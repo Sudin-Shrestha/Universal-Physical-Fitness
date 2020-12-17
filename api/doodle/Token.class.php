@@ -59,9 +59,7 @@ class Token {
         );
 
         // Token Payload
-        $json_token_payload = json_encode(
-            $payload
-        );
+        $json_token_payload = json_encode($payload);
 
         // Token Signature
         $base64_token_signature = base64_encode(
@@ -137,7 +135,81 @@ class Token {
         // Finally returning the payload
         return json_decode($reveived_token_payload, TRUE);
 
-    } // Token - Verify() 
+    } // Token - Verify()
+
+
+    public static function isEmpty(string $token = NULL) {
+
+        if($token == NULL || trim($token) == '') return TRUE;
+
+        return FALSE;
+
+    }
+
+    public static function isInvalid(string $token = NULL){
+
+        if (self::isEmpty($token)) return TRUE;
+
+        $token = explode('.',$token);
+
+        if(count($token) !== 3) return TRUE;
+
+        foreach($token as $frag){ if(base64_encode(base64_decode($frag, TRUE)) !== $frag) return TRUE; }
+
+        return FALSE;
+    }
+
+    // Checks whether the token string is expired or not
+    public static function isExpired(string $token = NULL) {
+
+        if(self::isInvalid($token)) return TRUE;
+
+        $token = explode('.',$token);
+
+        $header = json_decode(base64_decode($token[0],TRUE),TRUE);
+
+        if($header !== NULL && $header['exp'] < time()) return TRUE;
+
+        return FALSE;
+
+    }
+
+    public static function isTampered(string $token = NULL) {
+
+        if(self::isInvalid($token)) return TRUE;
+
+        $token = explode('.',$token);
+
+        $signature = hash_hmac(
+            Config::TOKEN_HASH_ALGORITHM, 
+            base64_decode($token[0],TRUE).base64_decode($token[1],TRUE), 
+            Config::TOKEN_SECRET_KEY
+        );
+
+        if($signature !== base64_decode($token[2],TRUE)) return TRUE;
+
+        return FALSE;
+    }
+
+    public static function getHeader(string $token = NULL) {
+
+        if(self::isInvalid($token)) return [];
+
+        $token = explode('.',$token);
+
+        return json_decode(base64_decode($token[0],TRUE),TRUE);
+
+    }
+
+    public static function getPayload(string $token = NULL) {
+
+        if(self::isInvalid($token)) return [];
+
+        $token = explode('.',$token);
+
+        return json_decode(base64_decode($token[1],TRUE),TRUE);
+
+    }
 
 } // Token{}
 

@@ -1,10 +1,3 @@
-<?php
-    include '../includes/verification.php';
-
-    
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,34 +18,13 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
-<style>
-    table, th , td {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 18px;
-
-    }
-    /*Style for Table Header*/
-    th {
-    background: darkblue;
-    color: white;
-    text-align: left;
-    }
-    /*Style for Alternate Rows*/
-    table tr:nth-child(odd) {
-    background-color: #C2EBC3;
-    }
-    table tr:nth-child(even) {
-    background-color: #FFFFFF;
-    }
-    </style>
 <body>
-  <div class="container-scroller">
+<div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-          <a class="navbar-brand brand-logo" href="index.php">UPF Admin</a>
+          <a class="navbar-brand brand-logo" href="index.html">UPF Admin</a>
           <a class="navbar-brand brand-logo-mini" href="index.html">UPF</a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
@@ -176,7 +148,7 @@
                 <i class="mdi mdi-settings text-primary"></i>
                 Settings
               </a>
-              <a href="../controller/logout.php" class="dropdown-item">
+              <a href="pages/login.html" class="dropdown-item">
                 <i class="mdi mdi-logout text-primary"></i>
                 Logout
               </a>
@@ -202,7 +174,7 @@
           <li class="nav-item">
             <a class="nav-link" href="user.php">
               <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">Add Users</span>
+              <span class="menu-title">Users</span>
             </a>
           </li>
           <li class="nav-item">
@@ -238,158 +210,77 @@
         </ul>
       </nav>
       <!-- partial -->
-      <div class="main-panel">
+    <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin">
-              <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex align-items-end flex-wrap">
-                  <div class="mr-md-3 mr-xl-5">
-                    <h2>Welcome back,</h2>
-                    <p class="mb-md-0">Your dashboard is ready.</p>
-                  </div>
-                  <div class="d-flex">
-                    <i class="mdi mdi-home text-muted hover-cursor"></i>
-                    <p class="text-primary mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
-                  </div>
+         
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <strong>Add User</strong> 
                 </div>
-                <div class="d-flex justify-content-between align-items-end flex-wrap">
-                  <button class="btn btn-primary mt-2 mt-xl-0">Download report</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body dashboard-tabs p-0">
-                  <ul class="nav nav-tabs px-4" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
-                    </li>
-                  </ul>
-                  <div class="tab-content py-0 px-0">
-                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-                      <div class="d-flex flex-wrap justify-content-xl-between">
-                        <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Today date</small>
-                            <div class="">
-                              <?php echo "". date("l"). " " . date("Y/m/d"); ?>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Total Item</small>
-                            <h5 class="mr-2 mb-0">200</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-eye mr-3 icon-lg text-success"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Total views</small>
-                            <h5 class="mr-2 mb-0">9833550</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Blog</small>
-                            <h5 class="mr-2 mb-0">3</h5>
-                          </div>
-                        </div>
-                        <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                          <i class="mdi mdi-flag mr-3 icon-lg text-danger"></i>
-                          <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Total Members</small>
-                            <h5 class="mr-2 mb-0"><?php 
-                               $dataJson = file_get_contents("http://localhost/fitness/api/user/view");
-                               $data = json_decode($dataJson, true);
-                                echo count($data);
-                              ?></h5>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-     
-          <div class="row">
-            <div class="col-md-12 stretch-card">
-              <div class="card">
                 <div class="card-body">
-                  <p class="card-title">All Members</p>
-                  <?php
-                    // echo "<pre>";
-                    //   var_dump($data);
-                    //   echo "</pre>";
-                    /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/user/view");
-                    $data = json_decode($str_data, true);
-                    $temp = "<table>";
- 
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>First Name</th>";
-                    $temp .= "<th>Last Name</th>";
-                    $temp .= "<th>Address</th>";
-                    $temp .= "<th>Phone</th>";
-                    $temp .= "<th>Email</th>";
-                    $temp .= "<th>Password</th>";
-                    $temp .= "<th>Valid From</th>";
-                    $temp .= "<th>Valid To</th></tr>";
-                    // $temp .= "<th>Action</th></tr>";
-
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["firstName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["lastName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["address"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["phone"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["email"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["password"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validFrom"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validTo"] . "</td>";
-                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
-                    $temp .= "</tr>";
-                    }
-                    
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
-                    ?>
+                    <form action="http://localhost/fitness/api/user/register" method="POST" id='register'>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="fname">First Name</label>
+                            <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                            <label for="lname">Last Name</label>
+                            <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                            <label for="phone">Phone</label>
+                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputAddress2">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@fitness.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="**************" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="validFrom">Valid from</label>
+                            <input type="date" class="form-control" id="validFrom" name="validFrom" placeholder="" required>
+                            </div>
+                           
+                            <div class="form-group col-md-6">
+                            <label for="validTo">Valid To</label>
+                            <input type="date" class="form-control" id="validTo" name="validTo" placeholder="" required>
+                            </div>
+                          
+                        </div>
+                        <div class="row">
+                            <span id='message'></span>
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Add User</button>
+                    </form>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="#" target="_blank">Islington</a>. All rights reserved.</span>
-          </div>
-        </footer>
+        
+      
         <!-- partial -->
-      </div>
+        </div>
       <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
-  </div>
+</div>
   <!-- container-scroller -->
 
   <!-- plugins:js -->
   <script src="vendors/base/vendor.bundle.base.js"></script>
+  <script src="js/validEmail.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <script src="vendors/chart.js/Chart.min.js"></script>

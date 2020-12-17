@@ -6,7 +6,7 @@
         const POSITIVE_WHOLE_NUMBER = '/(0|[1-9]\d*)';
         const POSITIVE_NEGATIVE_WHOLE_NUMBER = '/(^-?(0|[1-9]\d*)';
         const ALPHABET = '/([a-zA-Z]*)';
-        const STRING = '/([a-zA-Z0-9]*)';
+        const STRING = '/([\s\S]+)';
         const INTEGER = '/([0-9]*)';
         const DECIMAL = '';
         const BOOLEAN = "/(^(0|1)$)";

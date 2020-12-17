@@ -1,5 +1,5 @@
 	<!-- Footer section -->
-	<footer class="footer-section set-bg" data-setbg="img/footer-bg.jpg">
+	<footer class="footer-section set-bg" data-setbg="../img/footer-bg.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-sm-6">
@@ -55,7 +55,7 @@
 			<div class="row">
 				<div class="col-md-6 order-2 order-md-1">
 					<div class="copyright"><p>
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made by <a href="https://colorlib.com" target="_blank">islington student</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made by islington student
 </p></div>
 				</div>
 				<div class="col-md-6 order-1 order-md-2">

@@ -12,7 +12,7 @@
         const DATABASE_HOST = 'localhost';
         const DATABASE_USER = 'root';
         const DATABASE_PASS = '';
-        const DATABASE_NAME = 'test';
+        const DATABASE_NAME = 'fitness';
         const DATABASE_CHAR = 'utf8mb4'; # recommended value : utf8mb4
 
 
