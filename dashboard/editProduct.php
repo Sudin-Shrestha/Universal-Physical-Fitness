@@ -1,9 +1,3 @@
-<?php 
-//  $dataJson = file_get_contents("http://localhost/fitness/api/user/view");
- // $data = json_decode($dataJson, true);
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,26 +18,6 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
-    <style>
-    table, th , td {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 10px;
-    }
-    /*Style for Table Header*/
-    th {
-    background: darkblue;
-    color: white;
-    text-align: left;
-    }
-    /*Style for Alternate Rows*/
-    table tr:nth-child(odd) {
-    background-color: #C2EBC3;
-    }
-    table tr:nth-child(even) {
-    background-color: #FFFFFF;
-    }
-    </style>
 <body>
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -239,57 +213,15 @@
     <div class="main-panel">
         <div class="content-wrapper">
          
-        <div class="container">
-            <div class="card">
-                <div class="card-header bg-white">
-                    <strong>Users</strong> 
-                </div>
-                <div class="card-body">
-                    <?php
-                    // echo "<pre>";
-                    //   var_dump($data);
-                    //   echo "</pre>";
-                    /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/user/view");
-                    $data = json_decode($str_data, true);
-                    $temp = "<table>";
- 
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>First Name</th>";
-                    $temp .= "<th>Last Name</th>";
-                    $temp .= "<th>Address</th>";
-                    $temp .= "<th>Phone</th>";
-                    $temp .= "<th>Email</th>";
-                    $temp .= "<th>Password</th>";
-                    $temp .= "<th>Valid From</th>";
-                    $temp .= "<th>Valid To</th></tr>";
-                    // $temp .= "<th>Action</th></tr>";
-
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["firstName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["lastName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["address"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["phone"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["email"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["password"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validFrom"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validTo"] . "</td>";
-                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
-                    $temp .= "</tr>";
-                    }
+            <div class="container">
+                <div class="card">
+                    <div class="card-header bg-white">
+                        <strong>Edit Product</strong> 
+                    </div>
+                    <div class="card-body"></div>
                     
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
-                    ?>
                 </div>
             </div>
-        </div>
         
       
         <!-- partial -->

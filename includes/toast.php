@@ -1,5 +1,5 @@
 <?php
-    if(isset($_COOKIE['toast_message'])){
+       if(isset($_COOKIE['toast_message'])){
         echo "
             <style>
                 .toast{
@@ -48,6 +48,5 @@
 
         unset($_COOKIE['toast_message']); 
         setcookie('toast_message', null, -1, '/'); 
-
-    }
+            }
     ?>

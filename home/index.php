@@ -9,7 +9,8 @@
 	
 	<?php 
 	$PAGENAME='home';
-	include '../includes/import.php'; ?>
+	include '../includes/import.php'; 
+	?>
 
 </head>
 <body>
@@ -159,10 +160,10 @@
 						<div class="bmi-calculator">
 							<div class="row">
 								<div class="col-sm-6">
-									<input type="text" placeholder="Weight (KG)" id="bmi-weight">
+									<input type="text" placeholder="Weight (in KG)" id="bmi-weight">
 								</div>
 								<div class="col-sm-6">
-									<input type="text" placeholder="Hight (M)" id="bmi-hight">
+									<input type="text" placeholder="Height (in Meter)" id="bmi-hight">
 								</div>
 								<div class="col-sm-6">
 									<button class="site-btn" id="bmi-submit">Calculate</button>

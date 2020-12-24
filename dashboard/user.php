@@ -148,7 +148,7 @@
                 <i class="mdi mdi-settings text-primary"></i>
                 Settings
               </a>
-              <a href="pages/login.html" class="dropdown-item">
+              <a href="../controller/logout.php" class="dropdown-item">
                 <i class="mdi mdi-logout text-primary"></i>
                 Logout
               </a>

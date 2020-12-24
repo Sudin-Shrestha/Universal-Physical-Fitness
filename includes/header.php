@@ -64,7 +64,7 @@
 			<div class="modal-body">
 				<strong class="my-3 h4">Welcome Please Signup to Continue</strong>
 				<p>Already Have an account the please login</p>
-				<form action="http://localhost/fitness/api/user/signup" method="POST" id='signupForm'>
+				<form action="../controller/signup.php" method="POST" id='signupForm'>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -107,13 +107,13 @@
 					<span id='message'></span>
 					<span class="float-right" id='messages'></span>
 					
-
-					<button type="submit" class="btn btn-warning btn-lg btn-block my-3" value="signup" id="submitBtn">
+					<button type="submit" class="btn btn-warning btn-lg btn-block my-3" value="signup" id="submitBtn" >
 						<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 8.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
 						  </svg>
 						Signup
 					</button>
+
 					
 					<p>By clicking “SIGN UP”, I agree to fitness Terms of Use and Privacy Policy</p>
 					<p class="text-center h4">Or signup with</p>
@@ -145,7 +145,7 @@
             </div>
             <div class="modal-body">
                 <strong class="my-3 h4">Welcome Please login to Continue</strong>
-                <p>New Member? <a href="" data-toggle="modal" data-target="#signup" data-whatever="@mdo">Register</a> </p>
+                <p>New Member? Please signup </p>
                 <form action="../controller/login.php" method="POST" id="loginForm">
                     <div class="form-group">		
                         <label for="email" class="col-form-label">Email:</label>
@@ -173,9 +173,9 @@
     </div>
 
     
-	<header class="header-section">
+	<header class="header-section bg-white">
 		<a href="index.php" class="site-logo">
-			<img src="../img/logos-01.png" alt="" height="60">
+			<img src="../img/logos-01.png" alt="" height="64">
 		</a>
 		<ul class="main-menu">
 			<li><a class="<?php if ($PAGENAME=='home') echo 'active'; ?>" href="../home/">Home</a></li>

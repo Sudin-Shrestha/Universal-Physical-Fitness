@@ -9,7 +9,9 @@
 	
 	<?php 
 	$PAGENAME='about';
-	include '../includes/import.php'; ?>
+	include '../includes/import.php';
+	?>
+
 
 
 	<!--[if lt IE 9]>

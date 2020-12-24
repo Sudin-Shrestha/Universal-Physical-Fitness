@@ -94,66 +94,32 @@
 				<hr class="my-0"/>
 				<!--Products starts here-->
 				<div class="row my-4">
-					<div class="col-md-4">
-						<figure class="card card-product">
-							<div class="img-wrap"><img src="https://foodpharmacy.blog/img-jpg/musclepharm-combat-protein-powder-cookies-n-cream-5-lbs-2275-g.jpg"></div>
-							<figcaption class="info-wrap">
-									<h4 class="title">Whey Combat</h4>
-									<p class="desc">Mass Gainer protein</p>
-									<div class="rating-wrap">
-										<div class="label-rating">132 reviews</div>
-										<div class="label-rating">154 orders </div>
-									</div> <!-- rating-wrap.// -->
-							</figcaption>
-							<div class="bottom-wrap">
-								<a href="" class="btn btn-sm btn-primary float-right">Order Now</a>	
-								<div class="price-wrap h5">
-									<span class="price-new">$1280</span> <del class="price-old">$1980</del>
-								</div> <!-- price-wrap.// -->
-							</div> <!-- bottom-wrap.// -->
-						</figure>
-					</div> <!-- col // -->
-
-					<div class="col-md-4">
-						<figure class="card card-product">
-							<div class="img-wrap"><img src="https://foodpharmacy.blog/img-jpg/musclepharm-combat-protein-powder-cookies-n-cream-5-lbs-2275-g.jpg"> </div>
-							<figcaption class="info-wrap">
-									<h4 class="title">Power Combat</h4>
-									<p class="desc">Pre Workout</p>
-									<div class="rating-wrap">
-										<div class="label-rating">132 reviews</div>
-										<div class="label-rating">154 orders </div>
-									</div> <!-- rating-wrap.// -->
-							</figcaption>
-							<div class="bottom-wrap">
-									<a href="" class="btn btn-sm btn-primary float-right">Order Now</a>	
+					<?php  $products = json_decode(
+						file_get_contents('http://localhost/fitness/api/product/all'),
+						TRUE
+					);
+					foreach($products as $product){
+						echo '
+						<div class="col-md-4">
+							<figure class="card card-product">
+								<div class="img-wrap"><img src="https://foodpharmacy.blog/img-jpg/musclepharm-combat-protein-powder-cookies-n-cream-5-lbs-2275-g.jpg"></div>
+								<figcaption class="info-wrap">
+										<h4 class="title">'.$product['name'].'</h4>
+										<p class="desc">Brand: <span class="text-primary"> '.$product['brand'].' </span></p>
+								</figcaption>
+								<div class="bottom-wrap">
+									<a href="../product/?id='.$product['id'].'" class="btn btn-sm btn-info float-right">Order Now</a>	
 									<div class="price-wrap h5">
-										<span class="price-new">$1280</span> <del class="price-old">$1980</del>
-									</div> <!-- price-wrap.// -->
-							</div> <!-- bottom-wrap.// -->
-						</figure>
-					</div> <!-- col // -->
+										<span class="price-new font-weight-bold" style="color: #FF9800">Rs.'.$product['price'].'</span> 
+									</div>
+								</div> 
+							</figure>
+						</div> 
+						';
+					}
+					?>
 
-					<div class="col-md-4">
-						<figure class="card card-product">
-							<div class="img-wrap"><img src="https://m.media-amazon.com/images/I/41h5OXjHBnL.jpg"></div>
-							<figcaption class="info-wrap">
-									<h4 class="title">Whey Steel</h4>
-									<p class="desc">Post Workout</p>
-									<div class="rating-wrap">
-										<div class="label-rating">132 reviews</div>
-										<div class="label-rating">154 orders </div>
-									</div> <!-- rating-wrap.// -->
-							</figcaption>
-							<div class="bottom-wrap">
-									<a href="" class="btn btn-sm btn-primary float-right">Order Now</a>	
-									<div class="price-wrap h5">
-										<span class="price-new">$1280</span> <del class="price-old">$1980</del>
-									</div> <!-- price-wrap.// -->
-							</div> <!-- bottom-wrap.// -->
-						</figure>
-					</div> <!-- col // -->
-				</div> <!-- row.// -->
+				</div> 
 			</div>	
 			
 		</div>

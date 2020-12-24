@@ -6,3 +6,4 @@
 	<script src="../js/circle-progress.min.js"></script>
 	<script src="../js/main.js"></script>
 	<script src="../js/passwordValid.js"></script>
+	

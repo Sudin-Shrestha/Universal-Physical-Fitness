@@ -25,3 +25,16 @@ $('#email').on('keyup', function (){
     });
 });
 
+
+$(document).ready(function(){
+    $('#password').on('keyup',function(){
+         var Password = $(this).val();
+         if (Password.length < 8){
+            $('#messages').html('Password must be 8 character long').css('color', 'red');
+            $('#submitBtn').prop('disabled', true);
+         }else{
+            $('#messages').html('').css('color', 'red');
+            $('#submitBtn').prop('disabled', false);
+         }
+    });
+ });

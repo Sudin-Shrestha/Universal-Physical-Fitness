@@ -148,7 +148,7 @@
                 <i class="mdi mdi-settings text-primary"></i>
                 Settings
               </a>
-              <a href="pages/login.html" class="dropdown-item">
+              <a href="../controller/logout.php" class="dropdown-item">
                 <i class="mdi mdi-logout text-primary"></i>
                 Logout
               </a>
@@ -219,7 +219,52 @@
                     <strong>Add Product</strong> 
                 </div>
                 <div class="card-body">
-                    
+                <form action="../controller/product.php" method="POST" id='product'>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                            <label for="name"> Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="price">Price</label>
+                            <input type="text" class="form-control" id="price" name="price" placeholder="price" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                            <label for="brand">Brand</label>
+                            <input type="text" class="form-control" id="brand" name="brand" placeholder="brand" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="category" id="category" class="form-control">
+                              <option value="protein" name="protein">Protein</option>
+                              <option value="equipments" name="equpiments">Equpiments</option>
+                              <option value="belt" name="belt">Belt</option>
+                              <option value="glovs" name="gloves">Gloves</option>
+                              <option value="bottle" name="bottle">Bottle</option>
+                              <option value="bottle" name="others">Others</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Desciption</label>
+                            <textarea type="text" class="form-control" id="description" name="description" placeholder="" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="image">Images</label>
+                          <input type="file" class="form-control-file" id="image">
+                          <input type="file" class="form-control-file mt-3" id="image">
+                          <input type="file" class="form-control-file mt-3" id="image">
+                          <input type="file" class="form-control-file mt-3" id="image">
+                        </div>
+                   
+                        <input class="" name="token" type="hidden" value="<?=$_COOKIE['token']; ?>">
+                        
+                        <button type="submit" id="addProduct" name="addProduct" class="btn btn-primary">Add Product</button>
+                    </form>
                 </div>
             </div>
         </div>
