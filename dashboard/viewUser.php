@@ -25,10 +25,14 @@
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
     <style>
+    table{
+      overflow-x:auto;
+    }
     table, th , td {
     border: 1px solid grey;
     border-collapse: collapse;
-    padding: 10px;
+    padding: 8px;
+  
     }
     /*Style for Table Header*/
     th {
@@ -198,9 +202,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="orders.php">
+              <i class="mdi mdi-cart menu-icon"></i>
+              <span class="menu-title">View Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="user.php">
-              <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">Users</span>
+              <i class="mdi mdi-account-plus menu-icon"></i>
+              <span class="menu-title">Add Users</span>
             </a>
           </li>
           <li class="nav-item">
@@ -211,7 +221,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="addProduct.php">
-              <i class="mdi mdi-view-headline menu-icon"></i>
+              <i class="mdi mdi-cart-plus menu-icon"></i>
               <span class="menu-title">Add Products</span>
             </a>
           </li>
@@ -222,15 +232,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-              <i class="mdi mdi-chart-pie menu-icon"></i>
-              <span class="menu-title">Category</span>
+            <a class="nav-link" href="blog.php">
+              <i class="mdi mdi-file-document-box menu-icon"></i>
+              <span class="menu-title">Blog</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Blog</span>
+            <a class="nav-link" href="editBlog.php">
+              <i class="mdi mdi-file-multiple menu-icon"></i>
+              <span class="menu-title">Edit Blog</span>
             </a>
           </li>
         </ul>
@@ -243,14 +253,20 @@
             <div class="card">
                 <div class="card-header bg-white">
                     <strong>Users</strong> 
+                    <?php 
+                        if(isset($_GET['view']) && $_GET['view']=='desc'){
+                          $str_data = file_get_contents("http://localhost/fitness/api/user/view/desc");
+                          echo '<a href="../dashboard/viewUser.php" class="float-right">Sort by Ascending</a>';
+                        }else{
+                          $str_data = file_get_contents("http://localhost/fitness/api/user/view/asc");
+                          echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right">Sort by Descending</a>';
+                        }
+                    ?>
+                  
                 </div>
-                <div class="card-body">
+                <div class="card-body" >
                     <?php
-                    // echo "<pre>";
-                    //   var_dump($data);
-                    //   echo "</pre>";
-                    /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/user/view");
+                 
                     $data = json_decode($str_data, true);
                     $temp = "<table>";
  
@@ -264,6 +280,8 @@
                     $temp .= "<th>Password</th>";
                     $temp .= "<th>Valid From</th>";
                     $temp .= "<th>Valid To</th></tr>";
+                    // $temp .= "<th>Action</th></tr>";
+                  
                     // $temp .= "<th>Action</th></tr>";
 
                     /*Dynamically generating rows & columns*/
@@ -279,7 +297,11 @@
                     $temp .= "<td>" . $data[$i]["password"] . "</td>";
                     $temp .= "<td>" . $data[$i]["validFrom"] . "</td>";
                     $temp .= "<td>" . $data[$i]["validTo"] . "</td>";
-                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
+
+                    $temp .= "<td>" . '<i class="mdi mdi-table-edit menu-icon"></i>' . "</td>";
+
+                    $temp .= "<td>" . '<i class="mdi mdi-delete menu-icon"></i>' . "</td>";
+
                     $temp .= "</tr>";
                     }
                     

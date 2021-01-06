@@ -1,3 +1,10 @@
+<?php 
+    if(!isset($_GET['id']) && $_GET['id'] < 1){
+        header('Location: ../shop');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -7,6 +14,10 @@
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php include '../includes/import.php'; ?>
+    <?php 
+	$PAGENAME='product';
+	
+	?>
     <style>
         body{
             background-color: #eff0f5;
@@ -42,38 +53,49 @@
 	<!-- Header incude -->
 	<?php include '../includes/header.php'; ?>	
 
-    <!--Product start here -->
-    <div class="container my-5 bg-white">
+    <?php 
+        $products = json_decode(
+            file_get_contents('http://localhost/fitness/api/product/'.$_GET['id']),
+            TRUE);
+        //     echo '<pre>';
+        //    var_dump($products);
+        //    echo '</pre>';
+
+    
+
+        echo '
+             
+        <div class="container my-5 bg-white">
         <div class="row">
-            <div class="col-md-4 my-5">
-                <img src="https://foodpharmacy.blog/img-jpg/musclepharm-combat-protein-powder-cookies-n-cream-5-lbs-2275-g.jpg" alt="product image" >
+            <div class="col-md-4 my-5 d-flex justify-content-center">
+                <img src="http://localhost/fitness/api/storage/'.$products['image'].'" alt="product image" height="400"  >
             </div>
 
-            <div class="col-md-5 my-3">
+            <div class="col-md-5 my-3 p-4">
                 <div class="row">
-                    <h2> MP Combat Protein Powder </h2>
+                    <h2>'.$products['name'].'</h2>
                 </div>
                 <div class="row">
-                    <p>Brand: <span class="text-primary">MP whey iso </span></hp>
+                    <p>Brand: <span class="text-primary">'.$products['brand'].'</span></hp>
                 </div>
                 <span>Rating
                 <div class="rating">
-                   <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
                 </div></span>
                 <hr class="my-0">
                 <div class="row mt-3">
-                    <h4 style="color: #FF9800"> Rs <span>30000</span> </h4>
+                    <h4 style="color: #FF9800"> Rs <span>'.$products['price'].'</span> </h4>
                 </div>
                 <div class="row my-4">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        <button onclick="this.parentNode.querySelector(\'input[type=number]\').stepDown()"
                         class="btn btn-light">-</button>
                         <input class="w-25" min="1" max="10" name="quantity" value="1" type="number">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        <button onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp()"
                         class="btn btn-light">+</button>
                 </div>
 
                 <div class="row">
-                    <button type="button" class="btn btn-info px-5 mr-3">Add to Cart</button>
+                    <button type="button" class="btn btn-info px-5 mr-3 add-to-cart" data-name='.$products['name'].' data-price='.$products['price'].'>Add to Cart</button>
                     <button type="button" class="btn btn-warning px-5 ">Buy it Now</button>
                 </div>
 
@@ -94,10 +116,9 @@
                 <!-- Home Delivery -->
                 <div class="row my-3">
                     <div class="col-md-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                        <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
+                    <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+                    </svg>
                     </div>
                     <div class="col-md-9">Home Delivery<br><strong> 2-3 days</strong></div>
                 </div>
@@ -146,10 +167,13 @@
                 Description of Product 
             </div>
             <div class="card-body">
-
+                <p><pre>'.$products['description'].'</pre> </p>
             </div>
         </div>
     </div>
+        ';
+       
+    ?>
 
 
 	<!-- Footer section -->

@@ -172,9 +172,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="orders.php">
+              <i class="mdi mdi-cart menu-icon"></i>
+              <span class="menu-title">View Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="user.php">
-              <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">Users</span>
+              <i class="mdi mdi-account-plus menu-icon"></i>
+              <span class="menu-title">Add Users</span>
             </a>
           </li>
           <li class="nav-item">
@@ -185,7 +191,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="addProduct.php">
-              <i class="mdi mdi-view-headline menu-icon"></i>
+              <i class="mdi mdi-cart-plus menu-icon"></i>
               <span class="menu-title">Add Products</span>
             </a>
           </li>
@@ -196,15 +202,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-              <i class="mdi mdi-chart-pie menu-icon"></i>
-              <span class="menu-title">Category</span>
+            <a class="nav-link" href="blog.php">
+              <i class="mdi mdi-file-document-box menu-icon"></i>
+              <span class="menu-title">Blog</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Blog</span>
+            <a class="nav-link" href="editBlog.php">
+              <i class="mdi mdi-file-multiple menu-icon"></i>
+              <span class="menu-title">Edit Blog</span>
             </a>
           </li>
         </ul>

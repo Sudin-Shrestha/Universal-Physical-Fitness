@@ -22,14 +22,26 @@
 							$token = file_get_contents(API_ENDPOINT.'/token/verify/'.$_COOKIE['token']);
 							$token = json_decode($token,TRUE);
 							
+
 							if(isset($token) && $token!= FALSE){
 								$token = $token[0];
 								$USER = [];
 								$USER['id'] = $token['id'];
 								$USER['name'] = $token['firstName'];
+								$USER['email'] = $token['email'];
+								
+								if($USER['email'] == 'admin'){
+									header ('location: ../dashboard');
+								}
 							
 							}
+							
+						}			
+						else if($PAGENAME == 'profile' || $PAGENAME == 'checkout'){
+							header('Location: ../home');
+            				exit;
 						}						
+						
 
 						if(!isset($USER)){
 							echo '<a href="" class="mx-2 text-dark font-weight-bold" data-toggle="modal" data-target="#login" data-whatever="@mdo">Login</a>';
@@ -38,7 +50,7 @@
 						}
 
 						else{
-							echo '<a href="" class="mx-2 text-dark font-weight-bold">Welcome '.$USER['name'].'</a>';
+							echo '<a href="../profile/" class="mx-2 text-dark font-weight-bold">Welcome '.$USER['name'].'</a>';
 							echo '<a href="../controller/logout.php" class="mx-2 text-dark font-weight-bold">Logout</a>';
 						}
 
@@ -46,7 +58,7 @@
 						unset($USER);
 
 						?>
-            <a href="../checkout/" class="mx-2 text-dark font-weight-bold">Check Out</a>
+            <a href="" class="mx-2 text-dark font-weight-bold" data-toggle="modal" data-target="#cart">Check Out(<span class="total-count"></span>) </a>
         </div>
     </div>
 
@@ -171,8 +183,52 @@
         </div>
         </div>
     </div>
+	
+	<!-- Cart Modal -->
+	<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="show-cart table">
+          
+        </table>
+        <div>Total price: Rs.<span class="total-cart"></span></div>
+      </div>
+      <div class="modal-footer">
+		<small>You have to login to make an order</small>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<button class="clear-cart btn btn-danger">Clear Cart</button>
 
-    
+		<?php 
+			if(isset($_COOKIE['token'])){
+				$accesstoken = file_get_contents('http://localhost/fitness/api/token/verify/'.$_COOKIE['token']);
+		
+				$accesstoken = json_decode($accesstoken,TRUE);
+				if($accesstoken != FALSE){
+					echo '
+					<a href="../checkout" class="btn btn-primary">Check Out</a>
+					';
+				}
+			}
+		
+		?>
+		
+        <!-- <button type="button" class="btn btn-primary"></button> -->
+	
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+	
+
 	<header class="header-section bg-white">
 		<a href="index.php" class="site-logo">
 			<img src="../img/logos-01.png" alt="" height="64">

@@ -3,7 +3,7 @@
     class Config {
 
         // System datas
-        const SYS_DIRECTORY = '/opt/lampp/htdocs/fitness'; # Path upto site's root directory
+        const SYS_DIRECTORY = 'C:\xampp\htdocs\fitness'; # Path upto site's root directory
 
         // Api class
         const API_DIRECTORY = '/fitness/api'; # Path from 'htdoc' dir to 'api' dir

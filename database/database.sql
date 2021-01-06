@@ -68,3 +68,11 @@ CREATE TABLE productImage (
     FOREIGN KEY (productId) REFERENCES product(id),
     FOREIGN KEY (imageId) REFERENCES image(id)
 );
+
+CREATE TABLE blog (
+    id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(5000) NOT NULL,
+    image VARCHAR(255) NOT NULL
+
+);

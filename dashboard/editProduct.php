@@ -18,6 +18,26 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
+<style>
+    table, th , td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 15px;
+    }
+    /*Style for Table Header*/
+    th {
+    background: darkblue;
+    color: white;
+    text-align: left;
+    }
+    /*Style for Alternate Rows*/
+    table tr:nth-child(odd) {
+    background-color: #C2EBC3;
+    }
+    table tr:nth-child(even) {
+    background-color: #FFFFFF;
+    }
+    </style>
 <body>
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -81,7 +101,7 @@
                     <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
                 </div>
                 <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal"> Johnson
+                  <h6 class="ellipsis font-weight-normal">Johnson
                   </h6>
                   <p class="font-weight-light small-text text-muted mb-0">
                     Upcoming board meeting
@@ -172,9 +192,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="orders.php">
+              <i class="mdi mdi-cart menu-icon"></i>
+              <span class="menu-title">View Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="user.php">
-              <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">Users</span>
+              <i class="mdi mdi-account-plus menu-icon"></i>
+              <span class="menu-title">Add Users</span>
             </a>
           </li>
           <li class="nav-item">
@@ -185,7 +211,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="addProduct.php">
-              <i class="mdi mdi-view-headline menu-icon"></i>
+              <i class="mdi mdi-cart-plus menu-icon"></i>
               <span class="menu-title">Add Products</span>
             </a>
           </li>
@@ -196,15 +222,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-              <i class="mdi mdi-chart-pie menu-icon"></i>
-              <span class="menu-title">Category</span>
+            <a class="nav-link" href="blog.php">
+              <i class="mdi mdi-file-document-box menu-icon"></i>
+              <span class="menu-title">Blog</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Blog</span>
+            <a class="nav-link" href="editBlog.php">
+              <i class="mdi mdi-file-multiple menu-icon"></i>
+              <span class="menu-title">Edit Blog</span>
             </a>
           </li>
         </ul>
@@ -218,7 +244,47 @@
                     <div class="card-header bg-white">
                         <strong>Edit Product</strong> 
                     </div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                    <?php
+                    // echo "<pre>";
+                    //   var_dump($data);
+                    //   echo "</pre>";
+                    /*Fetching JSON file content using php file_get_contents method*/
+                    $str_data = file_get_contents("http://localhost/fitness/api/product/view");
+                    $data = json_decode($str_data, true);
+                    $temp = "<table>";
+ 
+                    /*Defining table Column headers depending upon JSON records*/
+                    $temp .= "<tr><th>Id</th>";
+                    $temp .= "<th>Name</th>";
+                    $temp .= "<th>Description</th>";
+                    $temp .= "<th>Category</th>";
+                    $temp .= "<th>Price</th>";
+                    $temp .= "<th>Brand</th>";
+                    // $temp .= "<th>Action</th></tr>";
+
+                    /*Dynamically generating rows & columns*/
+                    for($i = 0; $i < sizeof($data); $i++)
+                    {
+                    $temp .= "<tr>";
+                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
+                    $temp .= "<td>" . $data[$i]["name"] . "</td>";
+                    $temp .= "<td>" . $data[$i]["description"] . "</td>";
+                    $temp .= "<td>" . $data[$i]["category"] . "</td>";
+                    $temp .= "<td>" . $data[$i]["price"] . "</td>";
+                    $temp .= "<td>" . $data[$i]["brand"] . "</td>";
+                    $temp .= "<td>" . '<i class="mdi mdi-table-edit menu-icon"></i>' . "</td>";
+
+                    $temp .= "<td>" . '<i class="mdi mdi-delete menu-icon"></i>' . "</td>";
+                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
+                    $temp .= "</tr>";
+                    }
+                    
+                    /*End tag of table*/
+                    $temp .= "</table>";
+                    echo $temp;
+                    ?>
+                    </div>
                     
                 </div>
             </div>

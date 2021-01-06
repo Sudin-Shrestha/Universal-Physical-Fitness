@@ -35,13 +35,14 @@
 		<!-- Search form -->
 		<div class="row d-flex justify-content-center">
 			<div class="input-group w-75">
-				<input type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2">
+				<input type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2" id="product-search">
 				<div class="input-group-append">
 				  <button class="btn btn-outline-secondary" type="button">Search</button>
 				</div>
 			</div>
+
+			
 		</div>
-	
 	</div>
 
 	<!--items-->
@@ -100,9 +101,9 @@
 					);
 					foreach($products as $product){
 						echo '
-						<div class="col-md-4">
+						<div class="col-md-4" data-product-col="'.$product['name'].'">
 							<figure class="card card-product">
-								<div class="img-wrap"><img src="https://foodpharmacy.blog/img-jpg/musclepharm-combat-protein-powder-cookies-n-cream-5-lbs-2275-g.jpg"></div>
+								<div class="img-wrap"><img src="http://localhost/fitness/api/storage/'.$product['image'].'"></div>
 								<figcaption class="info-wrap">
 										<h4 class="title">'.$product['name'].'</h4>
 										<p class="desc">Brand: <span class="text-primary"> '.$product['brand'].' </span></p>
@@ -126,7 +127,32 @@
 	</div>
 
 
+			<script>
+				 //  product searching javascript
+				 const productSearch = document.getElementById("product-search");
+                                const colEveryProduct = document.querySelectorAll("[data-product-col]");
 
+                                productSearch.onkeyup = () => {
+								
+                                    const needle = productSearch.value.trim().toLowerCase();
+									
+                                    if(needle == ""){
+										
+                                        for(const div of colEveryProduct){
+                                            div.style.display = "";
+                                        }
+                                    }else{
+                                        for(const div of colEveryProduct){
+                                            const hay = div.getAttribute("data-product-col").trim().toLowerCase();
+                                            if(hay.search(needle) == -1){
+                                                div.style.display = "none";
+                                            }else{
+                                                div.style.display = "";
+                                            }
+                                        }
+                                    }
+                                }
+			</script>
 
 
 	<!-- Footer section -->

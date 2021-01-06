@@ -25,7 +25,7 @@
 
 
 	<!-- Hero section -->
-	<section class="hero-section set-bg" data-setbg="../img/hero-bg.jpg">
+	<section class="hero-section set-bg" data-setbg="../img/bgbg.jpg">
 		<div class="container">
 			<div class="hero-text">
 				<h2>Shape Your</h2>
@@ -148,7 +148,7 @@
 
 	<!-- BMI section -->
 	<section class="bmi-section spad">
-		<div class="bmi-bg set-bg" data-setbg="../img/bmi-bg.jpg"></div>
+		<div class="bmi-bg set-bg" data-setbg="../img/bmi.jpg"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7 ml-auto">

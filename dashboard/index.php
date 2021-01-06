@@ -29,7 +29,7 @@
     table, th , td {
     border: 1px solid grey;
     border-collapse: collapse;
-    padding: 18px;
+    padding: 10px;
 
     }
     /*Style for Table Header*/
@@ -92,30 +92,7 @@
                   </p>
                 </div>
               </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">Tim Cook
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    New product launch
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal"> Johnson
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    Upcoming board meeting
-                  </p>
-                </div>
-              </a>
+          
             </div>
           </li>
           <li class="nav-item dropdown mr-4">
@@ -200,8 +177,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="orders.php">
+              <i class="mdi mdi-cart menu-icon"></i>
+              <span class="menu-title">View Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="user.php">
-              <i class="mdi mdi-account menu-icon"></i>
+              <i class="mdi mdi-account-plus menu-icon"></i>
               <span class="menu-title">Add Users</span>
             </a>
           </li>
@@ -213,7 +196,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="addProduct.php">
-              <i class="mdi mdi-view-headline menu-icon"></i>
+              <i class="mdi mdi-cart-plus menu-icon"></i>
               <span class="menu-title">Add Products</span>
             </a>
           </li>
@@ -224,15 +207,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-              <i class="mdi mdi-chart-pie menu-icon"></i>
-              <span class="menu-title">Category</span>
+            <a class="nav-link" href="blog.php">
+              <i class="mdi mdi-file-document-box menu-icon"></i>
+              <span class="menu-title">Blog</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Blog</span>
+            <a class="nav-link" href="editBlog.php">
+              <i class="mdi mdi-file-multiple menu-icon"></i>
+              <span class="menu-title">Edit Blog</span>
             </a>
           </li>
         </ul>
@@ -283,8 +266,12 @@
                         <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
                           <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
                           <div class="d-flex flex-column justify-content-around">
-                            <small class="mb-1 text-muted">Total Item</small>
-                            <h5 class="mr-2 mb-0">200</h5>
+                            <small class="mb-1 text-muted">Total Product</small>
+                            <h5 class="mr-2 mb-0"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/product/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data);
+                              ?></h5>
                           </div>
                         </div>
                         <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
@@ -298,7 +285,11 @@
                           <i class="mdi mdi-download mr-3 icon-lg text-warning"></i>
                           <div class="d-flex flex-column justify-content-around">
                             <small class="mb-1 text-muted">Blog</small>
-                            <h5 class="mr-2 mb-0">3</h5>
+                            <h5 class="mr-2 mb-0"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/blog/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data);
+                              ?></h5>
                           </div>
                         </div>
                         <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
@@ -306,7 +297,7 @@
                           <div class="d-flex flex-column justify-content-around">
                             <small class="mb-1 text-muted">Total Members</small>
                             <h5 class="mr-2 mb-0"><?php 
-                               $dataJson = file_get_contents("http://localhost/fitness/api/user/view");
+                               $dataJson = file_get_contents("http://localhost/fitness/api/user/view/asc");
                                $data = json_decode($dataJson, true);
                                 echo count($data);
                               ?></h5>
@@ -324,14 +315,26 @@
           <div class="row">
             <div class="col-md-12 stretch-card">
               <div class="card">
+              <div class="card-header">
+              <strong>Users</strong> 
+                    <?php 
+                        if(isset($_GET['view']) && $_GET['view']=='desc'){
+                          $str_data = file_get_contents("http://localhost/fitness/api/user/view/desc");
+                          echo '<a href="../dashboard/" class="float-right">Sort by Ascending</a>';
+                        }else{
+                          $str_data = file_get_contents("http://localhost/fitness/api/user/view/asc");
+                          echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right">Sort by Descending</a>';
+                        }
+                    ?>
+              </div>
                 <div class="card-body">
-                  <p class="card-title">All Members</p>
+                 
                   <?php
                     // echo "<pre>";
                     //   var_dump($data);
                     //   echo "</pre>";
                     /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/user/view");
+                    // $str_data = file_get_contents("http://localhost/fitness/api/user/view");
                     $data = json_decode($str_data, true);
                     $temp = "<table>";
  

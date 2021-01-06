@@ -172,9 +172,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="orders.php">
+              <i class="mdi mdi-cart menu-icon"></i>
+              <span class="menu-title">View Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="user.php">
-              <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">Users</span>
+              <i class="mdi mdi-account-plus menu-icon"></i>
+              <span class="menu-title">Add Users</span>
             </a>
           </li>
           <li class="nav-item">
@@ -185,7 +191,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="addProduct.php">
-              <i class="mdi mdi-view-headline menu-icon"></i>
+              <i class="mdi mdi-cart-plus menu-icon"></i>
               <span class="menu-title">Add Products</span>
             </a>
           </li>
@@ -196,15 +202,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-              <i class="mdi mdi-chart-pie menu-icon"></i>
-              <span class="menu-title">Category</span>
+            <a class="nav-link" href="blog.php">
+              <i class="mdi mdi-file-document-box menu-icon"></i>
+              <span class="menu-title">Blog</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-              <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Blog</span>
+            <a class="nav-link" href="editBlog.php">
+              <i class="mdi mdi-file-multiple menu-icon"></i>
+              <span class="menu-title">Edit Blog</span>
             </a>
           </li>
         </ul>
@@ -219,7 +225,7 @@
                     <strong>Add Product</strong> 
                 </div>
                 <div class="card-body">
-                <form action="../controller/product.php" method="POST" id='product'>
+                <form action="../controller/product.php" method="POST" id='product' enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="form-group col-md-12">
                             <label for="name"> Name</label>
@@ -250,15 +256,15 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Desciption</label>
-                            <textarea type="text" class="form-control" id="description" name="description" placeholder="" required></textarea>
+                            <textarea type="text" rows="20" class="form-control" id="description" name="description" placeholder="" required></textarea>
                         </div>
 
                         <div class="form-group">
                           <label for="image">Images</label>
-                          <input type="file" class="form-control-file" id="image">
+                          <input type="file" class="" id="image" name="image">
+                          <!-- <input type="file" class="form-control-file mt-3" id="image">
                           <input type="file" class="form-control-file mt-3" id="image">
-                          <input type="file" class="form-control-file mt-3" id="image">
-                          <input type="file" class="form-control-file mt-3" id="image">
+                          <input type="file" class="form-control-file mt-3" id="image"> -->
                         </div>
                    
                         <input class="" name="token" type="hidden" value="<?=$_COOKIE['token']; ?>">

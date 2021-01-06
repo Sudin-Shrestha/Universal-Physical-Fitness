@@ -4,7 +4,7 @@
 
 		public static $error = [];
 
-		private static $file;
+		public static $file;
 		
 		private static $mime;
 		

@@ -55,7 +55,7 @@
 			<div class="row">
 				<div class="col-md-6 order-2 order-md-1">
 					<div class="copyright"><p>
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made by islington student
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This is made by islington student
 </p></div>
 				</div>
 				<div class="col-md-6 order-1 order-md-2">
