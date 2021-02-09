@@ -298,11 +298,66 @@
                     $temp .= "<td>" . $data[$i]["validFrom"] . "</td>";
                     $temp .= "<td>" . $data[$i]["validTo"] . "</td>";
 
-                    $temp .= "<td>" . '<i class="mdi mdi-table-edit menu-icon"></i>' . "</td>";
+                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
 
-                    $temp .= "<td>" . '<i class="mdi mdi-delete menu-icon"></i>' . "</td>";
+                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
 
                     $temp .= "</tr>";
+
+                    $temp .= '
+                    <div class="modal fade" id="editModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                        <form action="../controller/editUser.php"  method="POST">
+                            <p>Email: <input type="text" class="form-control" id="updatedEmail" name="updatedEmail" value="'.$data[$i]['email'].'"></p>
+                            <p>Password: <input type="text" class="form-control" id="updatedPassword" name="updatedPassword" value="'.$data[$i]['password'].'"></p>
+                            <p>Valid From: <input type="date" class="form-control" id="updatedValidFrom" name="updatedValidFrom" value="'.$data[$i]['validFrom'].'"></p>
+                            <p>Valid To: <input type="date" class="form-control" id="updatedValidTo" name="updatedValidTo" value="'.$data[$i]['validTo'].'"></p>
+                          </div>
+                          <div class="modal-footer">
+                    
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <input type="hidden" name="edit_id" value="'.$data[$i]['id'].'">
+                          <button type="submit" class="btn btn-primary" name="updateUser" value="save">Save changes</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    ';
+
+                    $temp .= '
+                    <div class="modal fade" id="deleteModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Do you want to remove <span class="text-danger"> '.$data[$i]['firstName'].' </span>
+                        </div>
+                        <div class="modal-footer">
+                        <form action="../controller/productRemove.php"  method="POST">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
+                           <button type="submit" class="btn btn-danger" name="deleteUser" value="delete">Delete User</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    ';
+
                     }
                     
                     /*End tag of table*/

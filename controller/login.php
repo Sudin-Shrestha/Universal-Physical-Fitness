@@ -1,4 +1,6 @@
   
+
+	<?php include '../includes/toast.php'; ?>	
 <?php
 $cURLConnection = curl_init('http://localhost/fitness/api/user/login');
 curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $_POST);
@@ -28,3 +30,4 @@ $apiResponse = json_decode($apiResponse,TRUE);
     header('Location: ../home');
     exit;
 ?>
+

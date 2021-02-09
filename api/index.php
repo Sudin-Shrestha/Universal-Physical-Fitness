@@ -166,19 +166,81 @@
         Api::send($response);
     });
 
+    //view blog
     Api::GET('/blog'.Api::INTEGER,function($blog_id){
         $sql = "SELECT * FROM blog where id=?";
         $response = Database::query($sql,$blog_id);
         Api::send($response[0]);
     });
 
-      //get blog
-      Api::GET('/blog/all',function(){
+    //get blog
+    Api::GET('/blog/all',function(){
         $sql = "Select * from blog";
         $response = Database::query($sql);
         Api::send($response);
     });
 
+    //add order
+    Api::POST("/order",function(){
+        $sql = "INSERT INTO orders (productId, memberId, customerId, orderDate, orderStatus, quantity, price) VALUES (?,?,?,?,?,?,?)";
+        $response = Database::query($sql, $_POST['productId'], $_POST['memberId'],$_POST['customerId'], $_POST['orderDate'],$_POST['orderStatus'],$_POST['quantity']);
+        Api::send($response);
+    });
+
+    // delete Apis
+    //DELETE product
+    Api::POST("/delete/product",function(){
+        $sql = "DELETE FROM `product` WHERE id=?";
+        $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
+
+    //DELETE Blog
+    Api::POST("/delete/blog",function(){
+        $sql = "DELETE FROM `blog` WHERE id=?";
+        $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
+
+    //DELETE user
+    Api::POST("/delete/user",function(){
+        $sql = "DELETE FROM `user` WHERE id=?";
+         $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
+
+
+    //Update APIS
+     //update product
+     Api::POST("/update/product",function(){
+        $sql = "UPDATE product
+        SET name=?, price=?
+        WHERE id=?;";
+        $response = Database::query($sql, $_POST['updatedName'],$_POST['updatedPrice'],$_POST['edit_id'],);
+        Api::send($response);
+    });
+
+     //update Blog
+     Api::POST("/update/blog",function(){
+        $sql = "UPDATE blog
+        SET title=?
+        WHERE id=?;";
+        $response = Database::query($sql, $_POST['updateTitle'],$_POST['edit_id'],);
+        Api::send($response);
+    });
+
+    //update user
+    Api::POST("/update/user",function(){
+    $sql = "UPDATE member
+    SET email=?, password=?, validFrom=?, validTo=?
+    WHERE id=?;";
+    $response = Database::query($sql, $_POST['updatedEmail'],$_POST['updatedPassword'],$_POST['updatedValidFrom'],$_POST['updatedValidTo'],$_POST['edit_id'],);
+    Api::send($response);
+    });
+
+
+
+    
 
 ?>
 

@@ -242,22 +242,22 @@
             <div class="container">
                 <div class="card">
                     <div class="card-header bg-white">
-                        <strong>Edit Product</strong> 
+                        <strong>Edit Blog</strong> 
                     </div>
                     <div class="card-body" style="overflow-x:auto;">
                     <?php
                     /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/product/view");
+                    $str_data = file_get_contents("http://localhost/fitness/api/blog/all");
                     $data = json_decode($str_data, true);
                     $temp = "<table>";
  
                     /*Defining table Column headers depending upon JSON records*/
                     $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>Name</th>";
+                    $temp .= "<th>Title</th>";
                     $temp .= "<th>Description</th>";
-                    $temp .= "<th>Category</th>";
-                    $temp .= "<th>Price</th>";
-                    $temp .= "<th>Brand</th>";
+          
+
+
                     // $temp .= "<th>Action</th></tr>";
 
                     /*Dynamically generating rows & columns*/
@@ -265,19 +265,20 @@
                     {
                     $temp .= "<tr>";
                     $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["name"] . "</td>";
+                    $temp .= "<td>" . $data[$i]["title"] . "</td>";
                     $temp .= "<td>" . $data[$i]["description"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["category"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["price"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["brand"] . "</td>";
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
+                   
 
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
+                  
+                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#editBlog'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
+
+                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#deleteBlog'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
                     // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
                     $temp .= "</tr>";
 
+                    
                     $temp .= '
-                    <div class="modal fade" id="editModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editBlog'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -287,15 +288,15 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                        <form action="../controller/editProduct.php"  method="POST">
-                            <p>Name: <input type="text" class="form-control" id="updatedName" name="updatedName" value="'.$data[$i]['name'].'"></p>
-                            <p>Price: <input type="text" class="form-control" id="updatedPrice" name="updatedPrice" value="'.$data[$i]['price'].'"></p>
+                        <form action="../controller/updateBlog.php"  method="POST">
+                            <p>Title: <input type="text" class="form-control" id="updateTitle" name="updateTitle" value="'.$data[$i]['title'].'"></p>
+                          
                           </div>
                           <div class="modal-footer">
                     
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           <input type="hidden" name="edit_id" value="'.$data[$i]['id'].'">
-                          <button type="submit" class="btn btn-primary" name="updateProduct" value="save">Save changes</button>
+                          <button type="submit" class="btn btn-primary" name="updateBlog" value="save">Save changes</button>
                           </form>
                         </div>
                       </div>
@@ -304,7 +305,7 @@
                     ';
 
                     $temp .= '
-                    <div class="modal fade" id="deleteModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteBlog'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -314,13 +315,13 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          Do you want to delete <span class="text-danger"> '.$data[$i]['name'].' </span>
+                          Do you want to remove <span class="text-danger"> '.$data[$i]['title'].' </span>
                         </div>
                         <div class="modal-footer">
-                        <form action="../controller/productRemove.php"  method="POST">
+                        <form action="../controller/blogRemove.php"  method="POST">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
-                           <button type="submit" class="btn btn-danger" name="deleteProduct" value="delete">Delete Product</button>
+                           <button type="submit" class="btn btn-danger" name="deleteBlog" value="delete">Delete blog</button>
                           </form>
                         </div>
                       </div>
@@ -332,9 +333,9 @@
                     /*End tag of table*/
                     $temp .= "</table>";
                     echo $temp;
-                 
-                     //<input type="hidden" name="productid" value="'.$_GET['id'].'">
                     ?>
+
+                  
 
                     </div>
                 </div>
@@ -348,8 +349,6 @@
     <!-- page-body-wrapper ends -->
 </div>
   <!-- container-scroller -->
-
-
 
   <!-- plugins:js -->
   <script src="vendors/base/vendor.bundle.base.js"></script>

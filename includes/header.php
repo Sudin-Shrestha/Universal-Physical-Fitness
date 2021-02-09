@@ -37,7 +37,7 @@
 							}
 							
 						}			
-						else if($PAGENAME == 'profile' || $PAGENAME == 'checkout'){
+						else if($PAGENAME == 'profile' || $PAGENAME == 'checkout' || $PAGENAME == 'shipping'){
 							header('Location: ../home');
             				exit;
 						}						

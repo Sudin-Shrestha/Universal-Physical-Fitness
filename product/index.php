@@ -87,11 +87,14 @@
                     <h4 style="color: #FF9800"> Rs <span>'.$products['price'].'</span> </h4>
                 </div>
                 <div class="row my-4">
+             
                         <button onclick="this.parentNode.querySelector(\'input[type=number]\').stepDown()"
                         class="btn btn-light">-</button>
                         <input class="w-25" min="1" max="10" name="quantity" value="1" type="number">
                         <button onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp()"
-                        class="btn btn-light">+</button>
+                        class="btn btn-light">+</button> 
+                        
+                        
                 </div>
 
                 <div class="row">

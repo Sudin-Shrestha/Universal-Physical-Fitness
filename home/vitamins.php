@@ -7,6 +7,10 @@
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php include '../includes/import.php'; ?>
+	<?php 
+	$PAGENAME='vitamins';
+	
+	?>
 
 </head>
 <body>

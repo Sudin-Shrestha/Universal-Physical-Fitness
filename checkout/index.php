@@ -45,7 +45,7 @@
 			</div>
 			
 			<div class="col-md-2 mx-2 bg-white p-2 h-100 mt-3">
-				<a href="">
+				<a href="../shipping">
 				<div class="d-flex justify-content-center">
 					<img src="https://thumbs.dreamstime.com/b/dollar-money-icon-cash-sign-bill-symbol-flat-payment-dollar-currency-icon-dollar-money-icon-cash-sign-bill-symbol-flat-payment-147323372.jpg" alt="" height="56" width="56">
 				</div>
