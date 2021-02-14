@@ -65,7 +65,7 @@
 
         echo '
              
-        <div class="container my-5 bg-white">
+        <div class="container mt-5 bg-white">
         <div class="row">
             <div class="col-md-4 my-5 d-flex justify-content-center">
                 <img src="http://localhost/fitness/api/storage/'.$products['image'].'" alt="product image" height="400"  >
@@ -73,33 +73,39 @@
 
             <div class="col-md-5 my-3 p-4">
                 <div class="row">
-                    <h2>'.$products['name'].'</h2>
+                <p class="text-center display-2 text-info" style="opacity: 0.1; font-weight: bolder; position:absolute; top:0;left:0;">'.$products['brand'].'</p>
+                    <h2 style="position:absolute; top:40px;left:10; margin-bottom: 40px;">'.$products['name'].'</h2>
                 </div>
-                <div class="row">
-                    <p>Brand: <span class="text-primary">'.$products['brand'].'</span></hp>
+                <div class="row mt-5" >
+                    <p class="mt-4">Brand: <span class="text-primary font-weight-bold">'.$products['brand'].'</span></hp>
                 </div>
                 <span>Rating
                 <div class="rating">
                 <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
                 </div></span>
                 <hr class="my-0">
-                <div class="row mt-3">
-                    <h4 style="color: #FF9800"> Rs <span>'.$products['price'].'</span> </h4>
-                </div>
+                
                 <div class="row my-4">
              
                         <button onclick="this.parentNode.querySelector(\'input[type=number]\').stepDown()"
                         class="btn btn-light">-</button>
                         <input class="w-25" min="1" max="10" name="quantity" value="1" type="number">
                         <button onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp()"
-                        class="btn btn-light">+</button> 
-                        
+                        class="btn btn-light">+</button>  
                         
                 </div>
 
                 <div class="row">
-                    <button type="button" class="btn btn-info px-5 mr-3 add-to-cart" data-name='.$products['name'].' data-price='.$products['price'].'>Add to Cart</button>
-                    <button type="button" class="btn btn-warning px-5 ">Buy it Now</button>
+                    <button type="button" class="btn btn-info px-4 mr-3 add-to-cart" style="border-radius: 70px;" data-id="'.$products['id'].'" data-name='.$products['name'].' data-price='.$products['price'].'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash-fill" viewBox="0 0 16 16">
+                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1z"/>
+                  </svg> Add to Cart</button>
+                  <h3 style="color: #FF9800" class="mt-2"> Rs <span>'.$products['price'].'</span> </h3>
+                </div>
+
+                <div class="row mt-4">
+                    <a href="../home/mass.php"><p>Guide to protein <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                  </svg><p></a>
                 </div>
 
             </div>
@@ -109,7 +115,7 @@
                 <div class="row mb-3">
                     <div class="col-md-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314    6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                         </svg>
                     </div>
                     <div class="col-md-9">Delivery Option <br> <strong>Nepal, Kathmandu</strong><a href="#" class="px-2">Change</a></div>
@@ -164,20 +170,51 @@
         </div>
     </div>
 
+    <p class="text-center display-3 text-info" style="opacity: 0.3; font-weight: bolder;">Description</p>
+
     <div class="container mb-5">
         <div class="card">
-            <div class="card-header">
-                Description of Product 
-            </div>
             <div class="card-body">
                 <p><pre>'.$products['description'].'</pre> </p>
             </div>
         </div>
     </div>
         ';
+
        
     ?>
 
+    <div class="container">
+        <p class="text-center display-4 text-info" style="opacity: 0.3; font-weight: bolder;">You may also like</p>
+  
+    <div class="row my-4">
+					<?php  $products = json_decode(
+						file_get_contents('http://localhost/fitness/api/product/limit/4'),
+						TRUE
+					);
+					foreach($products as $product){
+						echo '
+						<div class="col-md-3" data-product-col="'.$product['name'].'" data-price-col="'.$product['price'].'">
+							<figure class="card card-product">
+								<div class="img-wrap"><img src="http://localhost/fitness/api/storage/'.$product['image'].'"></div>
+								<figcaption class="info-wrap">
+										<h4 class="title">'.$product['name'].'</h4>
+										<p class="desc">Brand: <span class="text-primary"> '.$product['brand'].' </span></p>
+								</figcaption>
+								<div class="bottom-wrap">
+									<a href="../product/?id='.$product['id'].'" class="btn btn-sm btn-info float-right">Order Now</a>	
+									<div class="price-wrap h5">
+										<span class="price-new font-weight-bold" style="color: #FF9800">Rs.'.$product['price'].'</span> 
+									</div>
+								</div> 
+							</figure>
+						</div> 
+						';
+					}
+					?>
+
+    </div>
+    </div>
 
 	<!-- Footer section -->
 	<?php include '../includes/footer.php'; ?>
@@ -185,5 +222,6 @@
 	<?php include '../includes/importjs.php'; ?>								
 
 
+            
 	</body>
 </html>

@@ -41,5 +41,5 @@ if(isset($_POST['addProduct'])){
     
 
  
-    header ('Location: ../dashboard');
+    header ('Location: ../dashboard/editProduct.php');
 };

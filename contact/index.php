@@ -68,18 +68,18 @@
 				</div>
 				<div class="col-lg-8">
 					<h2 class="contact-title">Get in touch</h2>
-					<form class="contact-form">
+					<form class="contact-form" action="../controller/queries.php" method="POST">
 						<div class="row">
 							<div class="col-md-6">
-								<input type="text" placeholder="Your name">
+								<input type="text" name="name" placeholder="Your name">
 							</div>
 							<div class="col-md-6">
-								<input type="text" placeholder="Your e-mail">
+								<input type="text" name="phone" placeholder="Your phone number">
 							</div>
 							<div class="col-md-12">
-								<input type="text" placeholder="Subject">
-								<textarea placeholder="Message"></textarea>
-								<button class="site-btn">Send Message</button>
+								<input type="text" name="email" placeholder="Email">
+								<textarea name="subject" placeholder="Subject Message"></textarea>
+								<button class="site-btn" type="submit" id="sendQuery" name="sendQuery">Send Message</button>
 							</div>
 						</div>
 					</form>

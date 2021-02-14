@@ -55,12 +55,12 @@
 			</div>
 
 			<div class="col-md-3">
-			
+				
 			</div>
 
 			<div class="col-md-4 bg-white mt-3">
 				<h6 class="font-weight-bold py-3">Order Summary</h6>
-				<small class="py-5">Subtotal (1 item and shipping fee incude): <span class="float-right total-cart"></span> </small> 
+				<small class="py-5">Subtotal (items and shipping fee incude): <span class="float-right total-cart"></span> </small> 
 				<h6 class="py-3">Total Amount <span style="color: #FF9800; float: right; font-size: 25px;" class="total-cart"></span> </h6>
 			</div>
 		</div>

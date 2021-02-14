@@ -216,7 +216,10 @@
           <li class="nav-item">
             <a class="nav-link" href="viewUser.php">
               <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">View Users</span>
+              <span class="menu-title">View Users <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/user/view/asc");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -228,7 +231,10 @@
           <li class="nav-item">
             <a class="nav-link" href="editProduct.php">
               <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Edit Products</span>
+              <span class="menu-title">Edit Products <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/product/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -240,7 +246,19 @@
           <li class="nav-item">
             <a class="nav-link" href="editBlog.php">
               <i class="mdi mdi-file-multiple menu-icon"></i>
-              <span class="menu-title">Edit Blog</span>
+              <span class="menu-title">Edit Blog <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/blog/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="queries.php">
+              <i class="mdi mdi-bullhorn menu-icon"></i>
+              <span class="menu-title">Queries <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/queries/all");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
         </ul>

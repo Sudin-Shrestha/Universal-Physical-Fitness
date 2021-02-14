@@ -1,6 +1,5 @@
   
-
-	<?php include '../includes/toast.php'; ?>	
+<?php include '../includes/toast.php'; ?>	
 <?php
 $cURLConnection = curl_init('http://localhost/fitness/api/user/login');
 curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $_POST);
@@ -18,16 +17,16 @@ $apiResponse = json_decode($apiResponse,TRUE);
             header('Location: ../dashboard');
             exit;
         }else if($apiResponse['usertype'] == 'customer'){
-            header('Location: ../home');
+            header('Location: '.$_SERVER['HTTP_REFERER']);
             exit;
         }else{
-            header('Location: ../home');
+            header('Location: '.$_SERVER['HTTP_REFERER']);
             exit;
         }
     }else
 
     setcookie('toast_message', "Invalid login details", time()+60*60, "/");
-    header('Location: ../home');
+    header('Location: '.$_SERVER['HTTP_REFERER']);
     exit;
 ?>
 

@@ -7,6 +7,6 @@
         
     }
 
-    header('Location: ../home');
+    header('Location: '.$_SERVER['HTTP_REFERER']);
     exit;
 ?>

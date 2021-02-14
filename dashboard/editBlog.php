@@ -206,7 +206,10 @@
           <li class="nav-item">
             <a class="nav-link" href="viewUser.php">
               <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">View Users</span>
+              <span class="menu-title">View Users <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/user/view/asc");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -218,7 +221,10 @@
           <li class="nav-item">
             <a class="nav-link" href="editProduct.php">
               <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Edit Products</span>
+              <span class="menu-title">Edit Products <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/product/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -230,7 +236,19 @@
           <li class="nav-item">
             <a class="nav-link" href="editBlog.php">
               <i class="mdi mdi-file-multiple menu-icon"></i>
-              <span class="menu-title">Edit Blog</span>
+              <span class="menu-title">Edit Blog <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/blog/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="queries.php">
+              <i class="mdi mdi-bullhorn menu-icon"></i>
+              <span class="menu-title">Queries <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/queries/all");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
         </ul>
@@ -240,29 +258,45 @@
         <div class="content-wrapper">
          
             <div class="container">
+            
                 <div class="card">
                     <div class="card-header bg-white">
                         <strong>Edit Blog</strong> 
                     </div>
                     <div class="card-body" style="overflow-x:auto;">
+                   
+                    
                     <?php
                     /*Fetching JSON file content using php file_get_contents method*/
                     $str_data = file_get_contents("http://localhost/fitness/api/blog/all");
                     $data = json_decode($str_data, true);
+
+                    if(count($data) == 0){
+                      echo '
+                      <div class="container">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <img src="images/nocontent.png" alt="" height="400" width="400">
+                        </div>
+                        <div class="col-md-7 display-1">
+                           <strong>No blog found</strong> 
+                        </div>
+                      </div>
+                      </div>
+                      ';
+                    }else{
                     $temp = "<table>";
- 
+
+                  
                     /*Defining table Column headers depending upon JSON records*/
                     $temp .= "<tr><th>Id</th>";
                     $temp .= "<th>Title</th>";
-                    $temp .= "<th>Description</th>";
+                    $temp .= "<th>Description</th></tr>";
           
-
-
-                    // $temp .= "<th>Action</th></tr>";
-
                     /*Dynamically generating rows & columns*/
                     for($i = 0; $i < sizeof($data); $i++)
                     {
+                      
                     $temp .= "<tr>";
                     $temp .= "<td>" . $data[$i]["id"] . "</td>";
                     $temp .= "<td>" . $data[$i]["title"] . "</td>";
@@ -270,9 +304,9 @@
                    
 
                   
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#editBlog'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
+                    $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editBlog'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
 
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#deleteBlog'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
+                    $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteBlog'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
                     // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
                     $temp .= "</tr>";
 
@@ -328,11 +362,15 @@
                     </div>
                   </div>
                     ';
-                    }
                     
+                  }
                     /*End tag of table*/
                     $temp .= "</table>";
                     echo $temp;
+                      
+                    }
+
+                 
                     ?>
 
                   

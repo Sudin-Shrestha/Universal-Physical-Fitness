@@ -216,7 +216,10 @@
           <li class="nav-item">
             <a class="nav-link" href="viewUser.php">
               <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">View Users</span>
+              <span class="menu-title">View Users <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/user/view/asc");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -228,7 +231,10 @@
           <li class="nav-item">
             <a class="nav-link" href="editProduct.php">
               <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Edit Products</span>
+              <span class="menu-title">Edit Products <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/product/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -240,7 +246,19 @@
           <li class="nav-item">
             <a class="nav-link" href="editBlog.php">
               <i class="mdi mdi-file-multiple menu-icon"></i>
-              <span class="menu-title">Edit Blog</span>
+              <span class="menu-title">Edit Blog <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/blog/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="queries.php">
+              <i class="mdi mdi-bullhorn menu-icon"></i>
+              <span class="menu-title">Queries <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/queries/all");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?> </span></span>
             </a>
           </li>
         </ul>
@@ -248,7 +266,6 @@
       <!-- partial -->
     <div class="main-panel">
         <div class="content-wrapper">
-         
         <div class="container">
             <div class="card">
                 <div class="card-header bg-white">
@@ -262,12 +279,28 @@
                           echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right">Sort by Descending</a>';
                         }
                     ?>
-                  
                 </div>
                 <div class="card-body" >
+                
                     <?php
-                 
                     $data = json_decode($str_data, true);
+                    
+                    if(count($data) == 0){
+                      echo '
+                      <div class="container">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <img src="images/nocontent.png" alt="" height="400" width="400">
+                        </div>
+                        <div class="col-md-7 display-1">
+                           <strong>No User found</strong> 
+                        </div>
+                      </div>
+                      </div>
+                      ';
+                    }else{
+                      echo '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">';
+                      
                     $temp = "<table>";
  
                     /*Defining table Column headers depending upon JSON records*/
@@ -279,10 +312,9 @@
                     $temp .= "<th>Email</th>";
                     $temp .= "<th>Password</th>";
                     $temp .= "<th>Valid From</th>";
-                    $temp .= "<th>Valid To</th></tr>";
-                    // $temp .= "<th>Action</th></tr>";
-                  
-                    // $temp .= "<th>Action</th></tr>";
+                    $temp .= "<th>Valid To</th>";
+                    $temp .= "<th>Edit</th>";  
+                    $temp .= "<th>Delete</th></tr>";
 
                     /*Dynamically generating rows & columns*/
                     for($i = 0; $i < sizeof($data); $i++)
@@ -298,9 +330,9 @@
                     $temp .= "<td>" . $data[$i]["validFrom"] . "</td>";
                     $temp .= "<td>" . $data[$i]["validTo"] . "</td>";
 
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
+                    $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
 
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
+                    $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
 
                     $temp .= "</tr>";
 
@@ -347,7 +379,7 @@
                           Do you want to remove <span class="text-danger"> '.$data[$i]['firstName'].' </span>
                         </div>
                         <div class="modal-footer">
-                        <form action="../controller/productRemove.php"  method="POST">
+                        <form action="../controller/userRemove.php"  method="POST">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
                            <button type="submit" class="btn btn-danger" name="deleteUser" value="delete">Delete User</button>
@@ -363,6 +395,8 @@
                     /*End tag of table*/
                     $temp .= "</table>";
                     echo $temp;
+                    }
+
                     ?>
                 </div>
             </div>
@@ -376,6 +410,27 @@
     <!-- page-body-wrapper ends -->
 </div>
   <!-- container-scroller -->
+
+  <script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementsByTagName("table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 
   <!-- plugins:js -->
   <script src="vendors/base/vendor.bundle.base.js"></script>

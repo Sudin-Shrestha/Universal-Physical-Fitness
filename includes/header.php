@@ -161,11 +161,11 @@
                 <form action="../controller/login.php" method="POST" id="loginForm">
                     <div class="form-group">		
                         <label for="email" class="col-form-label">Email:</label>
-                        <input type="text" class="form-control" id="email" name="username">
+                        <input type="text" class="form-control" id="email" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-form-label">Password:</label>
-                        <input type="password" class="form-control pwd" id="password" name="password"> 	
+                        <input type="password" class="form-control pwd" id="password" name="password" required> 	
                     </div>
                     <P><a href="recovery" class="float-right mb-4">Forgot Password?</a></P>
   

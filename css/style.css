@@ -1,9 +1,14 @@
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   height: 100%;
   font-family: "PT Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 h1,
 h2,

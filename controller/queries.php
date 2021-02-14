@@ -1,15 +1,18 @@
 <?php 
+    
 
-if(isset($_POST['deleteUser'])){
+if(isset($_POST['sendQuery'])){
     
     
-    $cURLConnection = curl_init('http://localhost/fitness/api/delete/user');
+    $cURLConnection = curl_init('http://localhost/fitness/api/queries');
     curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $_POST);
     curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
 
     $apiResponse = curl_exec($cURLConnection);
     curl_close($cURLConnection);
-  
-   header ('Location: ../dashboard/viewUser.php');
+    // echo $apiResponse;
+    // var_dump ($_POST);
+   
+   header ('Location: ../contact');
 };
 ?>

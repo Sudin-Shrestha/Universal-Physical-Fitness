@@ -206,7 +206,10 @@
           <li class="nav-item">
             <a class="nav-link" href="viewUser.php">
               <i class="mdi mdi-account menu-icon"></i>
-              <span class="menu-title">View Users</span>
+              <span class="menu-title">View Users <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/user/view/asc");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -218,7 +221,10 @@
           <li class="nav-item">
             <a class="nav-link" href="editProduct.php">
               <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Edit Products</span>
+              <span class="menu-title">Edit Products <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/product/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -230,7 +236,19 @@
           <li class="nav-item">
             <a class="nav-link" href="editBlog.php">
               <i class="mdi mdi-file-multiple menu-icon"></i>
-              <span class="menu-title">Edit Blog</span>
+              <span class="menu-title">Edit Blog <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/blog/view");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="queries.php">
+              <i class="mdi mdi-bullhorn menu-icon"></i>
+              <span class="menu-title">Queries <span class="badge-sm badge-pill badge-primary"> <?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/queries/all");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?> </span></span>
             </a>
           </li>
         </ul>
@@ -249,89 +267,108 @@
                     /*Fetching JSON file content using php file_get_contents method*/
                     $str_data = file_get_contents("http://localhost/fitness/api/product/view");
                     $data = json_decode($str_data, true);
-                    $temp = "<table>";
- 
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>Name</th>";
-                    $temp .= "<th>Description</th>";
-                    $temp .= "<th>Category</th>";
-                    $temp .= "<th>Price</th>";
-                    $temp .= "<th>Brand</th>";
-                    // $temp .= "<th>Action</th></tr>";
-
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["name"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["description"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["category"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["price"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["brand"] . "</td>";
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
-
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
-                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
-                    $temp .= "</tr>";
-
-                    $temp .= '
-                    <div class="modal fade" id="editModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                    if(count($data) == 0){
+                      echo '
+                      <div class="container">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <img src="images/nocontent.png" alt="" height="400" width="400">
                         </div>
-                        <div class="modal-body">
-                        <form action="../controller/editProduct.php"  method="POST">
-                            <p>Name: <input type="text" class="form-control" id="updatedName" name="updatedName" value="'.$data[$i]['name'].'"></p>
-                            <p>Price: <input type="text" class="form-control" id="updatedPrice" name="updatedPrice" value="'.$data[$i]['price'].'"></p>
+                        <div class="col-md-7 display-1">
+                           <strong>No Product found</strong> 
+                        </div>
+                      </div>
+                      </div>
+                      ';
+                    }else{
+                      $temp = "<table>";
+ 
+                      /*Defining table Column headers depending upon JSON records*/
+                      $temp .= "<tr><th>Id</th>";
+                      $temp .= "<th>Name</th>";
+                      $temp .= "<th>Description</th>";
+                      $temp .= "<th>Category</th>";
+                      $temp .= "<th>Price</th>";
+                      $temp .= "<th>Brand</th>";
+                      $temp .= "<th>Edit</th>";
+                      $temp .= "<th>Delete</th></tr>";
+  
+                      /*Dynamically generating rows & columns*/
+                      for($i = 0; $i < sizeof($data); $i++)
+                      {
+                      $temp .= "<tr>";
+                      $temp .= "<td>" . $data[$i]["id"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["name"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["description"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["category"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["price"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["brand"] . "</td>";
+                      $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
+  
+                      $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
+                      // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
+                      $temp .= "</tr>";
+  
+                      $temp .= '
+                      <div class="modal fade" id="editModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                          <form action="../controller/editProduct.php"  method="POST">
+                              <p>Name: <input type="text" class="form-control" id="updatedName" name="updatedName" value="'.$data[$i]['name'].'"></p>
+                              <p>Price: <input type="text" class="form-control" id="updatedPrice" name="updatedPrice" value="'.$data[$i]['price'].'"></p>
+                            </div>
+                            <div class="modal-footer">
+                      
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="hidden" name="edit_id" value="'.$data[$i]['id'].'">
+                            <button type="submit" class="btn btn-primary" name="updateProduct" value="save">Save changes</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      ';
+  
+                      $temp .= '
+                      <div class="modal fade" id="deleteModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Do you want to delete <span class="text-danger"> '.$data[$i]['name'].' </span>
                           </div>
                           <div class="modal-footer">
-                    
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" name="edit_id" value="'.$data[$i]['id'].'">
-                          <button type="submit" class="btn btn-primary" name="updateProduct" value="save">Save changes</button>
-                          </form>
+                          <form action="../controller/productRemove.php"  method="POST">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
+                             <button type="submit" class="btn btn-danger" name="deleteProduct" value="delete">Delete Product</button>
+                            </form>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                    ';
-
-                    $temp .= '
-                    <div class="modal fade" id="deleteModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          Do you want to delete <span class="text-danger"> '.$data[$i]['name'].' </span>
-                        </div>
-                        <div class="modal-footer">
-                        <form action="../controller/productRemove.php"  method="POST">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
-                           <button type="submit" class="btn btn-danger" name="deleteProduct" value="delete">Delete Product</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                    ';
+                      ';
+                      }
+                      
+                      /*End tag of table*/
+                      $temp .= "</table>";
+                      echo $temp;
                     }
-                    
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
+
+
+                  
                  
                      //<input type="hidden" name="productid" value="'.$_GET['id'].'">
                     ?>

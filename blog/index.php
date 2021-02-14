@@ -51,7 +51,7 @@
 					);
 					foreach($blogs as $blog){
 					echo '
-					<div class="blog-item">
+					<div class="blog-item" data-blog-col="'.$blog['title'].'">
 						<img src="http://localhost/fitness/api/storage/'.$blog['image'].'" alt="" style="object-fit: cover; height: 30%; width: 30%;" width="200" height="300">
 						<h2>'.$blog['title'].'</h2>
 						<div class="blog-metas">
@@ -78,8 +78,8 @@
 				<div class="col-lg-4 col-md-7 col-sm-9 sidebar">
 					<div class="widget-area">
 						<form class="search-widget">
-							<input type="text" placeholder="Search">
-							<button><img src="img/icons/search.png" alt=""></button>
+							<input type="text" placeholder="Search" aria-label="search" aria-describedby="basic-addon2" id="product-search">
+							<button><img src="../img/icons/search.png" alt=""></button>
 						</form>
 					</div>
 					<!-- <div class="widget-area">
@@ -98,34 +98,56 @@
 					<div class="widget-area">
 						<h2 class="widget-title">Recent Posts</h2>
 						<div class="recent-post-widget">
-							<div class="rp-item">
-								<img src="img/blog/blog-widget/1.jpg" alt="">
-								<div class="rp-text">
-									<p>Lorem ipsum dolor sit amet, consectetur.</p>
-									<div class="rp-date">February 17, 2019</div>
+
+						<?php 
+							if(count($blogs) == 0){
+								echo '<p>No blogs By Admin</p>';
+							}else{
+								echo '
+								<div class="rp-item">
+								<img src="http://localhost/fitness/api/storage/'.$blog['image'].'"   alt="">								
+									<div class="rp-text">
+										<p>'.$blog['title'].'</p>
+										<div class="rp-date">By Admin</div>
+										<p><div class="rp-date">2021</div></p> 
+									</div>
 								</div>
-							</div>
-							<div class="rp-item">
-								<img src="img/blog/blog-widget/2.jpg" alt="">
-								<div class="rp-text">
-									<p>Consectetur lorem ipsum dolor sit amet.</p>
-									<div class="rp-date">February 17, 2019</div>
-								</div>
-							</div>
-							<div class="rp-item">
-								<img src="img/blog/blog-widget/3.jpg" alt="">
-								<div class="rp-text">
-									<p>Ipsum dolor sit amet, consectetur. </p>
-									<div class="rp-date">February 17, 2019</div>
-								</div>
-							</div>
+								';
+							}
+						?>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	
+	<script>
+				 //  product searching javascript
+				 const productSearch = document.getElementById("product-search");
+                                const colEveryProduct = document.querySelectorAll("[data-blog-col]");
 
+                                productSearch.onkeyup = () => {
+								
+                                    const needle = productSearch.value.trim().toLowerCase();
+									
+                                    if(needle == ""){
+										
+                                        for(const div of colEveryProduct){
+                                            div.style.display = "";
+                                        }
+                                    }else{
+                                        for(const div of colEveryProduct){
+                                            const hay = div.getAttribute("data-blog-col").trim().toLowerCase();
+                                            if(hay.search(needle) == -1){
+                                                div.style.display = "none";
+                                            }else{
+                                                div.style.display = "";
+                                            }
+                                        }
+                                    }
+                                }
+			</script>
 
 
 

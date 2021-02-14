@@ -15,14 +15,13 @@
 </head>
 <body>
 	<!-- Page Preloder -->
-	<!-- <div id="preloder">
+	<div id="preloder">
 		<div class="loader"></div>
-	</div> -->
+	</div>
 
 	<!-- Header incude -->
 	<?php include '../includes/header.php'; ?>	
 	<?php include '../includes/toast.php'; ?>	
-
 
 
 	<!-- Hero section -->

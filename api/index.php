@@ -13,11 +13,11 @@
         if (!empty($data)){
             $data['usertype']='admin';
         }else{
-            $data = database::query('SELECT id, email, firstName, lastName, address, phone FROM customer WHERE email = ? and password = ?', $_POST['username'], $_POST['password']);
+            $data = database::query('SELECT id, email, firstName, lastName, address, phone, password FROM customer WHERE email = ? and password = ?', $_POST['username'], $_POST['password']);
             if(!empty($data)){
                 $data['usertype']='customer';
             }else {
-                $data = database::query('SELECT id, email, firstName, lastName, address, phone FROM member WHERE email = ? and password = ?', $_POST['username'], $_POST['password']);
+                $data = database::query('SELECT id, email, firstName, lastName, address, phone, validFrom, validTo, password FROM member WHERE email = ? and password = ?', $_POST['username'], $_POST['password']);
                 if(!empty($data)){
                     $data['usertype']='member';
                 }
@@ -53,7 +53,7 @@
     });
 
 
-    // view member
+    // view memberss
     Api::GET("/user/view".API::STRING,function($order){
         if($order == 'desc' ){
             $data = database::query('SELECT * FROM member ORDER BY validTo desc');
@@ -102,6 +102,13 @@
         $sql = "Select product.id AS id, product.name AS name, product.description AS description, product.category AS category, product.price AS price, product.brand AS brand, image.name AS image FROM product INNER JOIN productimage ON productimage.productId = product.id INNER JOIN image ON image.id = productimage.imageId";
         $response = Database::query($sql);
         Api::send($response);
+    });
+
+    //get product
+    Api::GET('/product/limit'.Api::INTEGER,function($limit){
+            $sql = "Select product.id AS id, product.name AS name, product.description AS description, product.category AS category, product.price AS price, product.brand AS brand, image.name AS image FROM product INNER JOIN productimage ON productimage.productId = product.id INNER JOIN image ON image.id = productimage.imageId LIMIT ?";
+            $response = Database::query($sql, $limit);
+            Api::send($response);
     });
 
     // view product
@@ -187,6 +194,27 @@
         Api::send($response);
     });
 
+    //add queries
+    Api::POST("/queries",function(){
+        $sql = "INSERT INTO queries (name, phone, email,subject) VALUES (?,?,?,?)";
+        $response = Database::query($sql, $_POST['name'], $_POST['phone'],$_POST['email'],$_POST['subject']);
+        Api::send($response);
+    });
+
+    //view queries
+    Api::GET("/queries/all",function(){
+        $sql = "Select * from queries";
+        $response = Database::query($sql);
+        Api::send($response);
+    });
+
+    //DELETE query
+    Api::POST("/delete/query",function(){
+        $sql = "DELETE FROM `queries` WHERE id=?";
+        $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
+
     // delete Apis
     //DELETE product
     Api::POST("/delete/product",function(){
@@ -204,7 +232,7 @@
 
     //DELETE user
     Api::POST("/delete/user",function(){
-        $sql = "DELETE FROM `user` WHERE id=?";
+        $sql = "DELETE FROM `member` WHERE id=?";
          $response = Database::query($sql, $_POST['delete_id']);
         Api::send($response);
     });
@@ -225,7 +253,7 @@
         $sql = "UPDATE blog
         SET title=?
         WHERE id=?;";
-        $response = Database::query($sql, $_POST['updateTitle'],$_POST['edit_id'],);
+        $response = Database::query($sql, $_POST['updateTitle'],$_POST['edit_id']);
         Api::send($response);
     });
 
@@ -234,10 +262,41 @@
     $sql = "UPDATE member
     SET email=?, password=?, validFrom=?, validTo=?
     WHERE id=?;";
-    $response = Database::query($sql, $_POST['updatedEmail'],$_POST['updatedPassword'],$_POST['updatedValidFrom'],$_POST['updatedValidTo'],$_POST['edit_id'],);
+    $response = Database::query($sql, $_POST['updatedEmail'],$_POST['updatedPassword'],$_POST['updatedValidFrom'],$_POST['updatedValidTo'],$_POST['edit_id']);
     Api::send($response);
     });
 
+    //update Customer details
+    Api::POST("/update/customer",function(){
+        $sql = "UPDATE customer
+        SET firstName=?, lastName=?, address=?, phone=?, email=?
+        WHERE id=?;";
+        $response = Database::query($sql, $_POST['updatedfirstName'],$_POST['updatedlastName'],$_POST['updatedAddress'],$_POST['updatedPhone'],$_POST['updatedEmail'],$_POST['edit_id']);
+        Api::send($response);
+    });
+
+    //update customer password
+    Api::POST("/update/password",function(){
+        $sql = "UPDATE customer
+        SET password=?
+        WHERE id=?;";
+        $response = Database::query($sql, $_POST['updatedPassword'],$_POST['edit_id']);
+        Api::send($response);
+    });
+
+    //Place order
+    Api::POST('/order',function(){
+        if(isset($_POST['token']) && !Token::isExpired($_POST['token']) && !Token::isTampered($_POST['token'])){
+            $payload = Token::getPayload($_POST['token']);
+            $sql = 'INSERT INTO orders (productId,memberId,customerId,orderDate,orderStatus,quantity,totalAmount) VALUES (?,?,?,?,?,?,?)';
+            $response = Database::query($sql, $_POST['productId'], $_POST['memberId'], $_POST['customerId'], date("Y/m/d"), $_POST['orderStatus'], $_POST['quantity'], $_POST['totalAmount']);
+           
+            Api::send($response);
+        }else{
+            Api::send("Token Invalid");
+        }
+        
+    });
 
 
     

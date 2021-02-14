@@ -10,9 +10,9 @@ if(isset($_POST['deleteProduct'])){
 
     $apiResponse = curl_exec($cURLConnection);
     curl_close($cURLConnection);
-    echo $apiResponse;
-    var_dump ($_POST);
+    // echo $apiResponse;
+    // var_dump ($_POST);
    
-   // header ('Location: ../dashboard/editProduct.php');
+   header ('Location: ../dashboard/editProduct.php');
 };
 ?>

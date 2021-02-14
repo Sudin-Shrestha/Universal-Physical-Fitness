@@ -31,5 +31,5 @@ if(isset($_POST['addBlog'])){
 
 
  
-    header ('Location: ../dashboard');
+    header ('Location: ../dashboard/editBlog.php');
 };

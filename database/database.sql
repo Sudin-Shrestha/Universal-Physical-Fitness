@@ -72,7 +72,7 @@ CREATE TABLE productImage (
 CREATE TABLE blog (
     id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
-    description VARCHAR(5000) NOT NULL,
+    description text NOT NULL,
     image VARCHAR(255) NOT NULL
 
 );

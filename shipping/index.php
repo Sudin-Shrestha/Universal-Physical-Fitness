@@ -96,7 +96,7 @@
                 </svg>
                 <span>'.$token['email'].'</span> 
             </p>
-
+            <small class="text-info">If invalid details please change details on profile.</small>
             <h6 class="font-weight-bold py-3">Order Summary</h6>
             <small class="py-5">Subtotal (1 item and shipping fee incude): <span class="float-right total-cart"></span> </small> 
             <h6 class="py-3">Total Amount <span style="color: #FF9800; float: right; font-size: 25px;" class="total-cart"></span> </h6>
@@ -159,7 +159,7 @@
 
 
 	<!-- Footer section -->
-	<?php //include '../includes/footer.php'; ?>
+	<?php include '../includes/footer.php'; ?>
 
 	<?php include '../includes/importjs.php'; ?>								
 

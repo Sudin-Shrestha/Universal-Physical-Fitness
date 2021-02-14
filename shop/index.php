@@ -34,14 +34,16 @@
 	<div class="container custom-padding">
 		<!-- Search form -->
 		<div class="row d-flex justify-content-center">
-			<div class="input-group w-75">
+						<form class="search-widget w-50">
+							<input type="text" placeholder="Search" aria-label="search" aria-describedby="basic-addon2" id="product-search">
+							<button><img src="../img/icons/search.png" alt=""></button>
+						</form>
+			<!-- <div class="input-group w-50">
 				<input type="text" class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2" id="product-search">
 				<div class="input-group-append">
 				  <button class="btn btn-outline-secondary" type="button">Search</button>
 				</div>
-			</div>
-
-			
+			</div> -->
 		</div>
 	</div>
 
@@ -72,7 +74,7 @@
 							<div class="input-group-prepend">
 							  <label class="input-group-text" for="inputGroupSelect01">Sort by price</label>
 							</div>
-							<select class="custom-select" id="inputGroupSelect01">
+							<select class="custom-select" id="selected-price">
 							  <option selected>Best Match</option>
 							  <option value="1">High to low</option>
 							  <option value="2">Low to high</option>
@@ -101,7 +103,7 @@
 					);
 					foreach($products as $product){
 						echo '
-						<div class="col-md-4" data-product-col="'.$product['name'].'">
+						<div class="col-md-4" data-product-col="'.$product['name'].'" data-price-col="'.$product['price'].'">
 							<figure class="card card-product">
 								<div class="img-wrap"><img src="http://localhost/fitness/api/storage/'.$product['image'].'"></div>
 								<figcaption class="info-wrap">
@@ -153,6 +155,7 @@
                                     }
                                 }
 			</script>
+
 
 
 	<!-- Footer section -->
