@@ -174,7 +174,10 @@
           <li class="nav-item">
             <a class="nav-link" href="orders.php">
               <i class="mdi mdi-cart menu-icon"></i>
-              <span class="menu-title">View Orders</span>
+              <span class="menu-title">View Orders <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/orders/all");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">

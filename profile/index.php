@@ -1,3 +1,4 @@
+<?php include '../includes/toast.php'; ?>	
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -15,6 +16,31 @@
     body{
             background-color: #eff0f5;
         }
+
+    table, th , td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 15px;
+    width: 100%;
+    white-space: nowrap;
+    }
+    /*Style for Table Header*/
+    th {
+    background: darkblue;
+    color: white;
+    text-align: left;
+    }
+    /*Style for Alternate Rows*/
+    table tr:nth-child(odd) {
+    background-color: #C2EBC3;
+    }
+    table tr:nth-child(even) {
+    background-color: #FFFFFF;
+    }
+    .card-body{
+        overflow-x:auto;
+    }
+
     </style>
 
 </head>
@@ -28,7 +54,7 @@
 	<!-- Header incude -->
     <?php include '../includes/header.php';
         include '../includes/toast.php';
-    
+
 
         
         
@@ -38,27 +64,6 @@
             $accesstoken = file_get_contents('http://localhost/fitness/api/token/verify/'.$_COOKIE['token']);
 
             $accesstoken = json_decode($accesstoken,TRUE);
-            //var_dump ($accesstoken);
-
-            // $date = $accesstoken['validTo'];
-            // $remaining = $date - time();
-            // $days_remaining = floor($remaining / 86400);
-            // $hours_remaining = floor(($remaining % 86400) / 3600);
-            // echo "There are $days_remaining days and $hours_remaining hours left";
-
-            // $future = $token['validTo']; //Future date.
-            // $timefromdb = date("Y-m-d");
-            // $timeleft = $future-$timefromdb;
-            // $daysleft = round((($timeleft/24)/60)/60); 
-            // echo $daysleft;
-
-            // $date = $token['validTo'];
-            // $today = date("Y-m-d");
-            // echo $date;
-            // echo $today;
-            
-            echo '<input type="hidden" value='.$token['password'].' id="oldPasswords">';
-            
 
 
             if ($accesstoken['usertype'] == "member"){
@@ -101,6 +106,7 @@
                                             <div class="py-2">Shipping Name: '.$token['firstName'].' '.$token['lastName'].'</div>
                                         </div>
                                     </div>
+                                    
         
                                     <div class="row">
                                         <div class="col-md-12">
@@ -108,28 +114,81 @@
                                                 <div class="card-header">
                                                     Recent Order
                                                 </div>
-                                                <div class="card-body">
+                                              
+                                               
+                                                      
+                                                    <div class="card-body"> ';
+                                                    $str_data = file_get_contents('http://localhost/fitness/api/orders/user/'.$token['id']);
+                                                    $data = json_decode($str_data, true);
+
+                                                    if(count($data) == 0){
+                                                    echo '
+                                                    <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                        <img src="images/nocontent.png" alt="" height="400" width="400">
+                                                        </div>
+                                                        <div class="col-md-7 display-1">
+                                                        <strong>No queries found</strong> 
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    ';
+                                                    }else{
+                                                    $temp = "<table>";
+
+                                                
+                                                    /*Defining table Column headers depending upon JSON records*/
+                                                    $temp .= "<tr><th>ProductName</th>";
+                                                    $temp .= "<th>Date</th>";
+                                                    $temp .= "<th>Status</th>";
+                                                    $temp .= "<th>Quantity</th>";
+                                                    $temp .= "<th>Amount</th></tr>";
+                                        
+                                                    /*Dynamically generating rows & columns*/
+                                                    for($i = 0; $i < sizeof($data); $i++)
+                                                    {
                                                     
+                                                    $temp .= "<tr>";
+                                                    $temp .= "<td>" . $data[$i]["productName"] . "</td>";
+                                                    $temp .= "<td>" . $data[$i]["date"] . "</td>";
+                                                    $temp .= "<td>" . $data[$i]["status"] . "</td>";
+                                                    $temp .= "<td>" . $data[$i]["quantity"] . "</td>";
+                                                    $temp .= "<td>" . $data[$i]["amount"] . "</td>";
+
+                        
+                                                    
+                                                }
+                                                    /*End tag of table*/
+                                                    $temp .= "</table>";
+                                                    echo $temp;
+                                                    
+                                                    }
+
+                                                    echo '
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>';
+                                               
+                                        
         
                         
-                        ';
+                      
         
         
                     }else{
-                        setcookie('toast_message', "Token is invalid or expired", time()+60*60, "/");
                         header('Location: ../home');
+                        setcookie('toast_message', "Token is invalid or expired", time()+60*60, "/");
                         exit;
                     }
         
             }else{
                 echo '
+                <input type="hidden" value='.$token['password'].' id="oldPasswords">
                 <div class="container">
                 <div class="row my-5">
                     <div class="col-md-4">
@@ -175,7 +234,55 @@
                                     <div class="card-header">
                                         Recent Order
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body">';
+                                    $str_data = file_get_contents('http://localhost/fitness/api/orders/customer/'.$token['id']);
+                                    $data = json_decode($str_data, true);
+
+                                    if(count($data) == 0){
+                                    echo '
+                                    <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                        <img src="images/nocontent.png" alt="" height="400" width="400">
+                                        </div>
+                                        <div class="col-md-7 display-1">
+                                        <strong>No queries found</strong> 
+                                        </div>
+                                    </div>
+                                    </div>
+                                    ';
+                                    }else{
+                                    $temp = "<table>";
+
+                                
+                                    /*Defining table Column headers depending upon JSON records*/
+                                    $temp .= "<tr><th>ProductName</th>";
+                                    $temp .= "<th>Date</th>";
+                                    $temp .= "<th>Status</th>";
+                                    $temp .= "<th>Quantity</th>";
+                                    $temp .= "<th>Amount</th></tr>";
+                        
+                                    /*Dynamically generating rows & columns*/
+                                    for($i = 0; $i < sizeof($data); $i++)
+                                    {
+                                    
+                                    $temp .= "<tr>";
+                                    $temp .= "<td>" . $data[$i]["productName"] . "</td>";
+                                    $temp .= "<td>" . $data[$i]["date"] . "</td>";
+                                    $temp .= "<td>" . $data[$i]["status"] . "</td>";
+                                    $temp .= "<td>" . $data[$i]["quantity"] . "</td>";
+                                    $temp .= "<td>" . $data[$i]["amount"] . "</td>";
+
+        
+                                    
+                                }
+                                    /*End tag of table*/
+                                    $temp .= "</table>";
+                                    echo $temp;
+                                    
+                                    }
+
+                                    echo '
                                         
                                     </div>
                                 </div>

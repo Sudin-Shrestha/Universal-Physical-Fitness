@@ -204,7 +204,10 @@
           <li class="nav-item">
             <a class="nav-link" href="orders.php">
               <i class="mdi mdi-cart menu-icon"></i>
-              <span class="menu-title">View Orders</span>
+              <span class="menu-title">View Orders <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/orders/all");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -280,7 +283,7 @@
                         }
                     ?>
                 </div>
-                <div class="card-body" >
+                <div class="card-body mx-2" style="overflow-x:auto;">
                 
                     <?php
                     $data = json_decode($str_data, true);
@@ -299,7 +302,7 @@
                       </div>
                       ';
                     }else{
-                      echo '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">';
+                      echo '<input type="text" class="form-control mb-4 w-50 border border-secondary" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">';
                       
                     $temp = "<table>";
  

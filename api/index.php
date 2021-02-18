@@ -187,13 +187,6 @@
         Api::send($response);
     });
 
-    //add order
-    Api::POST("/order",function(){
-        $sql = "INSERT INTO orders (productId, memberId, customerId, orderDate, orderStatus, quantity, price) VALUES (?,?,?,?,?,?,?)";
-        $response = Database::query($sql, $_POST['productId'], $_POST['memberId'],$_POST['customerId'], $_POST['orderDate'],$_POST['orderStatus'],$_POST['quantity']);
-        Api::send($response);
-    });
-
     //add queries
     Api::POST("/queries",function(){
         $sql = "INSERT INTO queries (name, phone, email,subject) VALUES (?,?,?,?)";
@@ -285,20 +278,91 @@
     });
 
     //Place order
-    Api::POST('/order',function(){
-        if(isset($_POST['token']) && !Token::isExpired($_POST['token']) && !Token::isTampered($_POST['token'])){
-            $payload = Token::getPayload($_POST['token']);
-            $sql = 'INSERT INTO orders (productId,memberId,customerId,orderDate,orderStatus,quantity,totalAmount) VALUES (?,?,?,?,?,?,?)';
-            $response = Database::query($sql, $_POST['productId'], $_POST['memberId'], $_POST['customerId'], date("Y/m/d"), $_POST['orderStatus'], $_POST['quantity'], $_POST['totalAmount']);
+    Api::GET('/order'.API::INTEGER.API::INTEGER.API::STRING.API::STRING,function($product_id, $count, $total, $token){
+    //  Api::send($_GET);
+     
+        if(isset($token)){
+            $payload = Token::getPayload($token);
+                if($payload['usertype'] == 'customer'){
+                    $sql = 'INSERT INTO orders (productId,customerId,orderDate,orderStatus,quantity,totalAmount) VALUES (?,?,?,?,?,?)';
+                }else {
+                    $sql = 'INSERT INTO orders (productId,memberId,orderDate,orderStatus,quantity,totalAmount) VALUES (?,?,?,?,?,?)';
+                }
+
+            $response = Database::query($sql, $product_id, $payload[0]['id'], date("Y/m/d"), "pending", $count, $total);
            
             Api::send($response);
         }else{
-            Api::send("Token Invalid");
+            Api::send("Token Invalid"); 
         }
         
     });
 
+    //orders all
+    Api::GET("/orders/all",function(){
+        $sql = "Select * from orders";
+        $response = Database::query($sql);
+        Api::send($response);
+    });
 
+    //orders all
+    Api::GET("/orders/each",function(){
+        $sql = "Select orders.id AS id, 
+                orders.productId AS productId,
+                orders.memberId AS memberId,
+                orders.customerId AS customerId,
+                orders.orderDate AS date,
+                orders.orderStatus AS status,
+                orders.quantity AS quantity,
+                orders.totalAmount AS amount,
+                product.name AS productName
+                from orders INNER JOIN product ON product.id = orders.productId 
+        ";
+        $response = Database::query($sql);
+        Api::send($response);   
+    });
+
+    //update order status
+    Api::POST("/update/order",function(){
+        $sql = "UPDATE orders
+        SET orderStatus=?
+        WHERE id=?;";
+        $response = Database::query($sql, $_POST['orderStatus'],$_POST['edit_id']);
+        Api::send($response);
+    });
+
+    //DELETE order
+    Api::POST("/delete/order",function(){
+        $sql = "DELETE FROM `orders` WHERE id=?";
+         $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
+
+    //orders all
+    Api::GET("/orders/user".Api::INTEGER,function($memberNo){
+        $sql = "Select 
+                orders.orderDate AS date,
+                orders.orderStatus AS status,
+                orders.quantity AS quantity,
+                orders.totalAmount AS amount,
+                product.name AS productName
+                from orders INNER JOIN product ON product.id = orders.productId  where orders.memberId=?";
+        $response = Database::query($sql, $memberNo);
+        Api::send($response);
+    });
+
+    //orders all
+    Api::GET("/orders/customer".Api::INTEGER,function($customerNo){
+        $sql = "Select 
+                orders.orderDate AS date,
+                orders.orderStatus AS status,
+                orders.quantity AS quantity,
+                orders.totalAmount AS amount,
+                product.name AS productName
+                from orders INNER JOIN product ON product.id = orders.productId  where orders.customerId=?";
+        $response = Database::query($sql, $customerNo);
+        Api::send($response);
+    });
     
 
 ?>

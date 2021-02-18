@@ -9,6 +9,7 @@ $apiResponse = curl_exec($cURLConnection);
 curl_close($cURLConnection);
 $apiResponse = json_decode($apiResponse,TRUE);
 
+
     if(isset($apiResponse) && isset($apiResponse['token'])){
 
         setcookie('token', $apiResponse['token'], time()+24*60*60, "/");
@@ -18,15 +19,19 @@ $apiResponse = json_decode($apiResponse,TRUE);
             exit;
         }else if($apiResponse['usertype'] == 'customer'){
             header('Location: '.$_SERVER['HTTP_REFERER']);
+            setcookie('toast_message', "Welcome User", time()+60*60, "/");
+            exit;
+        }else if ($apiResponse['usertype'] == 'member'){
+            header('Location: '.$_SERVER['HTTP_REFERER']);
+            setcookie('toast_message', "Welcome User", time()+60*60, "/");
             exit;
         }else{
             header('Location: '.$_SERVER['HTTP_REFERER']);
-            exit;
+            setcookie('toast_message', "Invalid Login details", time()+60*60, "/");
         }
     }else
-
-    setcookie('toast_message', "Invalid login details", time()+60*60, "/");
     header('Location: '.$_SERVER['HTTP_REFERER']);
+    setcookie('toast_message', "Invalid login details", time()+60*60, "/");
     exit;
 ?>
 

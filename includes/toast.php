@@ -7,8 +7,8 @@
                     display: block;
                     position: fixed;
                     width: 300px;
-                    bottom: 20;
-                    left: 20;
+                    bottom: 20px;
+                    right: 20px;
                     background-color: #000000; 
                     color: #EEEEEE;
                     box-shadow: 0 3.0px 6.00px rgba(0,0,0,0.16), 0 3.0px 6.0px rgba(0,0,0,0.2300);

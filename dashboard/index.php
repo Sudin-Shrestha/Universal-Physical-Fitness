@@ -179,7 +179,10 @@
           <li class="nav-item">
             <a class="nav-link" href="orders.php">
               <i class="mdi mdi-cart menu-icon"></i>
-              <span class="menu-title">View Orders</span>
+              <span class="menu-title">View Orders <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/orders/all");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -348,7 +351,7 @@
                         }
                     ?>
               </div>
-                <div class="card-body">
+                <div class="card-body  mx-2" style="overflow-x:auto;">
                  
                   <?php
                     // echo "<pre>";
@@ -396,6 +399,75 @@
               </div>
             </div>
           </div>
+          
+          <div class="row mt-5">
+          <div class="col-md-12 stretch-card">
+            <div class="card">
+                <div class="card-header bg-white">
+                    <strong>Orders</strong> 
+                </div>
+
+                <div class="card-body mx-2" style="overflow-x:auto;">
+                <?php
+                    /*Fetching JSON file content using php file_get_contents method*/
+                    $str_data = file_get_contents("http://localhost/fitness/api/orders/each");
+                    $data = json_decode($str_data, true);
+                    if(count($data) == 0){
+                      echo '
+                      <div class="container">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <img src="images/nocontent.png" alt="" height="400" width="400">
+                        </div>
+                        <div class="col-md-7 display-1">
+                           <strong>No orders found</strong> 
+                        </div>
+                      </div>
+                      </div>
+                      ';
+                    }else{
+                      $temp = "<table>";
+ 
+                      /*Defining table Column headers depending upon JSON records*/
+                      $temp .= "<tr><th>Id</th>";
+                      $temp .= "<th>Product ID</th>";
+                      $temp .= "<th>Member ID</th>";
+                      $temp .= "<th>Customer ID</th>";
+                      $temp .= "<th>Order Date</th>";
+                      $temp .= "<th>Order Status</th>";
+                      $temp .= "<th>Quantity</th>";
+                      $temp .= "<th>Total Amount</th>";
+                      $temp .= "<th>Product Name</th>";
+                   
+                      /*Dynamically generating rows & columns*/
+                      for($i = 0; $i < sizeof($data); $i++)
+                      {
+                      $temp .= "<tr>";
+                      $temp .= "<td>" . $data[$i]["id"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["productId"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["memberId"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["customerId"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["date"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["status"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["quantity"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["amount"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["productName"] . "</td>";
+                      
+                      }
+                      
+                      /*End tag of table*/
+                      $temp .= "</table>";
+                      echo $temp;
+                    }
+
+             
+                    ?>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->

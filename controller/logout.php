@@ -1,3 +1,4 @@
+<?php include '../includes/toast.php'; ?>	
 <?php
 
     if (isset($_COOKIE['token'])) {
@@ -7,6 +8,7 @@
         
     }
 
-    header('Location: '.$_SERVER['HTTP_REFERER']);
+    header('Location: ../home');
+    setcookie('toast_message', "Thank you for visiting have a good day", time()+60*60, "/");
     exit;
 ?>

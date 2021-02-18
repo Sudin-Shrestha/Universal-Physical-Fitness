@@ -163,7 +163,7 @@ var shoppingCart = (function() {
     $('.show-cart').html(output);
     $('.total-cart').html(shoppingCart.totalCart());
     $('.total-count').html(shoppingCart.totalCount());  
-    console.log(cartArray);
+    //console.log(cartArray);
   }
   
   // Delete item button

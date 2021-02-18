@@ -204,7 +204,10 @@
           <li class="nav-item">
             <a class="nav-link" href="orders.php">
               <i class="mdi mdi-cart menu-icon"></i>
-              <span class="menu-title">View Orders</span>
+              <span class="menu-title">View Orders <span class="badge-sm badge-pill badge-primary"><?php 
+                               $dataJson = file_get_contents("http://localhost/fitness/api/orders/all");
+                               $data = json_decode($dataJson, true);
+                                echo count($data); ?></span></span>
             </a>
           </li>
           <li class="nav-item">
@@ -271,61 +274,124 @@
             <div class="card">
                 <div class="card-header bg-white">
                     <strong>Orders</strong> 
-                    <?php 
-                        if(isset($_GET['view']) && $_GET['view']=='desc'){
-                          $str_data = file_get_contents("http://localhost/fitness/api/user/view/desc");
-                          echo '<a href="../dashboard/viewUser.php" class="float-right">Sort by Ascending</a>';
-                        }else{
-                          $str_data = file_get_contents("http://localhost/fitness/api/user/view/asc");
-                          echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right">Sort by Descending</a>';
-                        }
-                    ?>
-                  
                 </div>
-                <div class="card-body" >
-                    <?php
-                 
+
+                <div class="card-body" style="overflow-x:auto;">
+                <?php
+                    /*Fetching JSON file content using php file_get_contents method*/
+                    $str_data = file_get_contents("http://localhost/fitness/api/orders/each");
                     $data = json_decode($str_data, true);
-                    $temp = "<table>";
+                    if(count($data) == 0){
+                      echo '
+                      <div class="container">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <img src="images/nocontent.png" alt="" height="400" width="400">
+                        </div>
+                        <div class="col-md-7 display-1">
+                           <strong>No orders found</strong> 
+                        </div>
+                      </div>
+                      </div>
+                      ';
+                    }else{
+                      $temp = "<table>";
  
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>First Name</th>";
-                    $temp .= "<th>Last Name</th>";
-                    $temp .= "<th>Address</th>";
-                    $temp .= "<th>Phone</th>";
-                    $temp .= "<th>Email</th>";
-                    $temp .= "<th>Password</th>";
-                    $temp .= "<th>Valid From</th>";
-                    $temp .= "<th>Valid To</th></tr>";
-                    // $temp .= "<th>Action</th></tr>";
-                  
-                    // $temp .= "<th>Action</th></tr>";
+                      /*Defining table Column headers depending upon JSON records*/
+                      $temp .= "<tr><th>Id</th>";
+                      $temp .= "<th>Product ID</th>";
+                      $temp .= "<th>Member ID</th>";
+                      $temp .= "<th>Customer ID</th>";
+                      $temp .= "<th>Order Date</th>";
+                      $temp .= "<th>Order Status</th>";
+                      $temp .= "<th>Quantity</th>";
+                      $temp .= "<th>Total Amount</th>";
+                      $temp .= "<th>Product Name</th>";
+                      $temp .= "<th>Edit</th>";
+                      $temp .= "<th>Delete</th></tr>";
+  
+                      /*Dynamically generating rows & columns*/
+                      for($i = 0; $i < sizeof($data); $i++)
+                      {
+                      $temp .= "<tr>";
+                      $temp .= "<td>" . $data[$i]["id"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["productId"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["memberId"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["customerId"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["date"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["status"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["quantity"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["amount"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["productName"] . "</td>";
+                      $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
+  
+                      $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
+                      // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
+                      $temp .= "</tr>";
+  
+                      $temp .= '
+                      <div class="modal fade" id="editModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                          <form action="../controller/editOrder.php"  method="POST">
+                              <label for="orderStatus">Order Status</label>
+                              <select id="orderStatus" name="orderStatus" class="form-control">
+                                <option value="Pending" name="pending">Pending</option>
+                                <option value="Delivered" name="delivered">Delivered</option>
+                              </select>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="hidden" name="edit_id" value="'.$data[$i]['id'].'">
+                            <button type="submit" class="btn btn-primary" name="updateOrder" value="save">Save changes</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      ';
 
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["firstName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["lastName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["address"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["phone"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["email"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["password"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validFrom"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validTo"] . "</td>";
-
-                    $temp .= "<td>" . '<i class="mdi mdi-table-edit menu-icon"></i>' . "</td>";
-
-                    $temp .= "<td>" . '<i class="mdi mdi-delete menu-icon"></i>' . "</td>";
-
-                    $temp .= "</tr>";
+                     
+  
+                      $temp .= '
+                      <div class="modal fade" id="deleteModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Do you want to delete id <span class="text-danger"> '.$data[$i]['id'].' </span>
+                          </div>
+                          <div class="modal-footer">
+                          <form action="../controller/orderRemove.php"  method="POST">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
+                             <button type="submit" class="btn btn-danger" name="deleteOrder" value="delete">Delete Product</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      ';
+                      }
+                      
+                      /*End tag of table*/
+                      $temp .= "</table>";
+                      echo $temp;
                     }
-                    
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
+
+             
                     ?>
                 </div>
             </div>

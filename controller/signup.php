@@ -1,3 +1,4 @@
+<?php include '../includes/toast.php'; ?>	
 <?php 
     $cURLConnection = curl_init('http://localhost/fitness/api/user/signup');
     curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $_POST);
@@ -13,6 +14,7 @@
      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          $isEmailValid = false;
         
-         header('Location: ../index.php');
+         header('Location: '.$_SERVER['HTTP_REFERER']);
+         setcookie('toast_message', "Signup Successful Please Login to continue", time()+60*60, "/");
      }
 ?>
