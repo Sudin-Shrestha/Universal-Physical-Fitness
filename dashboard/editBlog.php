@@ -254,6 +254,24 @@
                                 echo count($data); ?></span></span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="classes.php">
+              <i class="mdi mdi-run menu-icon"></i>
+              <span class="menu-title">Classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="editClass.php">
+              <i class="mdi mdi-rename-box menu-icon"></i>
+              <span class="menu-title">Edit classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="packageQuery.php">
+              <i class="mdi mdi-layers menu-icon"></i>
+              <span class="menu-title">Package Query</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -290,21 +308,22 @@
 
                   
                     /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
+                    $temp .= "<tr><th>Description</th>";
+                    $temp .= "<th>Id</th>";
                     $temp .= "<th>Title</th>";
-                    $temp .= "<th>Description</th></tr>";
+                    $temp .= "<th>Edit</th>";
+                    $temp .= "<th>Delete</th></tr>";
+                  
           
                     /*Dynamically generating rows & columns*/
                     for($i = 0; $i < sizeof($data); $i++)
                     {
                       
                     $temp .= "<tr>";
+                    $temp .= "<td>" . $data[$i]["description"] . "</td>";
                     $temp .= "<td>" . $data[$i]["id"] . "</td>";
                     $temp .= "<td>" . $data[$i]["title"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["description"] . "</td>";
-                   
-
-                  
+                    
                     $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editBlog'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
 
                     $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteBlog'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";

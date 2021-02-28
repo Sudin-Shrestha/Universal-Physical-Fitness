@@ -50,7 +50,9 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="about-text">
-						<p>Donec nec sapien in urna fermentum ornare. Morbi vel ultrices leo. Sed eu turpis eu arcu vehicula frin-gilla ut vitae orci. Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae massa. Proin vulputate congue rutrum. Fusce lobor-tis a enim eget tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+						<p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum nihil modi quo nulla optio aspernatur delectus? Fuga, sequi error optio a eligendi voluptas animi commodi atque natus. Iusto, beatae a!
+						Lorem ipsum dolor sit, amet consectui error optio a eligendi voluptas animi commodi atque natus. Iusto, beatae a!	
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-4">
@@ -65,7 +67,7 @@
 				</div>
 			</div>
 			<div class="text-center pt-4">
-				<a href="#" class="site-btn">Become a Member</a>
+				<a href="../contact" class="site-btn">Become a Member</a>
 			</div>
 		</div>
 	</section>
@@ -76,16 +78,16 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 col-sm-6">
-					<div class="circle-progress" data-cptitle="Happy Clients" data-cpid="id-1" data-cpvalue="50" data-cpcolor="#fcff18"></div>
+					<div class="circle-progress" data-cptitle="Happy Clients" data-cpid="id-1" data-cpvalue="100" data-cpcolor="#fcff18"></div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
-					<div class="circle-progress" data-cptitle="Fatt Lost" data-cpid="id-2" data-cpvalue="75" data-cpcolor="#fcff18"></div>
+					<div class="circle-progress" data-cptitle="Fatt Lost" data-cpid="id-2" data-cpvalue="80" data-cpcolor="#fcff18"></div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
-					<div class="circle-progress" data-cptitle="Work" data-cpid="id-3" data-cpvalue="100" data-cpcolor="#fcff18"></div>
+					<div class="circle-progress" data-cptitle="Work" data-cpid="id-3" data-cpvalue="95" data-cpcolor="#fcff18"></div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
-					<div class="circle-progress" data-cptitle="Energy" data-cpid="id-4" data-cpvalue="25" data-cpcolor="#fcff18"></div>
+					<div class="circle-progress" data-cptitle="Energy" data-cpid="id-4" data-cpvalue="90" data-cpcolor="#fcff18"></div>
 				</div>
 			</div>
 		</div>

@@ -23,6 +23,9 @@
     border: 1px solid grey;
     border-collapse: collapse;
     padding: 15px;
+    width: 100%;
+    
+
     }
     /*Style for Table Header*/
     th {
@@ -254,6 +257,24 @@
                                 echo count($data); ?> </span></span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="classes.php">
+              <i class="mdi mdi-run menu-icon"></i>
+              <span class="menu-title">Classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="editClass.php">
+              <i class="mdi mdi-rename-box menu-icon"></i>
+              <span class="menu-title">Edit classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="packageQuery.php">
+              <i class="mdi mdi-layers menu-icon"></i>
+              <span class="menu-title">Package Query</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -284,12 +305,15 @@
                       </div>
                       ';
                     }else{
-                      $temp = "<table>";
+                      echo '<input type="text" class="form-control mb-4 w-100 border border-secondary" id="myInput" onkeyup="myFunction()" placeholder="Search for products.." title="Type in a name">';
+
+                      $temp = "<table id='productTable'>";
  
                       /*Defining table Column headers depending upon JSON records*/
-                      $temp .= "<tr><th>Id</th>";
+                      $temp .= "<tr><th>Description</th>";
+                      $temp .= "<th>Id</th>";
                       $temp .= "<th>Name</th>";
-                      $temp .= "<th>Description</th>";
+                      
                       $temp .= "<th>Category</th>";
                       $temp .= "<th>Price</th>";
                       $temp .= "<th>Brand</th>";
@@ -300,9 +324,9 @@
                       for($i = 0; $i < sizeof($data); $i++)
                       {
                       $temp .= "<tr>";
+                      $temp .= "<td>" . $data[$i]["description"] . "</td>";
                       $temp .= "<td>" . $data[$i]["id"] . "</td>";
                       $temp .= "<td>" . $data[$i]["name"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["description"] . "</td>";
                       $temp .= "<td>" . $data[$i]["category"] . "</td>";
                       $temp .= "<td>" . $data[$i]["price"] . "</td>";
                       $temp .= "<td>" . $data[$i]["brand"] . "</td>";
@@ -388,7 +412,27 @@
     <!-- page-body-wrapper ends -->
 </div>
   <!-- container-scroller -->
+  <script>
+function myFunction() {
+  var filter, table, tr, td, i, txtValue;
+  filter =  document.getElementById("myInput").value.toUpperCase();
 
+  table = document.getElementById("productTable");
+  tr = table.querySelectorAll("tr");
+  console.log(tr);
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].querySelectorAll("td")[2];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 
 
   <!-- plugins:js -->

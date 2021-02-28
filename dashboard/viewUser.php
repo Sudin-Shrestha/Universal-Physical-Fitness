@@ -32,7 +32,8 @@
     border: 1px solid grey;
     border-collapse: collapse;
     padding: 8px;
-  
+    width: 100%;
+    table-layout : fixed;
     }
     /*Style for Table Header*/
     th {
@@ -46,6 +47,11 @@
     }
     table tr:nth-child(even) {
     background-color: #FFFFFF;
+    }
+    @media only screen and (max-width: 666px) {
+    table, th , td {
+    width: auto;
+    }
     }
     </style>
 <body>
@@ -264,6 +270,24 @@
                                 echo count($data); ?> </span></span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="classes.php">
+              <i class="mdi mdi-run menu-icon"></i>
+              <span class="menu-title">Classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="editClass.php">
+              <i class="mdi mdi-rename-box menu-icon"></i>
+              <span class="menu-title">Edit classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="packageQuery.php">
+              <i class="mdi mdi-layers menu-icon"></i>
+              <span class="menu-title">Package Query</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -302,9 +326,9 @@
                       </div>
                       ';
                     }else{
-                      echo '<input type="text" class="form-control mb-4 w-50 border border-secondary" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">';
+                      echo '<input type="text" class="form-control mb-4 w-100 border border-secondary" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">';
                       
-                    $temp = "<table>";
+                    $temp = "<table id='userTable'>";
  
                     /*Defining table Column headers depending upon JSON records*/
                     $temp .= "<tr><th>Id</th>";
@@ -416,13 +440,14 @@
 
   <script>
 function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementsByTagName("table");
-  tr = table.getElementsByTagName("tr");
+  var filter, table, tr, td, i, txtValue;
+  filter =  document.getElementById("myInput").value.toUpperCase();
+
+  table = document.getElementById("userTable");
+  tr = table.querySelectorAll("tr");
+  console.log(tr);
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].querySelectorAll("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

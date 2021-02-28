@@ -36,12 +36,24 @@
 	
 		<div class="row">
 			<div class="col-md-2 mx-2 bg-white p-1 h-100 mt-3">
-				<a href="">
-				<div class="d-flex justify-content-center mt-1">
-					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD5EWCOP49KkEBrn7x_5xtrH_QRBvg2ax32w&usqp=CAU" alt="" height="60" width="60">
-				</div>
-				<h6 class="text-center py-2">esewa wallet</h6>
-				</a>
+		
+					<div class="d-flex justify-content-center mt-1">
+						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD5EWCOP49KkEBrn7x_5xtrH_QRBvg2ax32w&usqp=CAU" alt="" height="60" width="60">
+					</div>
+					<h6 class="text-center py-2">esewa wallet</h6>
+						<!-- <form action="https://uat.esewa.com.np/epay/main" method="POST">
+							<input value="100" name="tAmt" type="hidden">
+							<input value="90" name="amt" type="hidden">
+							<input value="5" name="txAmt" type="hidden">
+							<input value="2" name="psc" type="hidden">
+							<input value="3" name="pdc" type="hidden">
+							<input value="EPAYTEST" name="scd" type="hidden">
+							<input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
+							<input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
+							<input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
+							<input value="Submit" type="submit">
+						</form> -->
+			
 			</div>
 			
 			<div class="col-md-2 mx-2 bg-white p-2 h-100 mt-3">
@@ -75,5 +87,36 @@
 	<?php include '../includes/importjs.php'; ?>								
 
 
+	<script>
+		var path="https://uat.esewa.com.np/epay/main";
+		var params= {
+			amt: 10,
+			psc: 0,
+			pdc: 0,
+			txAmt: 0,
+			tAmt: 20,
+			pid: "5615",
+			scd: "EPAYTEST",
+			su: "http://merchant.com.np/page/esewa_payment_success",
+			fu: "http://merchant.com.np/page/esewa_payment_failed"
+		}
+
+		function post(path, params) {
+			var form = document.createElement("form");
+			form.setAttribute("method", "POST");
+			form.setAttribute("action", path);
+
+			for(var key in params) {
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", key);
+				hiddenField.setAttribute("value", params[key]);
+				form.appendChild(hiddenField);
+			}
+
+			document.body.appendChild(form);
+			form.submit();
+	}
+	</script>
 	</body>
 </html>

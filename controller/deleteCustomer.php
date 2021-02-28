@@ -3,10 +3,10 @@
 <?php 
 
     
-if(isset($_POST['updatePassword'])){
+if(isset($_POST['deleteAccount'])){
     
     
-    $cURLConnection = curl_init('http://localhost/fitness/api/update/password');
+    $cURLConnection = curl_init('http://localhost/fitness/api/delete/customer');
     curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $_POST);
     curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
 
@@ -16,7 +16,7 @@ if(isset($_POST['updatePassword'])){
     setcookie('token', null, -1, '/'); 
     
    header ('Location: ../home');  
-   setcookie('toast_message', "Passowrd change successful, please login again.", time()+60*60, "/");
+   setcookie('toast_message', "Account deleted successfully", time()+60*60, "/");
 
 
     

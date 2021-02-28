@@ -16,8 +16,8 @@
     body{
             background-color: #eff0f5;
         }
-
-    table, th , td {
+   
+    table.userProductsTable, table.userProductsTable th , table.userProductsTable td {
     border: 1px solid grey;
     border-collapse: collapse;
     padding: 15px;
@@ -25,16 +25,16 @@
     white-space: nowrap;
     }
     /*Style for Table Header*/
-    th {
+    table.userProductsTable th {
     background: darkblue;
     color: white;
     text-align: left;
     }
     /*Style for Alternate Rows*/
-    table tr:nth-child(odd) {
+    table.userProductsTable tr:nth-child(odd) {
     background-color: #C2EBC3;
     }
-    table tr:nth-child(even) {
+    table.userProductsTable tr:nth-child(even) {
     background-color: #FFFFFF;
     }
     .card-body{
@@ -65,9 +65,16 @@
 
             $accesstoken = json_decode($accesstoken,TRUE);
 
+         
+
 
             if ($accesstoken['usertype'] == "member"){
                 if($accesstoken != FALSE){
+                       //days calculation for membership expiry
+                        $future = strtotime($token['validTo']);
+                        $timefromdb = time();
+                        $timeleft = $future-$timefromdb;
+                        $daysleft = round((($timeleft/24)/60)/60);
                     echo '
                         <div class="container">
                             <div class="row my-5">
@@ -84,8 +91,10 @@
                                         <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
                                         </svg> '.$token['phone'].'</h5>
                                         <hr>
-                                        <p>Gym Membership Expiry Date: <span class="text-danger"> '.$token['validTo'].' </span> </P>
+                                        <p>Membership details</p>
                                         <p>Valid From: <span class="text-danger"> '.$token['validFrom'].' </span>  </P>
+                                        <p>Valid TO: <span class="text-danger"> '.$token['validTo'].' </span> </P>
+                                        <p>Days left: <span class="text-danger"> '.$daysleft.' </span>  </P>
                                         <a href="../controller/logout.php"><button type="button" class="btn btn-info w-100">Logout</button></a>
                                     </div>
                                 </div>
@@ -126,16 +135,16 @@
                                                     <div class="container">
                                                     <div class="row">
                                                         <div class="col-md-5">
-                                                        <img src="images/nocontent.png" alt="" height="400" width="400">
+                                                        <img src="../img/nocontent.png" alt="" height="300" width="300">
                                                         </div>
                                                         <div class="col-md-7 display-1">
-                                                        <strong>No queries found</strong> 
+                                                        <h1>No Orders found</h1> 
                                                         </div>
                                                     </div>
                                                     </div>
                                                     ';
                                                     }else{
-                                                    $temp = "<table>";
+                                                    $temp = "<table class='userProductsTable'>";
 
                                                 
                                                     /*Defining table Column headers depending upon JSON records*/
@@ -207,6 +216,7 @@
                             
                             <button type="button" class="btn btn-warning w-100 mb-2" data-toggle="modal" data-target="#editModal'.$token['id'].'">Edit Details</button>
                             <button type="button" class="btn btn-success w-100 mb-2" data-toggle="modal" data-target="#password'.$token['id'].'">Change Password</button>
+                            <button type="button" class="btn btn-danger w-100 mb-2" data-toggle="modal" data-target="#delete'.$token['id'].'">Delete Account</button>
                             <a href="../controller/logout.php"><button type="button" class="btn btn-info w-100">Logout</button></a>
                         </div>
                     </div>
@@ -243,16 +253,16 @@
                                     <div class="container">
                                     <div class="row">
                                         <div class="col-md-5">
-                                        <img src="images/nocontent.png" alt="" height="400" width="400">
+                                        <img src="../img/nocontent.png" alt="" height="300" width="300">
                                         </div>
                                         <div class="col-md-7 display-1">
-                                        <strong>No queries found</strong> 
+                                        <h2>No orders found</h2> 
                                         </div>
                                     </div>
                                     </div>
                                     ';
                                     }else{
-                                    $temp = "<table>";
+                                    $temp = "<table class='userProductsTable'>";
 
                                 
                                     /*Defining table Column headers depending upon JSON records*/
@@ -353,6 +363,32 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="delete'.$token['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Account</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="../controller/deleteCustomer.php"  method="POST">
+                            Do you want to delete this account!!
+                        </div>
+                            <div class="modal-footer">
+                        
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="hidden" name="delete_id" value="'.$token['id'].'">
+                                <button type="submit" class="btn btn-danger" name="deleteAccount" id="deleteAccount" value="save">Delete</button>
+                        
+                        </form>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
                 ';  
             }
         }

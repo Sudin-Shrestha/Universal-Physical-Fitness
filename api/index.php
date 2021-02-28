@@ -230,6 +230,14 @@
         Api::send($response);
     });
 
+    //DELETE user
+    Api::POST("/delete/customer",function(){
+        $sql = "DELETE FROM `customer` WHERE id=?";
+         $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
+
+
 
     //Update APIS
      //update product
@@ -289,7 +297,7 @@
                     $sql = 'INSERT INTO orders (productId,memberId,orderDate,orderStatus,quantity,totalAmount) VALUES (?,?,?,?,?,?)';
                 }
 
-            $response = Database::query($sql, $product_id, $payload[0]['id'], date("Y/m/d"), "pending", $count, $total);
+            $response = Database::query($sql, $product_id, $payload[0]['id'], date("Y/m/d"), "Pending", $count, $total);
            
             Api::send($response);
         }else{
@@ -364,6 +372,69 @@
         Api::send($response);
     });
     
+    //add classes and cover image dynamically  
+     Api::POST('/classes/add',function(){
+        $sql = 'INSERT INTO classes (price, duration, feature_1, feature_2, feature_3, feature_4, feature_5) VALUES(?,?,?,?,?,?,?)';
+        $response = Database::query($sql, $_POST['price'], $_POST['duration'], $_POST['f1'], $_POST['f2'], $_POST['f3'],  $_POST['f4'], $_POST['f5']);
+        Api::send($response);
+    });
+
+    
+    //classes all
+    Api::GET("/classes/all",function(){
+        $sql = "Select * from classes";
+        $response = Database::query($sql);
+        Api::send($response);
+    });
+
+    //Package query 
+    Api::POST('/package/query',function(){
+        $sql = 'INSERT INTO packagequery (classId, chooserName, chooserPhone) VALUES(?,?,?)';
+        $response = Database::query($sql, $_POST['package_id'], $_POST['chooserName'], $_POST['chooserPhone']);
+        Api::send($response);
+    });
+
+    // view product
+    Api::GET("/classes/view",function(){
+        $data = database::query('SELECT * FROM classes');
+        Api::send($data);
+    });
+
+    //update gym classes
+    Api::POST("/update/classes",function(){
+        $sql = "UPDATE classes
+        SET price=?, duration=?
+        WHERE id=?;";
+        $response = Database::query($sql, $_POST['packagePrice'], $_POST['packageDuration'],$_POST['edit_id']);
+        Api::send($response);
+    });
+
+    //DELETE gym classes
+    Api::POST("/delete/classes",function(){
+        $sql = "DELETE FROM `classes` WHERE id=?";
+         $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
+
+        //orders all
+    Api::GET("/package/queryall",function(){
+        $sql = "Select 
+                packagequery.id AS id,
+                packagequery.chooserName AS name,
+                packagequery.chooserPhone AS phone,
+                classes.price AS price,
+                classes.duration AS duration
+                from packagequery INNER JOIN classes ON classes.id = packagequery.classId";
+        $response = Database::query($sql);
+        Api::send($response);
+    });
+
+    //DELETE package query
+    Api::POST("/packagequery/delete",function(){
+        $sql = "DELETE FROM `packagequery` WHERE id=?";
+         $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
 
 ?>
 

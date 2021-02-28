@@ -23,17 +23,26 @@
 	<?php include '../includes/header.php'; ?>	
 	<?php include '../includes/toast.php'; ?>	
 
-
-	<!-- Hero section -->
-	<section class="hero-section set-bg" data-setbg="../img/bgbg.jpg">
+	<?php
+		$blog = json_decode(
+			file_get_contents('http://localhost/fitness/api/blog/1'),
+			TRUE
+		);
+		echo '
+		<section class="hero-section set-bg" data-setbg="http://localhost/fitness/api/storage/'.$blog['image'].'">
 		<div class="container">
 			<div class="hero-text">
 				<h2>Shape Your</h2>
 				<h2>Body <span>With Us!</span></h2>
-				<a href="contact.html" class="site-btn">Join the Gym</a>
+				<a href="../contact" class="site-btn">Join the Gym</a>
 			</div>
 		</div>
 	</section>
+		';
+	?>
+
+	<!-- Hero section -->
+	
 	<!-- Hero section end -->
 
 	<!-- Feature section -->
@@ -91,7 +100,7 @@
 							<li><img src="../img/check-icon.png" alt="">Cardio and Zumba</li>
 							<li><img src="../img/check-icon.png" alt="">Zumba and GYM</li>
 						</ul>
-						<a href="#" class="site-btn">Become a Member</a>
+						<a href="../classes" class="site-btn">See all packages</a>
 					</div>
 				</div>
 			</div>

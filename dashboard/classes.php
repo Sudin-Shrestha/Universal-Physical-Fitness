@@ -18,26 +18,6 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
-<style>
-    table, th , td {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 15px;
-    }
-    /*Style for Table Header*/
-    th {
-    background: darkblue;
-    color: white;
-    text-align: left;
-    }
-    /*Style for Alternate Rows*/
-    table tr:nth-child(odd) {
-    background-color: #C2EBC3;
-    }
-    table tr:nth-child(even) {
-    background-color: #FFFFFF;
-    }
-    </style>
 <body>
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -101,7 +81,7 @@
                     <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
                 </div>
                 <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">Johnson
+                  <h6 class="ellipsis font-weight-normal"> Johnson
                   </h6>
                   <p class="font-weight-light small-text text-muted mb-0">
                     Upcoming board meeting
@@ -243,7 +223,7 @@
                                $dataJson = file_get_contents("http://localhost/fitness/api/blog/view");
                                $data = json_decode($dataJson, true);
                                 echo count($data); ?></span></span>
-            </a>
+            </a> 
           </li>
           <li class="nav-item">
             <a class="nav-link" href="queries.php">
@@ -278,100 +258,56 @@
     <div class="main-panel">
         <div class="content-wrapper">
          
-            <div class="container">
-            
-                <div class="card">
-                    <div class="card-header bg-white">
-                        <strong>Queries</strong> 
-                    </div>
-                    <div class="card-body mx-2" style="overflow-x:auto;">
-                   
-                    
-                    <?php
-                    /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/queries/all");
-                    $data = json_decode($str_data, true);
-
-                    if(count($data) == 0){
-                      echo '
-                      <div class="container">
-                      <div class="row">
-                        <div class="col-md-5">
-                          <img src="images/nocontent.png" alt="" height="400" width="400">
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <strong>Add Classes Description</strong> 
+                </div>
+                <div class="card-body">
+                    <form action="../controller/classDesc.php" method="POST" id='classDesc'>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" id="price" name="price" placeholder="Price of package" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                            <label for="duaration">Duration</label>
+                            <input type="text" class="form-control" id="duration" name="duration" placeholder="Duration of package" required>
+                            </div>
                         </div>
-                        <div class="col-md-7 display-1">
-                           <strong>No queries found</strong> 
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="f1">Feature 1</label>
+                                <input type="text" class="form-control" id="f1" name="f1" placeholder="Feature 1" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="f2">Feature 2</label>
+                                <input type="text" class="form-control" id="f2" name="f2" placeholder="Featuer 2" required>
+                            </div>
                         </div>
-                      </div>
-                      </div>
-                      ';
-                    }else{
-                    $temp = "<table>";
-
-                  
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>Name</th>";
-                    $temp .= "<th>Phone</th>";
-                    $temp .= "<th>Email</th>";
-                    $temp .= "<th>Subject</th>";
-                    $temp .= "<th>Delete</th></tr>";
-          
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
-                      
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["name"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["phone"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["email"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["subject"] . "</td>";
-
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#deleteQuery'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
-                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
-                    $temp .= "</tr>";
-
-                    $temp .= '
-                    <div class="modal fade" id="deleteQuery'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="f3">Feature 3</label>
+                                <input type="text" class="form-control" id="f3" name="f3" placeholder="Feature 3">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="f4">Feature 4</label>
+                                <input type="text" class="form-control" id="f4" name="f4" placeholder="Featuer 4">
+                            </div>
                         </div>
-                        <div class="modal-body">
-                          Do you want to remove query from <span class="text-danger"> '.$data[$i]['name'].' </span>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="f5">Feature 5</label>
+                                <input type="text" class="form-control" id="f5" name="f5" placeholder="Feature 5" >
+                            </div>
+                            
                         </div>
-                        <div class="modal-footer">
-                        <form action="../controller/queryRemove.php"  method="POST">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
-                           <button type="submit" class="btn btn-danger" name="deleteQuery" value="delete">Delete blog</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                    ';
-                    
-                  }
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
-                      
-                    }
-
-                 
-                    ?>
-
-                  
-
-                    </div>
+                
+                        <button type="submit" id="submitBtn" class="btn btn-primary">Add Class</button>
+                    </form>
                 </div>
             </div>
+        </div>
         
       
         <!-- partial -->
@@ -384,6 +320,7 @@
 
   <!-- plugins:js -->
   <script src="vendors/base/vendor.bundle.base.js"></script>
+  <script src="js/validEmail.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <script src="vendors/chart.js/Chart.min.js"></script>

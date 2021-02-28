@@ -32,6 +32,8 @@
     border: 1px solid grey;
     border-collapse: collapse;
     padding: 8px;
+    width: 100%;
+    table-layout : fixed;
   
     }
     /*Style for Table Header*/
@@ -46,6 +48,12 @@
     }
     table tr:nth-child(even) {
     background-color: #FFFFFF;
+    }
+    @media only screen and (max-width: 666px) {
+ 
+    table, th , td {
+    width: auto;
+    }
     }
     </style>
 <body>
@@ -264,6 +272,24 @@
                                 echo count($data); ?></span></span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="classes.php">
+              <i class="mdi mdi-run menu-icon"></i>
+              <span class="menu-title">Classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="editClass.php">
+              <i class="mdi mdi-rename-box menu-icon"></i>
+              <span class="menu-title">Edit classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="packageQuery.php">
+              <i class="mdi mdi-layers menu-icon"></i>
+              <span class="menu-title">Package Query</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -299,14 +325,14 @@
  
                       /*Defining table Column headers depending upon JSON records*/
                       $temp .= "<tr><th>Id</th>";
+                      $temp .= "<th>Order Date</th>";
+                      $temp .= "<th>Product Name</th>";
                       $temp .= "<th>Product ID</th>";
                       $temp .= "<th>Member ID</th>";
                       $temp .= "<th>Customer ID</th>";
-                      $temp .= "<th>Order Date</th>";
                       $temp .= "<th>Order Status</th>";
                       $temp .= "<th>Quantity</th>";
                       $temp .= "<th>Total Amount</th>";
-                      $temp .= "<th>Product Name</th>";
                       $temp .= "<th>Edit</th>";
                       $temp .= "<th>Delete</th></tr>";
   
@@ -315,14 +341,14 @@
                       {
                       $temp .= "<tr>";
                       $temp .= "<td>" . $data[$i]["id"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["date"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["productName"] . "</td>";
                       $temp .= "<td>" . $data[$i]["productId"] . "</td>";
                       $temp .= "<td>" . $data[$i]["memberId"] . "</td>";
                       $temp .= "<td>" . $data[$i]["customerId"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["date"] . "</td>";
                       $temp .= "<td>" . $data[$i]["status"] . "</td>";
                       $temp .= "<td>" . $data[$i]["quantity"] . "</td>";
                       $temp .= "<td>" . $data[$i]["amount"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["productName"] . "</td>";
                       $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
   
                       $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";

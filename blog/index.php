@@ -64,16 +64,12 @@
 					}
 					?>
 
-
-				
-					
-			
-					<div class="site-pagination">
+					<!-- <div class="site-pagination">
 						<a href="" class="active">01</a>
 						<a href="">02</a>
 						<a href="">03</a>
 						<a href="">04</a>
-					</div>
+					</div> -->
 				</div>
 				<div class="col-lg-4 col-md-7 col-sm-9 sidebar">
 					<div class="widget-area">
@@ -82,19 +78,6 @@
 							<button><img src="../img/icons/search.png" alt=""></button>
 						</form>
 					</div>
-					<!-- <div class="widget-area">
-						<h2 class="widget-title">Categories</h2>
-						<ul>
-							<li><a href="">Body Building<span>5</span></a></li>
-							<li><a href="">Nutritions Tips<span>7</span></a></li>
-							<li><a href="">Pillates & Yoga<span>9</span></a></li>
-							<li><a href="">Events & Competitions<span>10</span></a></li>
-							<li><a href="">Workout<span>15</span></a></li>
-							<li><a href="">Fitness<span>8</span></a></li>
-							<li><a href="">Wellness Treatments<span>6</span></a></li>
-							<li><a href="">Uncategorized<span>47</span></a></li>
-						</ul>
-					</div> -->
 					<div class="widget-area">
 						<h2 class="widget-title">Recent Posts</h2>
 						<div class="recent-post-widget">

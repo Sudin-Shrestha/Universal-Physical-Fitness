@@ -1,6 +1,6 @@
-<?php 
+<?php include '../includes/toast.php'; ?>	
 
-    
+<?php    
 if(isset($_POST['updateCustomer'])){
     
     
@@ -16,6 +16,7 @@ if(isset($_POST['updateCustomer'])){
     setcookie('token', null, -1, '/'); 
     
    header ('Location: ../home');  
+   setcookie('toast_message', "Edit successful please login again", time()+60*60, "/");
     
    
 };

@@ -234,6 +234,24 @@
                                 echo count($data); ?></span></span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="classes.php">
+              <i class="mdi mdi-run menu-icon"></i>
+              <span class="menu-title">Classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="editClass.php">
+              <i class="mdi mdi-rename-box menu-icon"></i>
+              <span class="menu-title">Edit classes</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="packageQuery.php">
+              <i class="mdi mdi-layers menu-icon"></i>
+              <span class="menu-title">Package Query</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- partial -->

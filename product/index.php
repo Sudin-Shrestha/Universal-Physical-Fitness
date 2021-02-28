@@ -118,7 +118,7 @@
                         <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314    6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                         </svg>
                     </div>
-                    <div class="col-md-9">Delivery Option <br> <strong>Nepal, Kathmandu</strong><a href="#" class="px-2">Change</a></div>
+                    <div class="col-md-9">Delivery Option <br> <strong>Nepal, Kathmandu</strong><a href="../profile" class="px-2">Change</a></div>
                     
                 </div>
                 
@@ -170,12 +170,21 @@
         </div>
     </div>
 
-    <p class="text-center display-3 text-info" style="opacity: 0.3; font-weight: bolder;">Description</p>
+ 
 
-    <div class="container mb-5">
+    <div class="container my-5">
         <div class="card">
+            <div class="card-header">Description</div>
             <div class="card-body">
-                <p><pre>'.$products['description'].'</pre> </p>
+                <div class="row">
+                    <div class="col-md-3 font-weight-bold">
+                        Overview
+                    </div>
+                    <div class="col-md-7">
+                    <spam><pre>'.$products['description'].'</pre> </spam>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -186,6 +195,7 @@
 
     <div class="container">
         <p class="text-center display-4 text-info" style="opacity: 0.3; font-weight: bolder;">You may also like</p>
+        
   
     <div class="row my-4">
 					<?php  $products = json_decode(

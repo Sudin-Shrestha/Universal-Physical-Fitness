@@ -23,6 +23,8 @@
     border: 1px solid grey;
     border-collapse: collapse;
     padding: 15px;
+    width: 100%;
+    table-layout: fixed;
     }
     /*Style for Table Header*/
     th {
@@ -37,6 +39,12 @@
     table tr:nth-child(even) {
     background-color: #FFFFFF;
     }
+    @media only screen and (max-width: 666px) {
+ 
+ table, th , td {
+ width: auto;
+ }
+ }
     </style>
 <body>
 <div class="container-scroller">
@@ -101,7 +109,7 @@
                     <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
                 </div>
                 <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">Johnson
+                  <h6 class="ellipsis font-weight-normal"> Johnson
                   </h6>
                   <p class="font-weight-light small-text text-muted mb-0">
                     Upcoming board meeting
@@ -243,7 +251,7 @@
                                $dataJson = file_get_contents("http://localhost/fitness/api/blog/view");
                                $data = json_decode($dataJson, true);
                                 echo count($data); ?></span></span>
-            </a>
+            </a> 
           </li>
           <li class="nav-item">
             <a class="nav-link" href="queries.php">
@@ -278,20 +286,16 @@
     <div class="main-panel">
         <div class="content-wrapper">
          
-            <div class="container">
-            
-                <div class="card">
-                    <div class="card-header bg-white">
-                        <strong>Queries</strong> 
-                    </div>
-                    <div class="card-body mx-2" style="overflow-x:auto;">
-                   
-                    
-                    <?php
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <strong>Add Classes Description</strong> 
+                </div>
+                <div class="card-body" style="overflow-x:auto;">
+                <?php
                     /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/queries/all");
+                    $str_data = file_get_contents("http://localhost/fitness/api/classes/view");
                     $data = json_decode($str_data, true);
-
                     if(count($data) == 0){
                       echo '
                       <div class="container">
@@ -300,78 +304,121 @@
                           <img src="images/nocontent.png" alt="" height="400" width="400">
                         </div>
                         <div class="col-md-7 display-1">
-                           <strong>No queries found</strong> 
+                           <strong>No Classes found</strong> 
                         </div>
                       </div>
                       </div>
                       ';
                     }else{
-                    $temp = "<table>";
 
-                  
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>Name</th>";
-                    $temp .= "<th>Phone</th>";
-                    $temp .= "<th>Email</th>";
-                    $temp .= "<th>Subject</th>";
-                    $temp .= "<th>Delete</th></tr>";
-          
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
+                      $temp = "<table id='classTable'>";
+ 
+                      /*Defining table Column headers depending upon JSON records*/
+                      $temp .= "<tr><th>Id</th>";
+                      $temp .= "<th>Price</th>";
+                      $temp .= "<th>Duration</th>";
+                      $temp .= "<th>Fetaure 1</th>";
+                      $temp .= "<th>Fetaure 2</th>";
+                      $temp .= "<th>Fetaure 3</th>";
+                      $temp .= "<th>Fetaure 4</th>";
+                      $temp .= "<th>Fetaure 5</th>";
+                      $temp .= "<th>Edit</th>";
+                      $temp .= "<th>Delete</th></tr>";
+  
+                      /*Dynamically generating rows & columns*/
+                      for($i = 0; $i < sizeof($data); $i++)
+                      {
+                      $temp .= "<tr>";
+                      $temp .= "<td>" . $data[$i]["id"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["price"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["duration"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["feature_1"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["feature_2"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["feature_3"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["feature_4"] . "</td>";
+                      $temp .= "<td>" . $data[$i]["feature_5"] . "</td>";
+                      $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
+  
+                      $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
+                      // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
+                      $temp .= "</tr>";
+  
+                      $temp .= '
+                      <div class="modal fade" id="editModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                          <form action="../controller/editClasses.php"  method="POST">
+                            <div class="form-group">
+                                <label for="packagePrice">Price</label>
+                                <input type="text" class="form-control" id="packagePrice" name="packagePrice" placeholder="Enter price" value="'.$data[$i]["price"].'" required>
+                            
+                                </div>
+                                <div class="form-group">
+                                <label for="packageDuartion">Duartion</label>
+                                <input type="text" class="form-control" id="packageDuration" name="packageDuration" placeholder="Enter Duartion" value="'.$data[$i]["duration"].'" required>
+                                </div>
+                       
+
+                            </div>
+                            <div class="modal-footer">
                       
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["name"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["phone"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["email"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["subject"] . "</td>";
-
-                    $temp .= "<td>" . '<a href="" class="btn" data-toggle="modal" data-target="#deleteQuery'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
-                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
-                    $temp .= "</tr>";
-
-                    $temp .= '
-                    <div class="modal fade" id="deleteQuery'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          Do you want to remove query from <span class="text-danger"> '.$data[$i]['name'].' </span>
-                        </div>
-                        <div class="modal-footer">
-                        <form action="../controller/queryRemove.php"  method="POST">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
-                           <button type="submit" class="btn btn-danger" name="deleteQuery" value="delete">Delete blog</button>
-                          </form>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="hidden" name="edit_id" value="'.$data[$i]['id'].'">
+                            <button type="submit" class="btn btn-primary" name="editPackage" value="save">Save changes</button>
+                            </form>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                    ';
-                    
-                  }
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
+                      ';
+  
+                      $temp .= '
+                      <div class="modal fade" id="deleteModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Do you want to delete <span class="text-danger"> '.$data[$i]['duration'].' </span> package.
+                          </div>
+                          <div class="modal-footer">
+                          <form action="../controller/deleteClasses.php"  method="POST">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
+                             <button type="submit" class="btn btn-danger" name="deletePackage" value="delete">Delete Product</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                      ';
+                      }
                       
+                      /*End tag of table*/
+                      $temp .= "</table>";
+                      echo $temp;
                     }
 
-                 
-                    ?>
 
                   
+                 
+                     //<input type="hidden" name="productid" value="'.$_GET['id'].'">
+                    ?>
 
-                    </div>
                 </div>
             </div>
+        </div>
         
       
         <!-- partial -->
@@ -384,6 +431,7 @@
 
   <!-- plugins:js -->
   <script src="vendors/base/vendor.bundle.base.js"></script>
+  <script src="js/validEmail.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <script src="vendors/chart.js/Chart.min.js"></script>
