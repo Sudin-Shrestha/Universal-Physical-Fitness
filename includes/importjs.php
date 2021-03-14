@@ -9,4 +9,5 @@
 	<script src="../js/cart.js"></script>
 	<script src="../js/toast.js"></script>
 	<script src="../js/changePw.js"></script>
+	<script src= "https://smtpjs.com/v3/smtp.js"></script> 
 	

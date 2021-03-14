@@ -177,60 +177,7 @@
 					
 					?>
 			
-				<!-- 
-					<div class="form-row">
-								<div class="form-group col-md-6">
-									<label for="price">Package Price</label>
-									<input type="text" class="form-control" style="background: #669DB3FF;" id="price" name="price" value="Rs. '.$class['price'].'" readonly>
-								</div>
-								<div class="form-group col-md-6">
-									<label for="duration">Package Duration</label>
-									<input type="text" class="form-control" id="duration" name="duration" value="'.$class['duration'].'" readonly>
-								</div>
-							</div>
-					<div class="col-lg-3 col-sm-6">
-					<div class="pricing-box">
-						<h2>$25</h2>
-						<p>/month</p>
-						<ul>
-							<li>Gym</li>
-							<li>Fitness 24/7</li>
-							<li>Sauna</li>
-							<li><span></span></li>
-							<li><span></span></li>
-						</ul>
-						<a href="#" class="site-btn">Choose Plan</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="pricing-box">
-						<h2>$45</h2>
-						<p>/month</p>
-						<ul>
-							<li>Gym</li>
-							<li>Fitness 24/7</li>
-							<li>Sauna</li>
-							<li>Personal Trainer</li>
-							<li>Massage</li>
-						</ul>
-						<a href="#" class="site-btn">Choose Plan</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="pricing-box">
-						<h2>$60</h2>
-						<p>/month</p>
-						<ul>
-							<li>Gym</li>
-							<li>Fitness 24/7</li>
-							<li>Sauna</li>
-							<li>Personal Trainer</li>
-							<li>Massage</li>
-							<li>Dietician</li>
-						</ul>
-						<a href="#" class="site-btn">Choose Plan</a>
-					</div>
-				</div> -->
+			
 			</div>
 		</div>
 	</section>

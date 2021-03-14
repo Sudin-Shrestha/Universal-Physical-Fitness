@@ -8,6 +8,7 @@
 
     //login validation from 3 tables
     Api::POST("/user/login",function(){
+        if(!isset($_POST['username']) || !$_POST['username'] || !isset($_POST['password']) || !$_POST['password']) Api::send(null);
         $password_hash = md5($_POST['password']);
         $data = database::query('SELECT id, username as email, admin_name FROM admin WHERE username = ? and password = ?', $_POST['username'], $password_hash);
         if (!empty($data)){
@@ -23,6 +24,20 @@
                 }
             }
         }
+        $data['token'] = Token::create($data);
+        Api::send($data);
+    });
+
+      //login validation from 3 tables
+      Api::POST("/user/member/login",function(){
+        if(!isset($_POST['username']) || !$_POST['username'] || !isset($_POST['password']) || !$_POST['password']) Api::send(null);
+  
+        $data = database::query('SELECT id, email, firstName, lastName, address, phone, validFrom, validTo, password FROM member WHERE email = ? and password = ?', $_POST['username'], $_POST['password']);
+        
+        if(!$data) Api::send(null);
+
+        $data['usertype']='member';
+                
         $data['token'] = Token::create($data);
         Api::send($data);
     });
@@ -261,9 +276,9 @@
     //update user
     Api::POST("/update/user",function(){
     $sql = "UPDATE member
-    SET email=?, password=?, validFrom=?, validTo=?
+    SET email=?, password=?, validFrom=?, validTo=?, status=?
     WHERE id=?;";
-    $response = Database::query($sql, $_POST['updatedEmail'],$_POST['updatedPassword'],$_POST['updatedValidFrom'],$_POST['updatedValidTo'],$_POST['edit_id']);
+    $response = Database::query($sql, $_POST['updatedEmail'],$_POST['updatedPassword'],$_POST['updatedValidFrom'],$_POST['updatedValidTo'],$_POST['status'],$_POST['edit_id']);
     Api::send($response);
     });
 
@@ -435,6 +450,22 @@
          $response = Database::query($sql, $_POST['delete_id']);
         Api::send($response);
     });
+
+    //take gym data
+    Api::GET("/view/gymdetail",function(){
+        $data = database::query('SELECT * FROM gym_details');
+        Api::send($data);
+    });
+
+    //Update Gym data
+    Api::POST("/update/details",function(){
+        $sql = "UPDATE gym_details
+        SET gymLocation=?, gymPhone1=?, gymPhone1=?, gymEmail=?
+        WHERE id=?;";
+        $response = Database::query($sql, $_POST['gymLocation'], $_POST['gymPhone1'], $_POST['gymPhone1'], $_POST['gymEmail'],$_POST['edit_id']);
+        Api::send($response);
+    });
+
 
 ?>
 

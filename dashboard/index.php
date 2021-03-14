@@ -23,36 +23,15 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
-<style>
-    table, th , td {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 12px;
-    width: 100%;
-    table-layout: fixed;
-    }
-    /*Style for Table Header*/
-    th {
-    background: darkblue;
-    color: white;
-    text-align: left;
-    }
-    /*Style for Alternate Rows*/
-    table tr:nth-child(odd) {
-    background-color: #C2EBC3;
-    }
-    table tr:nth-child(even) {
-    background-color: #FFFFFF;
-    }
-    </style>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-          <a class="navbar-brand brand-logo" href="index.php">UPF Admin</a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">UPF</a>
+          <a class="navbar-brand brand-logo font-italic" href="index.php">Welcome Admin</a>
+          <a class="navbar-brand brand-logo-mini" href="index.php">UPF</a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
           </button>
@@ -72,76 +51,6 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown mr-1">
-            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-message-text mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">David Grey
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    The meeting is cancelled
-                  </p>
-                </div>
-              </a>
-          
-            </div>
-          </li>
-          <li class="nav-item dropdown mr-4">
-            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-success">
-                    <i class="mdi mdi-information mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">Application Error</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Just now
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-warning">
-                    <i class="mdi mdi-settings mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">Settings</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Private message
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-info">
-                    <i class="mdi mdi-account-box mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">New user registration</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    2 days ago
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="images/faces/face5.jpg" alt="profile"/>
@@ -256,6 +165,12 @@
               <span class="menu-title">Package Query</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gymDetails.php">
+              <i class="mdi mdi-folder-lock-open menu-icon"></i>
+              <span class="menu-title">Gym Details</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -355,127 +270,153 @@
      
           <div class="row">
             <div class="col-md-12 stretch-card">
-              <div class="card">
+            <div class="card">
               <div class="card-header">
-              <strong>Users</strong> 
-                    <?php 
-                        if(isset($_GET['view']) && $_GET['view']=='desc'){
-                          $str_data = file_get_contents("http://localhost/fitness/api/user/view/desc");
-                          echo '<a href="../dashboard/" class="float-right">Sort by Ascending</a>';
-                        }else{
-                          $str_data = file_get_contents("http://localhost/fitness/api/user/view/asc");
-                          echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right">Sort by Descending</a>';
-                        }
-                    ?>
+                  <strong>User Table</strong> 
+                  <?php 
+                            if(isset($_GET['view']) && $_GET['view']=='desc'){
+                              $str_data = file_get_contents("http://localhost/fitness/api/user/view/desc");
+                              echo '<a href="../dashboard/viewUser.php" class="float-right">Sort by Ascending</a>';
+                            }else{
+                              $str_data = file_get_contents("http://localhost/fitness/api/user/view/asc");
+                              echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right">Sort by Descending</a>';
+                            }
+                        ?>
               </div>
-                <div class="card-body  mx-2" style="overflow-x:auto;">
-                 
-                  <?php
-                    // echo "<pre>";
-                    //   var_dump($data);
-                    //   echo "</pre>";
-                    /*Fetching JSON file content using php file_get_contents method*/
-                    // $str_data = file_get_contents("http://localhost/fitness/api/user/view");
-                    $data = json_decode($str_data, true);
-                    $temp = "<table>";
- 
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>First Name</th>";
-                    $temp .= "<th>Last Name</th>";
-                    $temp .= "<th>Address</th>";
-                    $temp .= "<th>Phone</th>";
-                    $temp .= "<th>Email</th>";
-                    $temp .= "<th>Password</th>";
-                    $temp .= "<th>Valid From</th>";
-                    $temp .= "<th>Valid To</th></tr>";
-                    // $temp .= "<th>Action</th></tr>";
+              <div class="card-body" style="overflow-x:auto;">
+              <?php
+                $data = json_decode($str_data, true);
+                        
+                if(count($data) == 0){
+                  echo '
+                  <div class="container">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <img src="images/nocontent.png" alt="" height="400" width="400">
+                    </div>
+                    <div class="col-md-7 display-1">
+                      <strong>No User found</strong> 
+                    </div>
+                  </div>
+                  </div>
+                  ';
+                }else{
+                  echo '
+                  <table class="table table-hover table-bordered" id="userTable">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">email</th>
+                        <th scope="col">password</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                      </tr>
+                    </thead>
+                  
+                  
+                  ';
 
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["firstName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["lastName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["address"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["phone"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["email"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["password"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validFrom"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validTo"] . "</td>";
-                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
-                    $temp .= "</tr>";
-                    }
-                    
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
-                    ?>
-                </div>
+                  foreach($data as $users){
+                    //  var_dump($users);
+                    echo '
+                    <tbody>
+                      <tr>
+                      <td>'.$users['firstName'].' '.$users['lastName'].'</td>
+                      <td>'.$users['address'].'</td>
+                      <td>'.$users['phone'].'</td>
+                      <td>'.$users['email'].'</td>
+                      <td>'.$users['password'].'</td>
+                      <td>'.$users['validFrom'].'</td>
+                      <td>'.$users['validTo'].'</td>
+                      </tr>
+
+                
+                    </tbody>
+                
+                      ';
+                    } 
+                  }
+                  echo '</table>';
+                  
+                  
+              ?>
+              
+                
               </div>
+            </div>
             </div>
           </div>
           
           <div class="row mt-5">
           <div class="col-md-12 stretch-card">
             <div class="card">
-                <div class="card-header bg-white">
+                <div class="card-header bg-light">
                     <strong>Orders</strong> 
                 </div>
 
-                <div class="card-body mx-2" style="overflow-x:auto;">
+                <div class="card-body" style="overflow-x:auto;">
                 <?php
                     /*Fetching JSON file content using php file_get_contents method*/
                     $str_data = file_get_contents("http://localhost/fitness/api/orders/each");
                     $data = json_decode($str_data, true);
-                    if(count($data) == 0){
-                      echo '
-                      <div class="container">
-                      <div class="row">
-                        <div class="col-md-5">
-                          <img src="images/nocontent.png" alt="" height="400" width="400">
-                        </div>
-                        <div class="col-md-7 display-1">
-                           <strong>No orders found</strong> 
-                        </div>
-                      </div>
-                      </div>
-                      ';
-                    }else{
-                      $temp = "<table>";
- 
-                      /*Defining table Column headers depending upon JSON records*/
-                      $temp .= "<tr><th>Id</th>";
-                      $temp .= "<th>Product ID</th>";
-                      $temp .= "<th>Member ID</th>";
-                      $temp .= "<th>Customer ID</th>";
-                      $temp .= "<th>Order Date</th>";
-                      $temp .= "<th>Order Status</th>";
-                      $temp .= "<th>Quantity</th>";
-                      $temp .= "<th>Total Amount</th>";
-                      $temp .= "<th>Product Name</th>";
-                   
-                      /*Dynamically generating rows & columns*/
-                      for($i = 0; $i < sizeof($data); $i++)
-                      {
-                      $temp .= "<tr>";
-                      $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["productId"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["memberId"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["customerId"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["date"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["status"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["quantity"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["amount"] . "</td>";
-                      $temp .= "<td>" . $data[$i]["productName"] . "</td>";
-                      
-                      }
-                      
-                      /*End tag of table*/
-                      $temp .= "</table>";
-                      echo $temp;
-                    }
+                    
+            if(count($data) == 0){
+              echo '
+              <div class="container">
+              <div class="row">
+                <div class="col-md-5">
+                  <img src="images/nocontent.png" alt="" height="400" width="400">
+                </div>
+                <div class="col-md-7 display-1">
+                   <strong>No Oder found</strong> 
+                </div>
+              </div>
+              </div>
+              ';
+            }else{
+              echo '
+              <table class="table table-hover table-bordered" id="userTable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Product Id</th>
+                    <th scope="col">Customer Id</th>
+                    <th scope="col">Member Id</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+              
+              
+              ';
+
+               foreach($data as $users){
+                //  var_dump($users);
+                echo '
+                <tbody>
+                  <tr>
+                  <td>'.$users['productName'].'</td>
+                  <td>'.$users['date'].'</td>
+                  <td>'.$users['quantity'].'</td>
+                  <td>'.$users['productId'].'</td>
+                  <td>'.$users['customerId'].'</td>
+                  <td>'.$users['memberId'].'</td>
+                  <td>'.$users['status'].'</td>
+                  <td>'.$users['amount'].'</td>
+                  </tr>
+
+             
+                 </tbody>
+             
+                  ';
+                } 
+              }
+              echo '</table>';
+              
 
              
                     ?>

@@ -18,34 +18,14 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
-<style>
-    table, th , td {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 15px;
-    }
-    /*Style for Table Header*/
-    th {
-    background: darkblue;
-    color: white;
-    text-align: left;
-    }
-    /*Style for Alternate Rows*/
-    table tr:nth-child(odd) {
-    background-color: #C2EBC3;
-    }
-    table tr:nth-child(even) {
-    background-color: #FFFFFF;
-    }
-    </style>
 <body>
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-          <a class="navbar-brand brand-logo" href="index.html">UPF Admin</a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">UPF</a>
+          <a class="navbar-brand brand-logo font-italic" href="index.php">Welcome Admin</a>
+          <a class="navbar-brand brand-logo-mini" href="index.php">UPF</a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
           </button>
@@ -65,99 +45,6 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown mr-1">
-            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-message-text mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">David Grey
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    The meeting is cancelled
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">Tim Cook
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    New product launch
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">Johnson
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    Upcoming board meeting
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item dropdown mr-4">
-            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-success">
-                    <i class="mdi mdi-information mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">Application Error</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Just now
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-warning">
-                    <i class="mdi mdi-settings mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">Settings</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Private message
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-info">
-                    <i class="mdi mdi-account-box mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">New user registration</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    2 days ago
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="images/faces/face5.jpg" alt="profile"/>
@@ -272,6 +159,12 @@
               <span class="menu-title">Package Query</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gymDetails.php">
+              <i class="mdi mdi-folder-lock-open menu-icon"></i>
+              <span class="menu-title">Gym Details</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -281,10 +174,10 @@
             <div class="container">
             
                 <div class="card">
-                    <div class="card-header bg-white">
+                    <div class="card-header">
                         <strong>Edit Blog</strong> 
                     </div>
-                    <div class="card-body mx-2" style="overflow-x:auto;">
+                    <div class="card-body table-responsive-md">
                     <?php
                     /*Fetching JSON file content using php file_get_contents method*/
                     $str_data = file_get_contents("http://localhost/fitness/api/blog/all");
@@ -298,97 +191,92 @@
                           <img src="images/nocontent.png" alt="" height="400" width="400">
                         </div>
                         <div class="col-md-7 display-1">
-                           <strong>No blog found</strong> 
+                           <strong>No Blog found</strong> 
                         </div>
                       </div>
                       </div>
                       ';
-                    }else{
-                    $temp = "<table>";
-
-                  
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Description</th>";
-                    $temp .= "<th>Id</th>";
-                    $temp .= "<th>Title</th>";
-                    $temp .= "<th>Edit</th>";
-                    $temp .= "<th>Delete</th></tr>";
-                  
-          
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
+                    }else{        
+                      echo '
+                      <table class="table table-hover table-bordered" id="productTable">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
                       
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["description"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["title"] . "</td>";
-                    
-                    $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editBlog'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
-
-                    $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteBlog'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
-                    // $temp .= "<td>" . $data["member"][$i]["action"] . "</td>";
-                    $temp .= "</tr>";
-
-                    
-                    $temp .= '
-                    <div class="modal fade" id="editBlog'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                        <form action="../controller/updateBlog.php"  method="POST">
-                            <p>Title: <input type="text" class="form-control" id="updateTitle" name="updateTitle" value="'.$data[$i]['title'].'"></p>
+                      
+                      ';
+        
+                       foreach($data as $blog){
+                        //  var_dump($users);
+                        echo '
+                        <tbody>
+                          <tr>
+                          <td>'.$blog['title'].'</td>
+                          <td>'.$blog['description'].'</td>
+                          <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editBlog'.$blog['id'].'">Edit</button></td>
+                          <td><button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#deleteBlog'.$blog['id'].'">Delete</button></td>
+                          </tr>
+        
+                          <div class="modal fade" id="editBlog'.$blog['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                              <form action="../controller/updateBlog.php"  method="POST">
+                                  <p>Title: <input type="text" class="form-control" id="updateTitle" name="updateTitle" value="'.$blog['title'].'"></p>
+                                
+                                </div>
+                                <div class="modal-footer">
                           
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="hidden" name="edit_id" value="'.$blog['id'].'">
+                                <button type="submit" class="btn btn-primary" name="updateBlog" value="save">Save changes</button>
+                                </form>
+                              </div>
+                            </div>
                           </div>
-                          <div class="modal-footer">
-                    
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" name="edit_id" value="'.$data[$i]['id'].'">
-                          <button type="submit" class="btn btn-primary" name="updateBlog" value="save">Save changes</button>
-                          </form>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                    ';
 
-                    $temp .= '
-                    <div class="modal fade" id="deleteBlog'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          Do you want to remove <span class="text-danger"> '.$data[$i]['title'].' </span>
-                        </div>
-                        <div class="modal-footer">
-                        <form action="../controller/blogRemove.php"  method="POST">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
-                           <button type="submit" class="btn btn-danger" name="deleteBlog" value="delete">Delete blog</button>
-                          </form>
+                        <div class="modal fade" id="deleteBlog'.$blog['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              Do you want to remove <span class="text-danger"> '.$blog['title'].' </span>
+                            </div>
+                            <div class="modal-footer">
+                            <form action="../controller/blogRemove.php"  method="POST">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <input type="hidden" name="delete_id" value="'.$blog['id'].'">
+                               <button type="submit" class="btn btn-danger" name="deleteBlog" value="delete">Delete blog</button>
+                              </form>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                    ';
-                    
-                  }
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
-                      
-                    }
+        
+                     
+                         </tbody>
+                     
+                          ';
+                        } 
+                      }
+                      echo '</table>';
 
                  
                     ?>

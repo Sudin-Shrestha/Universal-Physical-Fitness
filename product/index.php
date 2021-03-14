@@ -14,6 +14,7 @@
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php include '../includes/import.php'; ?>
+    <?php include '../includes/toast.php'; ?>
     <?php 
 	$PAGENAME='product';
 	
@@ -50,6 +51,8 @@
 		<div class="loader"></div>
 	</div>
 
+    <div id="toast"></div>
+
 	<!-- Header incude -->
 	<?php include '../includes/header.php'; ?>	
 
@@ -57,10 +60,6 @@
         $products = json_decode(
             file_get_contents('http://localhost/fitness/api/product/'.$_GET['id']),
             TRUE);
-        //     echo '<pre>';
-        //    var_dump($products);
-        //    echo '</pre>';
-
     
 
         echo '
@@ -95,18 +94,20 @@
                         
                 </div>
 
-                <div class="row">
-                    <button type="button" class="btn btn-info px-4 mr-3 add-to-cart" style="border-radius: 70px;" data-id="'.$products['id'].'" data-name='.$products['name'].' data-price='.$products['price'].'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash-fill" viewBox="0 0 16 16">
-                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1z"/>
-                  </svg> Add to Cart</button>
-                  <h3 style="color: #FF9800" class="mt-2"> Rs <span>'.$products['price'].'</span> </h3>
-                </div>
-
                 <div class="row mt-4">
                     <a href="../home/mass.php"><p>Guide to protein <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
-                  </svg><p></a>
+                    </svg><p></a>
                 </div>
+                <div class="row">
+                    <button onclick="addCart()" type="button" class="btn btn-info px-4 mr-3 add-to-cart" id="add-to-cart" style="border-radius: 70px;" data-id="'.$products['id'].'" data-name='.$products['name'].' data-price='.$products['price'].'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-dash-fill" viewBox="0 0 16 16">
+                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1z"/>
+                    </svg> Add to Cart</button>
+                    <h3 style="color: #FF9800" class="mt-2"> Rs <span>'.$products['price'].'</span> </h3>
+                </div>
+                  
+
+            
 
             </div>
 
@@ -118,7 +119,7 @@
                         <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314    6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                         </svg>
                     </div>
-                    <div class="col-md-9">Delivery Option <br> <strong>Nepal, Kathmandu</strong><a href="../profile" class="px-2">Change</a></div>
+                    <div class="col-md-9">Delivery Option <br> <strong>Nepal, Kathmandu</strong></div>
                     
                 </div>
                 
@@ -229,9 +230,14 @@
 	<!-- Footer section -->
 	<?php include '../includes/footer.php'; ?>
 
-	<?php include '../includes/importjs.php'; ?>								
+	<?php include '../includes/importjs.php'; ?>	
 
+						
 
+    <script>
+        function addCart() {
+            document.getElementById("toast").innerHTML += "<div class='toast'>Product Added to cart</div>";        }
+</script>
             
 	</body>
 </html>

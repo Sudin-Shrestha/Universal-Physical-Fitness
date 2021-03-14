@@ -8,6 +8,7 @@
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php include '../includes/import.php'; ?>
+    <?php include '../includes/toast.php'; ?>
 	<?php 
 	$PAGENAME='shipping';
 	?>
@@ -22,6 +23,9 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
+
+    <!-- placeholder -->
+    <div id="toast"></div>
 
 	<!-- Header incude -->
 	<?php include '../includes/header.php'; ?>	
@@ -100,7 +104,7 @@
             <small class="py-5">Subtotal (1 item and shipping fee incude): <span class="float-right total-cart"></span> </small> 
             <h6 class="py-3">Total Amount <span style="color: #FF9800; float: right; font-size: 25px;" id="total-cart" class="total-cart"></span> </h6>
             <small id="error-txt"></small>
-            <a href="../profile"<button style="background-color: #FF9800;" class="btn w-100 my-2" id="confirmOrder" name="confirmOrder" >Confirm order</button></a>
+             <button style="background-color: #FF9800;"  onclick="sendEmail()" class="btn w-100 my-2" id="confirmOrder" name="confirmOrder" >Confirm order</button>
         </div>
                 ';
 
@@ -133,6 +137,11 @@
         <script>
             $('#confirmOrder').on('click', function(){
                 
+                if(shoppingCart.totalCount() < 1) {
+                    document.getElementById("toast").innerHTML += "<div class='toast'>No product to order</div>";
+                    return;
+                }
+                
                 const data = shoppingCart.listCart();
            
                 //console.log(data);
@@ -159,8 +168,32 @@
                         .catch((error) => {
                             console.error('Error:', error);
                         });
-                }   
-                
+                } 
+                  
+                // MEssage
+                document.getElementById("toast").innerHTML += "<div class='toast'>Order has been placed</div>";
+                    <?php
+                        $to = "sudinshrestha41@gmail.com";
+                        $subject = "This is subject";
+                        
+                        $message = "<b>This is HTML message.</b>";
+                        $message .= "<h1>This is headline.</h1>";
+                        
+                        $header = "From:abc@somedomain.com \r\n";
+                        $header .= "Cc:afgh@somedomain.com \r\n";
+                        $header .= "MIME-Version: 1.0\r\n";
+                        $header .= "Content-type: text/html\r\n";
+                        
+                        $retval = mail ($to,$subject,$message,$header);
+                        
+                        if( $retval == true ) {
+                            echo "Message sent successfully...";
+                        }else {
+                            echo "Message could not be sent...";
+                        }
+                    ?>
+                  
+            
             });
         </script>
 	</body>

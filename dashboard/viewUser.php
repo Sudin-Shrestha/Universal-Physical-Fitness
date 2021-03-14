@@ -1,8 +1,3 @@
-<?php 
-//  $dataJson = file_get_contents("http://localhost/fitness/api/user/view");
- // $data = json_decode($dataJson, true);
-?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,44 +19,14 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
-    <style>
-    table{
-      overflow-x:auto;
-    }
-    table, th , td {
-    border: 1px solid grey;
-    border-collapse: collapse;
-    padding: 8px;
-    width: 100%;
-    table-layout : fixed;
-    }
-    /*Style for Table Header*/
-    th {
-    background: darkblue;
-    color: white;
-    text-align: left;
-    }
-    /*Style for Alternate Rows*/
-    table tr:nth-child(odd) {
-    background-color: #C2EBC3;
-    }
-    table tr:nth-child(even) {
-    background-color: #FFFFFF;
-    }
-    @media only screen and (max-width: 666px) {
-    table, th , td {
-    width: auto;
-    }
-    }
-    </style>
 <body>
 <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-          <a class="navbar-brand brand-logo" href="index.html">UPF Admin</a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">UPF</a>
+          <a class="navbar-brand brand-logo font-italic" href="index.php">Welcome Admin</a>
+          <a class="navbar-brand brand-logo-mini" href="index.php">UPF</a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
           </button>
@@ -81,99 +46,6 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown mr-1">
-            <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-message-text mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="messageDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">David Grey
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    The meeting is cancelled
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal">Tim Cook
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    New product launch
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="item-content flex-grow">
-                  <h6 class="ellipsis font-weight-normal"> Johnson
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    Upcoming board meeting
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item dropdown mr-4">
-            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="notificationDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-success">
-                    <i class="mdi mdi-information mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">Application Error</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Just now
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-warning">
-                    <i class="mdi mdi-settings mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">Settings</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Private message
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item">
-                <div class="item-thumbnail">
-                  <div class="item-icon bg-info">
-                    <i class="mdi mdi-account-box mx-0"></i>
-                  </div>
-                </div>
-                <div class="item-content">
-                  <h6 class="font-weight-normal">New user registration</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    2 days ago
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="images/faces/face5.jpg" alt="profile"/>
@@ -288,16 +160,22 @@
               <span class="menu-title">Package Query</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gymDetails.php">
+              <i class="mdi mdi-folder-lock-open menu-icon"></i>
+              <span class="menu-title">Gym Details</span>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- partial -->
     <div class="main-panel">
         <div class="content-wrapper">
         <div class="container">
-            <div class="card">
-                <div class="card-header bg-white">
-                    <strong>Users</strong> 
-                    <?php 
+        <div class="card">
+          <div class="card-header">
+              <strong>User Table</strong> 
+              <?php 
                         if(isset($_GET['view']) && $_GET['view']=='desc'){
                           $str_data = file_get_contents("http://localhost/fitness/api/user/view/desc");
                           echo '<a href="../dashboard/viewUser.php" class="float-right">Sort by Ascending</a>';
@@ -306,129 +184,129 @@
                           echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right">Sort by Descending</a>';
                         }
                     ?>
+          </div>
+          <div class="card-body table-responsive-md">
+          <?php
+            $data = json_decode($str_data, true);
+                    
+            if(count($data) == 0){
+              echo '
+              <div class="container">
+              <div class="row">
+                <div class="col-md-5">
+                  <img src="images/nocontent.png" alt="" height="400" width="400">
                 </div>
-                <div class="card-body mx-2" style="overflow-x:auto;">
-                
-                    <?php
-                    $data = json_decode($str_data, true);
-                    
-                    if(count($data) == 0){
-                      echo '
-                      <div class="container">
-                      <div class="row">
-                        <div class="col-md-5">
-                          <img src="images/nocontent.png" alt="" height="400" width="400">
-                        </div>
-                        <div class="col-md-7 display-1">
-                           <strong>No User found</strong> 
-                        </div>
+                <div class="col-md-7 display-1">
+                   <strong>No User found</strong> 
+                </div>
+              </div>
+              </div>
+              ';
+            }else{
+              echo '<input type="text" class="form-control mb-4 w-100 border border-secondary" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">';
+
+              echo '
+              <table class="table table-hover table-bordered" id="userTable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">email</th>
+                    <th scope="col">password</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+              
+              
+              ';
+
+               foreach($data as $users){
+                //  var_dump($users);
+                echo '
+                <tbody>
+                  <tr>
+                  <td>'.$users['id'].'</td>
+                  <td>'.$users['firstName'].' '.$users['lastName'].'</td>
+                  <td>'.$users['address'].'</td>
+                  <td>'.$users['phone'].'</td>
+                  <td>'.$users['email'].'</td>
+                  <td>'.$users['password'].'</td>
+                  <td>'.$users['validFrom'].'</td>
+                  <td>'.$users['validTo'].'</td>
+                  <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editModal'.$users['id'].'">Edit</button></td>
+                  <td><button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#deleteModal'.$users['id'].'">Disable</button></td>
+                  </tr>
+
+                  <div class="modal fade" id="editModal'.$users['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
                       </div>
-                      </div>
-                      ';
-                    }else{
-                      echo '<input type="text" class="form-control mb-4 w-100 border border-secondary" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">';
-                      
-                    $temp = "<table id='userTable'>";
- 
-                    /*Defining table Column headers depending upon JSON records*/
-                    $temp .= "<tr><th>Id</th>";
-                    $temp .= "<th>First Name</th>";
-                    $temp .= "<th>Last Name</th>";
-                    $temp .= "<th>Address</th>";
-                    $temp .= "<th>Phone</th>";
-                    $temp .= "<th>Email</th>";
-                    $temp .= "<th>Password</th>";
-                    $temp .= "<th>Valid From</th>";
-                    $temp .= "<th>Valid To</th>";
-                    $temp .= "<th>Edit</th>";  
-                    $temp .= "<th>Delete</th></tr>";
-
-                    /*Dynamically generating rows & columns*/
-                    for($i = 0; $i < sizeof($data); $i++)
-                    {
-                    $temp .= "<tr>";
-                    $temp .= "<td>" . $data[$i]["id"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["firstName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["lastName"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["address"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["phone"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["email"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["password"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validFrom"] . "</td>";
-                    $temp .= "<td>" . $data[$i]["validTo"] . "</td>";
-
-                    $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#editModal'.$data[$i]['id'].'"><i class="mdi mdi-table-edit menu-icon"></i></a>' . "</td>";
-
-                    $temp .= "<td>" . '<a href="" class="btn-sm" data-toggle="modal" data-target="#deleteModal'.$data[$i]['id'].'"><i class="mdi mdi-delete menu-icon"></i></a>' . "</td>";
-
-                    $temp .= "</tr>";
-
-                    $temp .= '
-                    <div class="modal fade" id="editModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                        <form action="../controller/editUser.php"  method="POST">
-                            <p>Email: <input type="text" class="form-control" id="updatedEmail" name="updatedEmail" value="'.$data[$i]['email'].'"></p>
-                            <p>Password: <input type="text" class="form-control" id="updatedPassword" name="updatedPassword" value="'.$data[$i]['password'].'"></p>
-                            <p>Valid From: <input type="date" class="form-control" id="updatedValidFrom" name="updatedValidFrom" value="'.$data[$i]['validFrom'].'"></p>
-                            <p>Valid To: <input type="date" class="form-control" id="updatedValidTo" name="updatedValidTo" value="'.$data[$i]['validTo'].'"></p>
-                          </div>
-                          <div class="modal-footer">
-                    
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" name="edit_id" value="'.$data[$i]['id'].'">
-                          <button type="submit" class="btn btn-primary" name="updateUser" value="save">Save changes</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                    ';
-
-                    $temp .= '
-                    <div class="modal fade" id="deleteModal'.$data[$i]['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          Do you want to remove <span class="text-danger"> '.$data[$i]['firstName'].' </span>
+                      <div class="modal-body">
+                      <form action="../controller/editUser.php"  method="POST">
+                          <p>Email: <input type="text" class="form-control" id="updatedEmail" name="updatedEmail" value="'.$users['email'].'"></p>
+                          <p>Password: <input type="text" class="form-control" id="updatedPassword" name="updatedPassword" value="'.$users['password'].'"></p>
+                          <p>Valid From: <input type="date" class="form-control" id="updatedValidFrom" name="updatedValidFrom" value="'.$users['validFrom'].'"></p>
+                          <p>Valid To: <input type="date" class="form-control" id="updatedValidTo" name="updatedValidTo" value="'.$users['validTo'].'"></p>
                         </div>
                         <div class="modal-footer">
-                        <form action="../controller/userRemove.php"  method="POST">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <input type="hidden" name="delete_id" value="'.$data[$i]['id'].'">
-                           <button type="submit" class="btn btn-danger" name="deleteUser" value="delete">Delete User</button>
-                          </form>
-                        </div>
+                  
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="edit_id" value="'.$users['id'].'">
+                        <button type="submit" class="btn btn-primary" name="updateUser" value="save">Save changes</button>
+                        </form>
                       </div>
                     </div>
                   </div>
-                    ';
-
-                    }
-                    
-                    /*End tag of table*/
-                    $temp .= "</table>";
-                    echo $temp;
-                    }
-
-                    ?>
                 </div>
-            </div>
+
+                  <div class="modal fade" id="deleteModal'.$users['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Do you want to remove <span class="text-danger"> '.$users['firstName'].' </span>
+                      </div>
+                      <div class="modal-footer">
+                      <form action="../controller/userRemove.php"  method="POST">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="hidden" name="delete_id" value="'.$users['id'].'">
+                         <button type="submit" class="btn btn-danger" name="deleteUser" value="delete">Delete User</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+             
+                 </tbody>
+             
+                  ';
+                } 
+              }
+              echo '</table>';
+              
+               
+          ?>
+          
+            
+          </div>
         </div>
-        
+        </div>
       
         <!-- partial -->
         </div>
@@ -439,26 +317,37 @@
   <!-- container-scroller -->
 
   <script>
-function myFunction() {
-  var filter, table, tr, td, i, txtValue;
-  filter =  document.getElementById("myInput").value.toUpperCase();
+    function myFunction() {
+      var filter, table, tr, td, i, txtValue;
+      filter =  document.getElementById("myInput").value.toUpperCase();
 
-  table = document.getElementById("userTable");
-  tr = table.querySelectorAll("tr");
-  console.log(tr);
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].querySelectorAll("td")[1];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
+      table = document.getElementById("userTable");
+      tr = table.querySelectorAll("tr");
+      console.log(tr);
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].querySelectorAll("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
       }
-    }       
-  }
-}
+    }
 </script>
+
+<script>
+  $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+
+
 
   <!-- plugins:js -->
   <script src="vendors/base/vendor.bundle.base.js"></script>
@@ -482,4 +371,3 @@ function myFunction() {
 </body>
 
 </html>
-

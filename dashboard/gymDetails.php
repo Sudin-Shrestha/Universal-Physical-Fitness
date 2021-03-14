@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,7 +130,7 @@
                                $dataJson = file_get_contents("http://localhost/fitness/api/blog/view");
                                $data = json_decode($dataJson, true);
                                 echo count($data); ?></span></span>
-            </a>
+            </a> 
           </li>
           <li class="nav-item">
             <a class="nav-link" href="queries.php">
@@ -175,13 +174,14 @@
         <div class="container">
             <div class="card">
                 <div class="card-header">
-                    <strong>Orders</strong> 
+                    <strong>Gym Details</strong> 
                 </div>
-                <div class="card-body" style="overflow-x:auto;">
+                <div class="card-body table-responsive-md">
                 <?php
                     /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/orders/each");
+                    $str_data = file_get_contents("http://localhost/fitness/api/view/gymdetail");
                     $data = json_decode($str_data, true);
+
                     if(count($data) == 0){
                       echo '
                       <div class="container">
@@ -190,37 +190,20 @@
                           <img src="images/nocontent.png" alt="" height="400" width="400">
                         </div>
                         <div class="col-md-7 display-1">
-                           <strong>No User found</strong> 
+                           <strong>No details found</strong> 
                         </div>
                       </div>
                       </div>
                       ';
-                    }else{
+                    }else{        
                       echo '
-                      <div class="row">
-                        <div class="col-md-6">
-                        <input type="text" class="form-control mb-4 w-100 border border-secondary" id="orderName" onkeyup="nameSearch()" placeholder="Search by names.." title="Type in a name">
-                        </div>
-
-                        <div class="col-md-6">
-                        <input type="text" class="form-control mb-4 w-100 border border-secondary" id="orderDate" onkeyup="dateSearch()" placeholder="Search by date.." title="Type in a name">
-                        </div>
-                      </div>
-                      ';
-        
-                      echo '
-                      <table class="table table-hover table-bordered" id="orderTable">
+                      <table class="table table-hover table-bordered">
                         <thead class="thead-dark">
                           <tr>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Product Id</th>
-                            <th scope="col">Customer Id</th>
-                            <th scope="col">Member Id</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col"></th>
+                            <th scope="col">GYM Location</th>
+                            <th scope="col">GYM Phone 1</th>
+                            <th scope="col">GYM Phone 2</th>
+                            <th scope="col">GYM Email</th>
                             <th scope="col"></th>
                           </tr>
                         </thead>
@@ -228,73 +211,57 @@
                       
                       ';
         
-                       foreach($data as $orders){
+                       foreach($data as $details){
                         //  var_dump($users);
                         echo '
                         <tbody>
                           <tr>
-                          <td>'.$orders['productName'].'</td>
-                          <td>'.$orders['date'].'</td>
-                          <td>'.$orders['quantity'].'</td>
-                          <td>'.$orders['productId'].'</td>
-                          <td>'.$orders['customerId'].'</td>
-                          <td>'.$orders['memberId'].'</td>
-                          <td>'.$orders['status'].'</td>
-                          <td>'.$orders['amount'].'</td>
-                          <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editModal'.$orders['id'].'">Edit</button></td>
-                          <td><button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#deleteModal'.$orders['id'].'">Delete</button></td>
+                          <td>'.$details['gymLocation'].'</td>
+                          <td>'.$details['gymPhone1'].'</td>
+                          <td>'.$details['gymPhone2'].'</td>
+                          <td>'.$details['gymEmail'].'</td>
+                          <td><button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#editModal'.$details['id'].'">Delete</button></td>
                           </tr>
         
-                          <div class="modal fade" id="editModal'.$orders['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal fade" id="editModal'.$details['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
                               <div class="modal-body">
-                              <form action="../controller/editOrder.php"  method="POST">
-                                  <label for="orderStatus">Order Status</label>
-                                  <select id="orderStatus" name="orderStatus" class="form-control">
-                                    <option value="Pending" name="pending">Pending</option>
-                                    <option value="Delivered" name="delivered">Delivered</option>
-                                    <option value="Canceled" name="Canceled">Canceled</option>
-                                  </select>
+                                <form action="../controller/gymData.php"  method="POST">
+                                    <div class="form-group">
+                                        <label for="location">Gym Location</label>
+                                        <input type="text" class="form-control" name="gymLocation" placeholder="Gym Location" value="'.$details['gymLocation'].'">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone1">Gym phone 1</label>
+                                        <input type="number" class="form-control" name="gymPhone1" placeholder="Gym Phone 1" value="'.$details['gymPhone1'].'">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="location">Gym Location</label>
+                                        <input type="text" class="form-control" name="gymPhone2" placeholder="Gym phone 2" value="'.$details['gymPhone2'].'">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="location">Gym Email</label>
+                                        <input type="text" class="form-control" name="gymEmail" placeholder="Gym Email" value="'.$details['gymEmail'].'">
+                                    </div>
                                 </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <input type="hidden" name="edit_id" value="'.$orders['id'].'">
-                                <button type="submit" class="btn btn-primary" name="updateOrder" value="save">Save changes</button>
+                                    <div class="modal-footer">
+                                    
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <input type="hidden" name="edit_id" value="'.$details['id'].'">
+                                        <button type="submit" class="btn btn-primary" name="editGymDetails" value="delete">Save Change</button>
+                                    
+                                    </div>
                                 </form>
-                              </div>
                             </div>
                           </div>
                         </div>
-        
-                        <div class="modal fade" id="deleteModal'.$orders['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              Do you want to delete order <span class="text-danger"> '.$orders['productName'].' </span>
-                            </div>
-                            <div class="modal-footer">
-                            <form action="../controller/orderRemove.php"  method="POST">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <input type="hidden" name="delete_id" value="'.$orders['id'].'">
-                               <button type="submit" class="btn btn-danger" name="deleteOrder" value="delete">Delete Product</button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                      
                          </tbody>
                      
@@ -303,9 +270,9 @@
                       }
                       echo '</table>';
                       
-
-             
+                    
                     ?>
+
                 </div>
             </div>
         </div>
@@ -319,49 +286,9 @@
 </div>
   <!-- container-scroller -->
 
-  <script>
-     function nameSearch() {
-      var filter, table, tr, td, i, txtValue;
-      filter =  document.getElementById("orderName").value.toUpperCase();
-
-      table = document.getElementById("orderTable");
-      tr = table.querySelectorAll("tr");
-      console.log(tr);
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].querySelectorAll("td")[0];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }       
-      }
-    }
-
-    function dateSearch() {
-      var filter, table, tr, td, i, txtValue;
-      filter =  document.getElementById("orderDate").value.toUpperCase();
-
-      table = document.getElementById("orderTable");
-      tr = table.querySelectorAll("tr");
-      console.log(tr);
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].querySelectorAll("td")[1];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        }       
-      }
-    }
-</script>
   <!-- plugins:js -->
   <script src="vendors/base/vendor.bundle.base.js"></script>
+  <script src="js/validEmail.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <script src="vendors/chart.js/Chart.min.js"></script>
