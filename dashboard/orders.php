@@ -180,7 +180,7 @@
                 <div class="card-body" style="overflow-x:auto;">
                 <?php
                     /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/orders/each");
+                    $str_data = file_get_contents("http://localhost/fitness/api/orders/customer");
                     $data = json_decode($str_data, true);
                     if(count($data) == 0){
                       echo '
@@ -212,12 +212,13 @@
                       <table class="table table-hover table-bordered" id="orderTable">
                         <thead class="thead-dark">
                           <tr>
-                            <th scope="col">Product Name</th>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Customer Address</th>
+                            <th scope="col">Customer Phone</th>
+                            <th scope="col">Customer Mail</th>
                             <th scope="col">Date</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Product Id</th>
-                            <th scope="col">Customer Id</th>
-                            <th scope="col">Member Id</th>
                             <th scope="col">Status</th>
                             <th scope="col">Amount</th>
                             <th scope="col"></th>
@@ -233,12 +234,13 @@
                         echo '
                         <tbody>
                           <tr>
-                          <td>'.$orders['productName'].'</td>
+                          <td>'.$orders['customerName'].' '.$orders['customerlastName'].'</td>
+                          <td>'.$orders['customerAddress'].'</td>
+                          <td>'.$orders['customerPhone'].'</td>
+                          <td>'.$orders['customerMail'].'</td>
                           <td>'.$orders['date'].'</td>
                           <td>'.$orders['quantity'].'</td>
                           <td>'.$orders['productId'].'</td>
-                          <td>'.$orders['customerId'].'</td>
-                          <td>'.$orders['memberId'].'</td>
                           <td>'.$orders['status'].'</td>
                           <td>'.$orders['amount'].'</td>
                           <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editModal'.$orders['id'].'">Edit</button></td>
@@ -283,7 +285,7 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                              Do you want to delete order <span class="text-danger"> '.$orders['productName'].' </span>
+                              Do you want to delete order of<span class="text-danger"> '.$orders['customerName'].'  </span>
                             </div>
                             <div class="modal-footer">
                             <form action="../controller/orderRemove.php"  method="POST">
@@ -348,7 +350,7 @@
       tr = table.querySelectorAll("tr");
       console.log(tr);
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].querySelectorAll("td")[1];
+        td = tr[i].querySelectorAll("td")[4];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {

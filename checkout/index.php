@@ -34,25 +34,14 @@
 			</svg>Please select above method for payment. For esewa transactions, please ensure sufficient balance. if unable to make payment with esewa, try again later.</p>
 		</div>
 	
-		<div class="row">
+		<div class="row mb-5" >
 			<div class="col-md-2 mx-2 bg-white p-1 h-100 mt-3">
-		
-					<div class="d-flex justify-content-center mt-1">
-						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD5EWCOP49KkEBrn7x_5xtrH_QRBvg2ax32w&usqp=CAU" alt="" height="60" width="60">
+				 
+				<div class="d-flex justify-content-center mt-1" id="payment-button">
+						<img src="https://omegaschool.edu.np/storage/phpclpxKK.png" alt="" height="60" width="60">
 					</div>
-					<h6 class="text-center py-2">esewa wallet</h6>
-						<!-- <form action="https://uat.esewa.com.np/epay/main" method="POST">
-							<input value="100" name="tAmt" type="hidden">
-							<input value="90" name="amt" type="hidden">
-							<input value="5" name="txAmt" type="hidden">
-							<input value="2" name="psc" type="hidden">
-							<input value="3" name="pdc" type="hidden">
-							<input value="EPAYTEST" name="scd" type="hidden">
-							<input value="ee2c3ca1-696b-4cc5-a6be-2c40d929d453" name="pid" type="hidden">
-							<input value="http://merchant.com.np/page/esewa_payment_success?q=su" type="hidden" name="su">
-							<input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
-							<input value="Submit" type="submit">
-						</form> -->
+					<h6 class="text-center py-2">Khalti wallet</h6>
+			
 			
 			</div>
 			
@@ -73,7 +62,7 @@
 			<div class="col-md-4 bg-white mt-3">
 				<h6 class="font-weight-bold py-3">Order Summary</h6>
 				<small class="py-5">Subtotal (items and shipping fee incude): <span class="float-right total-cart"></span> </small> 
-				<h6 class="py-3">Total Amount <span style="color: #FF9800; float: right; font-size: 25px;" class="total-cart"></span> </h6>
+				<h6 class="py-3">Total Amount <span style="color: #FF9800; float: right; font-size: 25px;" class="total-cart" id="total-cart"></span> </h6>
 			</div>
 		</div>
 	</div>
@@ -84,39 +73,70 @@
 	<!-- Footer section -->
 	<?php //include '../includes/footer.php'; ?>
 
-	<?php include '../includes/importjs.php'; ?>								
+	<?php include '../includes/importjs.php'; ?>		
+
+	<?php 
+		$args = http_build_query(array(
+			'token' => 'QUao9cqFzxPgvWJNi9aKac',
+			'amount'  => 500
+		));
+		
+		$url = "https://khalti.com/api/v2/payment/verify/";
+		
+		# Make the call using API.
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		
+		$headers = ['Authorization: test_secret_key_ba43278c6c73464f9481af820ccd6a39'];
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		
+		// Response
+		$response = curl_exec($ch);
+		$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+		
+	?>						
 
 
 	<script>
-		var path="https://uat.esewa.com.np/epay/main";
-		var params= {
-			amt: 10,
-			psc: 0,
-			pdc: 0,
-			txAmt: 0,
-			tAmt: 20,
-			pid: "5615",
-			scd: "EPAYTEST",
-			su: "http://merchant.com.np/page/esewa_payment_success",
-			fu: "http://merchant.com.np/page/esewa_payment_failed"
-		}
+        var config = {
+            // replace the publicKey with yours
+            "publicKey": "test_public_key_0b622aba68e54136bfa071aab6732a30",
+            "productIdentity": "1234567890",
+            "productName": "Dragon",
+            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+            "paymentPreference": [
+                "KHALTI",
+                "EBANKING",
+                "MOBILE_BANKING",
+                "CONNECT_IPS",
+                "SCT",
+                ],
+            "eventHandler": {
+                onSuccess (payload) {
+                    // hit merchant api for initiating verfication
+                    console.log(payload);
+                },
+                onError (error) {
+                    console.log(error);
+                },
+                onClose () {
+                    console.log('widget is closing');
+                }
+            }
+        };
+		var amt = document.getElementById("total-cart").value;
+		console.log(amt);
 
-		function post(path, params) {
-			var form = document.createElement("form");
-			form.setAttribute("method", "POST");
-			form.setAttribute("action", path);
-
-			for(var key in params) {
-				var hiddenField = document.createElement("input");
-				hiddenField.setAttribute("type", "hidden");
-				hiddenField.setAttribute("name", key);
-				hiddenField.setAttribute("value", params[key]);
-				form.appendChild(hiddenField);
-			}
-
-			document.body.appendChild(form);
-			form.submit();
-	}
-	</script>
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            // minimum transaction amount must be 10, i.e 1000 in paisa.
+            checkout.show({amount: amt * 100});
+        }
+    </script>
 	</body>
 </html>

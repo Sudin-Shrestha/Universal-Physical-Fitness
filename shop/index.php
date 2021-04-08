@@ -86,10 +86,10 @@
 							<div class="input-group-prepend">
 							  <label class="input-group-text" for="inputGroupSelect01">Sort by Rating</label>
 							</div>
-							<select class="custom-select" id="inputGroupSelect01">
+							<select class="price-sorting custom-select" id="price-sorting">
 							  <option selected>Best Match</option>
-							  <option value="1">High to low</option>
-							  <option value="2">Low to high</option>
+							  <option value="h2l" id="h2l">High to low</option>
+							  <option value="l2h" id="l2h">Low to high</option>
 							</select>
 						</div>
 					</div>
@@ -119,14 +119,56 @@
 							</figure>
 						</div> 
 						';
+
+						rsort($product);
 					}
 					?>
+					
 
 				</div> 
 			</div>	
+			<div class="site-pagination">
+						<a href="../" class="active">01</a>
+						<a href="">02</a>
+						<a href="">03</a>
+						<a href="">04</a>
+					</div>
 			
 		</div>
 	</div>
+
+
+			<script>
+				 //  product searching javascript
+				 const productSort = document.getElementById("price-sorting");
+                                const EveryProduct = document.querySelectorAll("[data-price-col]");
+
+								var high = document.getElementById("h2l");
+								var low = document.getElementById("l2h");
+
+
+
+                                productSort.onSelected = () => {
+								
+                                    const needle = productSort.value.trim().high;
+									
+                                    if(needle == ""){
+										
+                                        for(const div of EveryProduct){
+                                            div.style.display = "";
+                                        }
+                                    }else{
+                                        for(const div of EveryProduct){
+                                            const hay = div.getAttribute("data-price-col").trim().toLowerCase();
+                                            if(hay.sort(needle) == -1){
+                                                div.style.display = "none";
+                                            }else{
+                                                div.style.display = "";
+                                            }
+                                        }
+                                    }
+                                }
+			</script>
 
 
 			<script>

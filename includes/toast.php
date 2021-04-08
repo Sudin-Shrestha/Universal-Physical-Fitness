@@ -6,8 +6,8 @@
         width: 300px;
         bottom: 20px;
         right: 20px;
-        background-color: #000000; 
-        color: #EEEEEE;
+        background-color: #e5e8f1; 
+        color: #000000;
         box-shadow: 0 3.0px 6.00px rgba(0,0,0,0.16), 0 3.0px 6.0px rgba(0,0,0,0.2300);
         padding: 18px;
         border-radius: 4px;

@@ -114,7 +114,23 @@
 
     //get product
     Api::GET('/product/all',function(){
-        $sql = "Select product.id AS id, product.name AS name, product.description AS description, product.category AS category, product.price AS price, product.brand AS brand, image.name AS image FROM product INNER JOIN productimage ON productimage.productId = product.id INNER JOIN image ON image.id = productimage.imageId";
+        $limit = 4;
+        // $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        // $sqls = "Select * from product";
+  
+        // $totals = mysqli_num_rows($sqls);
+        // $pages = ceil($totals / $limit);
+        // if(!isset($_GET['page'])){
+        //     $page = 1;
+        // }else{
+        //     $page = $_GET['page'];
+        // }
+        // $start = ($page - 1) * $limit;
+        // $total = $result1[0]['id'];
+        // $pages = ceil($total / $limit);
+        $sql = "Select product.id AS id, product.name AS name, product.description AS description, product.category AS category, product.price AS price, product.brand AS brand, image.name AS image FROM product INNER JOIN productimage ON productimage.productId = product.id INNER JOIN image ON image.id = productimage.imageId LIMIT $limit";
+
+
         $response = Database::query($sql);
         Api::send($response);
     });
@@ -337,13 +353,52 @@
                 orders.orderDate AS date,
                 orders.orderStatus AS status,
                 orders.quantity AS quantity,
-                orders.totalAmount AS amount,
-                product.name AS productName
-                from orders INNER JOIN product ON product.id = orders.productId 
+                orders.totalAmount AS amount
+                from orders  
         ";
         $response = Database::query($sql);
         Api::send($response);   
     });
+
+    //orders mEMBER
+    Api::GET("/orders/member",function(){
+        $sql = "Select orders.id AS id, 
+                orders.productId AS productId,
+                orders.memberId AS memberId,
+                orders.orderDate AS date,
+                orders.orderStatus AS status,
+                orders.quantity AS quantity,
+                orders.totalAmount AS amount,
+                member.firstName AS memberName,
+                member.lastName AS memberLastName,
+                member.address AS memberAddress,
+                member.phone As memberPhone
+                from orders INNER JOIN member ON member.id = orders.memberId 
+        ";
+        $response = Database::query($sql);
+        Api::send($response);   
+    });
+
+     //orders Customer
+     Api::GET("/orders/customer",function(){
+        $sql = "Select orders.id AS id, 
+                orders.productId AS productId,
+                orders.customerId AS customerId,
+                orders.orderDate AS date,
+                orders.orderStatus AS status,
+                orders.quantity AS quantity,
+                orders.totalAmount AS amount,
+                customer.firstName AS customerName,
+                customer.lastname AS customerlastName,
+                customer.address AS customerAddress,
+                customer.phone As customerPhone,
+                customer.email As customerMail
+                from orders INNER JOIN customer ON customer.id = orders.customerId
+        ";
+        $response = Database::query($sql);
+        Api::send($response);   
+    });
+
 
     //update order status
     Api::POST("/update/order",function(){
@@ -466,6 +521,27 @@
         Api::send($response);
     });
 
+    //add notice  
+    Api::POST('/notice',function(){
+        $sql = 'INSERT INTO notice (notice) VALUES(?)';
+        $response = Database::query($sql, $_POST['notice']);
+        Api::send($response);
+    });
+
+    //Update Gym data
+    Api::POST("/delete/notice",function(){
+        $sql = "DELETE FROM `notice` WHERE id=?";
+        $response = Database::query($sql, $_POST['delete_id']);
+        Api::send($response);
+    });
+
+
+    //add notice  
+    Api::GET('/notice/all',function(){
+        $sql = 'SELECT * FROM NOTICE';
+        $response = Database::query($sql);
+        Api::send($response);
+    });
 
 ?>
 

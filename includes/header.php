@@ -1,7 +1,7 @@
 <?php include '../includes/toast.php'; ?>
 
 
-    <div class="row bg-light p-2 mx-0">
+    <div class="row bg-light p-2 mx-0 sticky-top">
         <div class="col-md-5">
             Get Variety of GYM prodcuts and Supplements. 
             <a a class="<?php if ($PAGENAME=='shop') echo 'active'; ?> text-warning mx-2" href="../shop/">Order Now
@@ -240,7 +240,7 @@
 
 	
 
-	<header class="header-section bg-white">
+	<header class="header-section bg-white sticky-top">
 		<a href="index.php" class="site-logo">
 			<img src="../img/logos-01.png" alt="" height="64">
 		</a>

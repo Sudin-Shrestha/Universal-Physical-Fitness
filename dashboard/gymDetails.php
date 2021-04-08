@@ -220,7 +220,7 @@
                           <td>'.$details['gymPhone1'].'</td>
                           <td>'.$details['gymPhone2'].'</td>
                           <td>'.$details['gymEmail'].'</td>
-                          <td><button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#editModal'.$details['id'].'">Delete</button></td>
+                          <td><button type="button" class="btn btn-success btn-sm"  data-toggle="modal" data-target="#editModal'.$details['id'].'">Edit</button></td>
                           </tr>
         
                           <div class="modal fade" id="editModal'.$details['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

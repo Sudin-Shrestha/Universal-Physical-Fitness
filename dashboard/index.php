@@ -267,6 +267,104 @@
               </div>
             </div>
           </div>
+
+          <div class="row mb-5">
+            <div class="col-md-12 stretch-card">
+            <div class="card">
+              <div class="card-header">
+                  <strong>Gym Notice</strong>
+              </div>
+              <div class="card-body" style="overflow-x:auto;">
+              <?php
+                /*Fetching JSON file content using php file_get_contents method*/
+                $str_data = file_get_contents("http://localhost/fitness/api/notice/all");
+                $data = json_decode($str_data, true);
+          
+                if(count($data) == 0){
+                  echo '
+                  <div class="container">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <img src="images/nocontent.png" alt="" height="400" width="400">
+                    </div>
+                    <div class="col-md-7 display-1">
+                      <strong>No Notice found</strong> 
+                    </div>
+                  </div>
+                  </div>
+                  ';
+                }else{
+                  echo '
+                  <table class="table table-hover table-bordered" id="userTable">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Notice</th>
+                        <th scope="col"></th>
+                       
+                      </tr>
+                    </thead>
+                  
+                  
+                  ';
+
+                  foreach($data as $notice){
+                    //  var_dump($users);
+                    echo '
+                    <tbody>
+                      <tr>
+                      <td>'.$notice['notice'].'</td>       
+                       <td><button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#deleteModal'.$notice['id'].'">Delete</button></td>
+                 
+                      </tr>
+
+    
+                    <div class="modal fade" id="deleteModal'.$notice['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Do you want to delete this notice
+                        </div>
+                        <div class="modal-footer">
+                        <form action="../controller/noticeRemove.php"  method="POST">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <input type="hidden" name="delete_id" value="'.$notice['id'].'">
+                           <button type="submit" class="btn btn-danger" name="deleteNotice" value="delete">Delete Notice</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                
+                    </tbody>
+                
+                      ';
+                    } 
+                  }
+                  echo '</table>';
+                  
+                  
+              ?>
+
+            <form class="mt-4"  action="../controller/notice.php"  method="POST">
+              <div class="form-group">
+                <label for="notice">Notice</label>
+                <input type="text" class="form-control" name="notice" id="notice" aria-describedby="notice" placeholder="Enter Notice">
+              </div>
+              <button type="submit" class="btn btn-primary float-right">Send Notice</button>
+            </form>
+              
+                
+              </div>
+            </div>
+            </div>
+          </div>
      
           <div class="row">
             <div class="col-md-12 stretch-card">
@@ -353,13 +451,12 @@
           <div class="col-md-12 stretch-card">
             <div class="card">
                 <div class="card-header bg-light">
-                    <strong>Orders</strong> 
+                    <strong>Customer Orders</strong> 
                 </div>
-
                 <div class="card-body" style="overflow-x:auto;">
                 <?php
                     /*Fetching JSON file content using php file_get_contents method*/
-                    $str_data = file_get_contents("http://localhost/fitness/api/orders/each");
+                    $str_data = file_get_contents("http://localhost/fitness/api/orders/member");
                     $data = json_decode($str_data, true);
                     
             if(count($data) == 0){
@@ -380,14 +477,18 @@
               <table class="table table-hover table-bordered" id="userTable">
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Product Id</th>
-                    <th scope="col">Customer Id</th>
-                    <th scope="col">Member Id</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Amount</th>
+     
+                  <th scope="col">Member Name</th>
+                  <th scope="col">member Address</th>
+                  <th scope="col">Member Phone</th>
+                  <th scope="col">Member Id</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Product Id</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col"></th>
+       
                   </tr>
                 </thead>
               
@@ -399,18 +500,47 @@
                 echo '
                 <tbody>
                   <tr>
-                  <td>'.$users['productName'].'</td>
+                  <td>'.$users['memberName'].' '.$users['memberLastName'].'</td>
+                  <td>'.$users['memberAddress'].'</td>
+                  <td>'.$users['memberPhone'].'</td>
+                  <td>'.$users['memberId'].'</td>
                   <td>'.$users['date'].'</td>
                   <td>'.$users['quantity'].'</td>
                   <td>'.$users['productId'].'</td>
-                  <td>'.$users['customerId'].'</td>
-                  <td>'.$users['memberId'].'</td>
                   <td>'.$users['status'].'</td>
                   <td>'.$users['amount'].'</td>
-                  </tr>
+                  <td><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editModal'.$users['id'].'">Edit</button></td>
 
-             
+                  </tr>
                  </tbody>
+
+                 <div class="modal fade" id="editModal'.$users['id'].'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                       <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                       </button>
+                     </div>
+                     <div class="modal-body">
+                     <form action="../controller/editOrder.php"  method="POST">
+                         <label for="orderStatus">Order Status</label>
+                         <select id="orderStatus" name="orderStatus" class="form-control">
+                           <option value="Pending" name="pending">Pending</option>
+                           <option value="Delivered" name="delivered">Delivered</option>
+                           <option value="Canceled" name="Canceled">Canceled</option>
+                         </select>
+                       </div>
+                       <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                       <input type="hidden" name="edit_id" value="'.$users['id'].'">
+                       <button type="submit" class="btn btn-primary" name="updateOrder" value="save">Save changes</button>
+                       </form>
+                     </div>
+                   </div>
+                 </div>
+               </div>
              
                   ';
                 } 
