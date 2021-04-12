@@ -1,3 +1,4 @@
 # fitness
 #Universal Physical Fitness
-GYM Mobile and Web Application
+GYM Web Application
+CMS and Ecommerce with API PHP
