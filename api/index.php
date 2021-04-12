@@ -28,7 +28,7 @@
         Api::send($data);
     });
 
-      //login validation from 3 tables
+    //API for mobile login
       Api::POST("/user/member/login",function(){
         if(!isset($_POST['username']) || !$_POST['username'] || !isset($_POST['password']) || !$_POST['password']) Api::send(null);
   
@@ -541,6 +541,11 @@
         $sql = 'SELECT * FROM NOTICE';
         $response = Database::query($sql);
         Api::send($response);
+    });
+
+    // get token payload
+    Api::get('/token/payload/'.Api::STRING, function($token){
+        Api::send(Token::getPayload($token));
     });
 
 ?>
