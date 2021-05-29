@@ -67,11 +67,11 @@
 					</div>
 					<div class="col-md-6 order-1 order-md-2">
 						<ul class="footer-menu">
-							<li><a href="">Home</a></li>
-							<li><a href="">About Us</a></li>
-							<li><a href="">Classes</a></li>
-							<li><a href="">News</a></li>
-							<li><a href="">Contact</a></li>
+							<li><a href="../home">Home</a></li>
+							<li><a href="../about">About Us</a></li>
+							<li><a href="../classes">Classes</a></li>
+							<li><a href="../shop">Shop</a></li>
+							<li><a href="../contact">Contact</a></li>
 						</ul>
 					</div>
 				</div>

@@ -25,16 +25,16 @@
 
 	<?php
 		$blog = json_decode(
-			file_get_contents('http://localhost/fitness/api/blog/1'),
+			file_get_contents('http://localhost/fitness/api/blog/3'),
 			TRUE
 		);
 		echo '
 		<section class="hero-section set-bg" data-setbg="http://localhost/fitness/api/storage/'.$blog['image'].'">
 		<div class="container">
 			<div class="hero-text">
-				<h2>Shape Your</h2>
-				<h2>Body <span>With Us!</span></h2>
-				<a href="../contact" class="site-btn">Join the Gym</a>
+				<h2>Every Step</h2>
+				<h2>Is <span>Progress</span></h2>
+				<a href="../contact" class="site-btn">Join the gym</a>
 			</div>
 		</div>
 	</section>

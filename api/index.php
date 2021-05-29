@@ -114,23 +114,14 @@
 
     //get product
     Api::GET('/product/all',function(){
-        $limit = 4;
-        // $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        // $sqls = "Select * from product";
-  
-        // $totals = mysqli_num_rows($sqls);
-        // $pages = ceil($totals / $limit);
-        // if(!isset($_GET['page'])){
-        //     $page = 1;
-        // }else{
-        //     $page = $_GET['page'];
-        // }
-        // $start = ($page - 1) * $limit;
-        // $total = $result1[0]['id'];
-        // $pages = ceil($total / $limit);
-        $sql = "Select product.id AS id, product.name AS name, product.description AS description, product.category AS category, product.price AS price, product.brand AS brand, image.name AS image FROM product INNER JOIN productimage ON productimage.productId = product.id INNER JOIN image ON image.id = productimage.imageId LIMIT $limit";
-
-
+        $sql = "Select product.id AS id, product.name AS name,
+            product.description AS description, 
+            product.category AS category, 
+            product.price AS price, 
+            product.brand AS brand, 
+            image.name AS image
+            FROM 
+            product INNER JOIN productimage ON productimage.productId = product.id INNER JOIN image ON image.id = productimage.imageId";
         $response = Database::query($sql);
         Api::send($response);
     });

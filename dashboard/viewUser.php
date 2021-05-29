@@ -178,10 +178,10 @@
               <?php 
                         if(isset($_GET['view']) && $_GET['view']=='desc'){
                           $str_data = file_get_contents("http://localhost/fitness/api/user/view/desc");
-                          echo '<a href="../dashboard/viewUser.php" class="float-right">Sort by Ascending</a>';
+                          echo '<a href="../dashboard/viewUser.php" class="float-right btn btn-primary">Sort by Ascending</a>';
                         }else{
                           $str_data = file_get_contents("http://localhost/fitness/api/user/view/asc");
-                          echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right">Sort by Descending</a>';
+                          echo '<a href="../dashboard/viewUser.php?view=desc" class="float-right btn btn-primary">Sort by Descending</a>';
                         }
                     ?>
           </div>

@@ -3,7 +3,7 @@
 <head>
 	<title>Universal Physical Fitness</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="X Gym Fitness HTML Template">
+	<meta name="description" content="Universal Physical Fitness">
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	

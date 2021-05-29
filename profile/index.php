@@ -4,7 +4,7 @@
 <head>
 	<title>Universal Physical Fitness</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="">
+	<meta name="description" content="Universal Physical Fitness">
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
@@ -75,6 +75,11 @@
                         $timefromdb = time();
                         $timeleft = $future-$timefromdb;
                         $daysleft = round((($timeleft/24)/60)/60);
+                        if($daysleft <= 0){
+                            $finish = "Expired" . $daysleft . " days ago";
+                        }else{
+                           $finish = $daysleft. " Days left";
+                        }
                     echo '
                         <div class="container">
                             <div class="row my-5">
@@ -93,8 +98,8 @@
                                         <hr>
                                         <p>Last Membership details</p>
                                         <p>Valid From: <span class="text-danger"> '.$token['validFrom'].' </span>  </P>
-                                        <p>Valid TO: <span class="text-danger"> '.$token['validTo'].' </span> </P>
-                                        <p>Days left: <span class="text-danger"> '.$daysleft.' </span>  </P>
+                                        <p>Valid To: <span class="text-danger"> '.$token['validTo'].' </span> </P>
+                                        <p>Days left: <span class="text-danger">'.$finish.' </span>  </P>
                                         <a href="../controller/logout.php"><button type="button" class="btn btn-info w-100">Logout</button></a>
                                     </div>
                                 </div>

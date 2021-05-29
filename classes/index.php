@@ -3,7 +3,7 @@
 <head>
 	<title>Universal Physical Fitness</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="X Gym Fitness HTML Template">
+	<meta name="description" content="Universal Physical Fitness">
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php 
@@ -46,7 +46,7 @@
 						<div class="ib-icon">
 							<i class="flaticon-045-fitness"></i>
 						</div>
-						<h4>Finess</h4>
+						<h4>Fitness</h4>
 						<p>Vivamus libero mauris, bibendum eget sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare.</p>
 					</div>
 				</div>
@@ -64,7 +64,7 @@
 						<div class="ib-icon">
 							<i class="flaticon-017-weightlifting-1"></i>
 						</div>
-						<h4>Pilates</h4>
+						<h4>Zumba</h4>
 						<p>Donec nec sapien in urna fermentum ornare. Morbi vel ultrices leo. Sed eu turpis eu arcu vehicula fringilla ut vitae orci. </p>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 						<div class="ib-icon">
 							<i class="flaticon-004-dumbbell"></i>
 						</div>
-						<h4>Wheight Lifting</h4>
+						<h4>Weight Lifting</h4>
 						<p>Donec nec sapien in urna fermentum ornare. Morbi vel ultrices leo. Sed eu turpis eu arcu vehicula fringilla ut vitae orci. </p>
 					</div>
 				</div>

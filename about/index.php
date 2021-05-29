@@ -3,7 +3,7 @@
 <head>
 	<title>Universal Physical Fitness</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="">
+	<meta name="description" content="Universal Physical Fitness">
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
@@ -11,13 +11,6 @@
 	$PAGENAME='about';
 	include '../includes/import.php';
 	?>
-
-
-
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
 
 </head>
 <body>
@@ -104,36 +97,36 @@
 				<div class="col-lg-3 col-sm-6">
 					<div class="trainer-item">
 						<div class="trainer-pic">
-							<img src="../img/trainers/1.jpg" alt="">
+							<img src="../img/trainers/5.jpg" alt="">
 						</div>
-						<h4>Michael Smith</h4>
+						<h4>Sudin Shrestha</h4>
 						<p>Vivamus libero mauris, bibendum eget sapien ac, ultrices rhoncus ipsum nec sapien.</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="trainer-item">
 						<div class="trainer-pic">
-							<img src="../img/trainers/2.jpg" alt="">
+							<img src="../img/trainers/6.jpg" alt="">
 						</div>
-						<h4>Jessica Black</h4>
+						<h4>Sudin Shrestha</h4>
 						<p>Ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermentum ornare.</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="trainer-item">
 						<div class="trainer-pic">
-							<img src="../img/trainers/3.jpg" alt="">
+							<img src="../img/trainers/7.jpg" alt="">
 						</div>
-						<h4>James Brown</h4>
+						<h4>Sudin Shrestha</h4>
 						<p>Libero mauris, bibendum eget sapien ac, ultrices rhoncus ipsum. Donec nec sapien.</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="trainer-item">
 						<div class="trainer-pic">
-							<img src="../img/trainers/4.jpg" alt="">
+							<img src="../img/trainers/8.jpg" alt="">
 						</div>
-						<h4>Paula Carlton</h4>
+						<h4>Sudin Shrestha</h4>
 						<p>Sapien ac, ultrices rhoncus ipsum. Donec nec sapien in urna fermen-tum ornare.</p>
 					</div>
 				</div>

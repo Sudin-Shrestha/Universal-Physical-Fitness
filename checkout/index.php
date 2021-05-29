@@ -113,7 +113,6 @@
                 "EBANKING",
                 "MOBILE_BANKING",
                 "CONNECT_IPS",
-                "SCT",
                 ],
             "eventHandler": {
                 onSuccess (payload) {
@@ -128,8 +127,7 @@
                 }
             }
         };
-		var amt = document.getElementById("total-cart").value;
-		console.log(amt);
+		var amt = document.getElementById("total-cart").innerHTML;
 
         var checkout = new KhaltiCheckout(config);
         var btn = document.getElementById("payment-button");

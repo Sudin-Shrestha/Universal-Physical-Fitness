@@ -11,7 +11,7 @@
 <head>
 	<title>Universal Physical Fitness</title>
 	<meta charset="UTF-8">
-	<meta name="description" content="">
+	<meta name="description" content="Universal Physical Fitness">
 	<meta name="keywords" content="fitness, html">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
@@ -65,19 +65,6 @@
 					';
 					
 					?> 
-	
-
-        <!-- <div class="row d-flex justify-content-center">
-        <img src="https://api.time.com/wp-content/uploads/2020/03/gym-coronavirus.jpg" class="blog-img" alt="" width="400" height="300">
-        </div>
-        <div class="row my-5" >
-        <h1 class="mb-2">The Blog Title</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas maiores nihil, alias asperiores 
-        debitis dolore sint nesciunt consequatur, accusamus dolorem aliquam laboriosam. Harum qui numquam voluptas 
-        accusantium. Quasi, perspiciatis quas. Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolore
-         dolorem molestiae? Exercitationem veniam sint tempora nesciunt blanditiis velit, officia mollitia laudantium, beatae
-          recusandae deleniti magni neque nostrum possimus qui.</p>
-        </div> -->
     </div>
 
 
